@@ -12,6 +12,7 @@ Landing page da **LM Tubos · Materiais Contra Incêndio** (distribuidora em Goi
 envio para todo o Brasil). Agência: M|P Assessoria. Objetivo: conversas no WhatsApp
 comercial (Roberto Silva, (62) 98558-7373). Stack: **HTML + CSS + JS puro, sem build**.
 Domínio previsto: `www.lmtubos.com.br` (ainda não publicado).
+Repositório: https://github.com/mppartnersprincipal-svg/lp-lm-tubos (branch `main`, **público**). `.claude/settings.local.json` fica fora do git.
 
 ## Regras que valem para tudo
 
@@ -54,3 +55,4 @@ Domínio previsto: `www.lmtubos.com.br` (ainda não publicado).
 - 01/10: faixa de diferenciais (`.proofs`) virou esteira infinita com ícones animados (hoje via `initMarquees` em main.js; sem JS ou com movimento reduzido fica a grade estática). Fotos reais do estoque chegaram em `Fotos_e_Logo/Fotos Estoque/` (7 verticais), ainda não aplicadas
 - 01/10: cards de `#produtos` entram um a um no scroll, em cascata por linha (atributo `data-reveal-cards` + `initRevealCards` em main.js; reutilizável em outras listas)
 - 01/10: seção Marcas com os 5 logos do cliente em esteira (Tupper removida em todo o site até chegar o logo). Esteira virou genérica (`[data-marquee]`). Performance: fontes hospedadas no site + preload da Archivo, logos SVG otimizados, esteira iniciada após o load. LCP mobile 3,25 s → 2,72 s (meta ≤ 3 s); desktop 0,62 s
+- 01/10: projeto inteiro versionado no GitHub (commit inicial `2874a69`)
