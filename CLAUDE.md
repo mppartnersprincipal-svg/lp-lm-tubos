@@ -59,3 +59,4 @@ Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na ra
 - 01/10: projeto inteiro versionado no GitHub (commit inicial `2874a69`)
 - 01/10: seção `#estoque` com as 7 fotos reais do galpão (mosaico + foto ampliada ao clicar) e link "Estoque" no menu; menu ajustado para caber em 1024 px. LCP mobile com gzip 2,11 s (nota 99); sem gzip 2,93 s
 - 01/10: primeiro deploy na Vercel deu 404 (publicou a raiz do repo); criado `vercel.json` com `outputDirectory: site` + cache de assets
+- 01/10: deploy corrigido e no ar em https://lp-lm-tubos.vercel.app (commits `e187242`, `df2f5fa`); Vercel serve com brotli e cache de assets
