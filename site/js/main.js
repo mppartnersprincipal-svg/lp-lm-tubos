@@ -395,6 +395,34 @@
   }
 
   /* ---------------------------------------------------------------
+     Fotos do estoque ampliadas (links com data-lightbox)
+     Sem suporte a <dialog>, o link abre a foto normalmente.
+     --------------------------------------------------------------- */
+  function initLightbox() {
+    const dialog = document.getElementById("lightbox");
+    if (!dialog || typeof dialog.showModal !== "function") return;
+    const image = dialog.querySelector(".lightbox__img");
+    const caption = dialog.querySelector(".lightbox__caption");
+
+    document.addEventListener("click", (event) => {
+      const link = event.target.closest("a[data-lightbox]");
+      if (!link) return;
+      event.preventDefault();
+      const thumb = link.querySelector("img");
+      const label = link.querySelector(".stock__caption");
+      image.src = link.href;
+      image.alt = thumb ? thumb.alt : "";
+      caption.textContent = label ? label.textContent : "";
+      dialog.showModal();
+    });
+    // Fecha no X ou ao clicar fora da foto (no fundo escuro). Esc já fecha por padrão.
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog || event.target.closest(".lightbox__close")) dialog.close();
+    });
+    dialog.addEventListener("close", () => { image.removeAttribute("src"); });
+  }
+
+  /* ---------------------------------------------------------------
      Faixa de promoção
      --------------------------------------------------------------- */
   function initPromo() {
@@ -414,6 +442,7 @@
   /* --------------------------------------------------------------- */
   initPromo();
   initMarquees();
+  initLightbox();
   initWaLinks();
   initForm();
   initActiveLink();
