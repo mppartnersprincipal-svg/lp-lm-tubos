@@ -1,0 +1,11 @@
+# Configuração local do Claude Code (caminhos desta máquina)
+.claude/settings.local.json
+
+# Lixo do sistema operacional
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Dependências e relatórios temporários
+node_modules/
+*.log

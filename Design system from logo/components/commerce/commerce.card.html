@@ -1,0 +1,23 @@
+<!-- @dsCard group="Components" viewport="700x360" name="Commerce" -->
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css"><script src="https://unpkg.com/react@18/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><script src="https://unpkg.com/lucide@latest"></script><style>body{padding:20px}.g{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.col{display:grid;gap:14px}</style></head><body><div id="root"></div>
+<script>
+// Carrega os componentes-fonte (.jsx) diretamente; em consumo real use window.<Namespace> do _ds_bundle.js
+window.__loadDS = async () => {
+  const files = [["Button","../core/Button.jsx"],["IconButton","../core/IconButton.jsx"],["Badge","../core/Badge.jsx"],["Tag","../core/Tag.jsx"],["Card","../core/Card.jsx"],["Logo","../core/Logo.jsx"],["Input","../forms/Input.jsx"],["Select","../forms/Select.jsx"],["Checkbox","../forms/Checkbox.jsx"],["Radio","../forms/Radio.jsx"],["Switch","../forms/Switch.jsx"],["Tabs","../navigation/Tabs.jsx"],["Dialog","../feedback/Dialog.jsx"],["Toast","../feedback/Toast.jsx"],["Tooltip","../feedback/Tooltip.jsx"],["ProductCard","../commerce/ProductCard.jsx"]];
+  const NS = {}; const srcs = await Promise.all(files.map(([n,u])=>fetch(u).then(r=>r.text())));
+  const order = ["Button","Badge"]; // dependências primeiro
+  const items = files.map((f,i)=>[f[0],srcs[i]]).sort((a,b)=>order.indexOf(b[0])-order.indexOf(a[0]));
+  for (const [n,src] of items) {
+    let code = src.replace(/import React from "react";?/,"").replace(/import \{\s*(\w+)\s*\} from "[^"]+";?/g,(m,x)=>"const "+x+"=NS."+x+";").replace(/export function/g,"function")+"\nNS."+n+"="+n+";";
+    code = Babel.transform(code,{presets:["react"]}).code;
+    new Function("React","NS",code)(React,NS);
+  }
+  return NS;
+};
+</script>
+<script type="text/babel">
+const {ProductCard}=new Proxy({}, {get:(_,k)=>(props)=>React.createElement(NS[k],props)});
+function App(){return <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:16}}><ProductCard title="Tubos ranhurados" description="Pintados, DN 1″ a 8″, a pronta entrega" badge="Pronta entrega"/><ProductCard title="Válvulas importadas" description="Gaveta, borboleta, retenção e governo" badge="Importado" badgeTone="primary"/><ProductCard compact title="Sprinklers" description="Pendentes, uprights e laterais — 68 °C e 79 °C" badge="Pronta entrega"/></div>}
+__loadDS().then(ns=>{Object.assign(window,{NS:ns});ReactDOM.createRoot(document.getElementById("root")).render(<App/>);});
+setTimeout(()=>window.lucide&&lucide.createIcons(),50);
+</script></body></html>

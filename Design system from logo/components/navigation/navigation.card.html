@@ -1,0 +1,23 @@
+<!-- @dsCard group="Components" viewport="700x400" name="Navigation" -->
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css"><script src="https://unpkg.com/react@18/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><script src="https://unpkg.com/lucide@latest"></script><style>body{padding:20px}.g{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.col{display:grid;gap:14px}</style></head><body><div id="root"></div>
+<script>
+// Carrega os componentes-fonte (.jsx) diretamente; em consumo real use window.<Namespace> do _ds_bundle.js
+window.__loadDS = async () => {
+  const files = [["Button","../core/Button.jsx"],["IconButton","../core/IconButton.jsx"],["Badge","../core/Badge.jsx"],["Tag","../core/Tag.jsx"],["Card","../core/Card.jsx"],["Logo","../core/Logo.jsx"],["Input","../forms/Input.jsx"],["Select","../forms/Select.jsx"],["Checkbox","../forms/Checkbox.jsx"],["Radio","../forms/Radio.jsx"],["Switch","../forms/Switch.jsx"],["Tabs","../navigation/Tabs.jsx"],["Dialog","../feedback/Dialog.jsx"],["Toast","../feedback/Toast.jsx"],["Tooltip","../feedback/Tooltip.jsx"],["ProductCard","../commerce/ProductCard.jsx"]];
+  const NS = {}; const srcs = await Promise.all(files.map(([n,u])=>fetch(u).then(r=>r.text())));
+  const order = ["Button","Badge"]; // dependências primeiro
+  const items = files.map((f,i)=>[f[0],srcs[i]]).sort((a,b)=>order.indexOf(b[0])-order.indexOf(a[0]));
+  for (const [n,src] of items) {
+    let code = src.replace(/import React from "react";?/,"").replace(/import \{\s*(\w+)\s*\} from "[^"]+";?/g,(m,x)=>"const "+x+"=NS."+x+";").replace(/export function/g,"function")+"\nNS."+n+"="+n+";";
+    code = Babel.transform(code,{presets:["react"]}).code;
+    new Function("React","NS",code)(React,NS);
+  }
+  return NS;
+};
+</script>
+<script type="text/babel">
+const {Tabs,Accordion}=new Proxy({}, {get:(_,k)=>(props)=>React.createElement(NS[k],props)});
+function App(){return <div className="col"><Tabs items={[{value:"a",label:"Especificações"},{value:"b",label:"Normas"},{value:"c",label:"Downloads"}]}/><Tabs variant="pill" items={[{value:"a",label:"Tubos"},{value:"b",label:"Válvulas"},{value:"c",label:"Sprinklers"},{value:"d",label:"Hidrantes"}]}/><Accordion items={[{title:"Qual o prazo de entrega para o Norte e Nordeste?",content:"Itens de pronta entrega saem de Goiânia em até 2 dias úteis; o transporte varia de 3 a 10 dias conforme o estado."},{title:"Vocês vendem tubo já pintado?",content:"Sim. Tubos de aço pintados em vermelho, ranhurados ou roscados, DN 1″ a 8″, a pronta entrega."},{title:"Como peço orçamento?",content:"Envie a lista de materiais pelo WhatsApp ou pelo formulário de contato. Retornamos em até 1 hora útil."}]}/></div>}
+__loadDS().then(ns=>{Object.assign(window,{NS:ns});ReactDOM.createRoot(document.getElementById("root")).render(<App/>);});
+setTimeout(()=>window.lucide&&lucide.createIcons(),50);
+</script></body></html>

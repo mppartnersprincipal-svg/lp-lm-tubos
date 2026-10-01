@@ -1,0 +1,13 @@
+/* Animações do sistema — use com prefers-reduced-motion respeitado */
+@keyframes lm-spin{to{transform:rotate(360deg)}}
+@keyframes lm-fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes lm-fade-in{from{opacity:0}to{opacity:1}}
+@keyframes lm-scale-in{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@keyframes lm-pulse-ring{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}70%{box-shadow:0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+@keyframes lm-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes lm-shimmer{from{background-position:-200% 0}to{background-position:200% 0}}
+@keyframes lm-stripe-slide{from{background-position:0 0}to{background-position:40px 0}}
+.lm-reveal{opacity:0;transform:translateY(24px);transition:opacity var(--dur-reveal) var(--ease-out),transform var(--dur-reveal) var(--ease-out)}
+.lm-reveal.is-in{opacity:1;transform:none}
+.lm-skeleton{background:linear-gradient(90deg,var(--lm-gray-100) 25%,var(--lm-gray-50) 50%,var(--lm-gray-100) 75%);background-size:200% 100%;animation:lm-shimmer 1.4s linear infinite}
+@media (prefers-reduced-motion:reduce){.lm-reveal{opacity:1;transform:none;transition:none}*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}

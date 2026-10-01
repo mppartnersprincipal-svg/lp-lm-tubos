@@ -1,0 +1,31 @@
+<!-- @dsCard group="Site institucional" viewport="1280x800" subtitle="Home, Produtos e Contato — clique na navegação" name="Site LM Tubos" -->
+<!-- @startingPoint section="Site institucional" subtitle="Home do site com hero, catálogo e CTA de orçamento" viewport="1280x800" -->
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>LM Tubos — Materiais contra incêndio</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head><body><div id="root"></div>
+<script>
+window.__loadDS = async () => {
+  const files = [["Button","core"],["Badge","core"],["IconButton","core"],["Tag","core"],["Card","core"],["Logo","core"],["Input","forms"],["Select","forms"],["Checkbox","forms"],["Radio","forms"],["Switch","forms"],["Tabs","navigation"],["Dialog","feedback"],["Toast","feedback"],["Tooltip","feedback"],["ProductCard","commerce"],["Reveal","motion"],["Counter","motion"],["Marquee","motion"],["StickyCTA","motion"],["ScrollProgress","motion"],["Accordion","navigation"]];
+  const NS = {}; const srcs = await Promise.all(files.map(([n,d])=>fetch("../../components/"+d+"/"+n+".jsx").then(r=>r.text())));
+  files.forEach(([n],i)=>{ let code=srcs[i].replace(/import React from "react";?/,"").replace(/import \{\s*(\w+)\s*\} from "[^"]+";?/g,(m,x)=>"const "+x+"=NS."+x+";").replace(/export function/g,"function")+"\nNS."+n+"="+n+";"; new Function("React","NS",Babel.transform(code,{presets:["react"]}).code)(React,NS); });
+  for (const s of ["Header","Footer","Home","Produtos","Contato"]) { const src=await fetch("./"+s+".jsx").then(r=>r.text()); new Function("React","NS",Babel.transform(src.replace(/export function/g,"function")+"\nNS."+s+"="+s+";",{presets:["react"]}).code)(React,NS); }
+  return NS;
+};
+</script>
+<script type="text/babel">
+function App({NS}){
+  const [page,setPage]=React.useState(localStorage.getItem("lm-site-page")||"home");
+  const go=(p)=>{setPage(p);localStorage.setItem("lm-site-page",p);window.scrollTo({top:0,behavior:"smooth"});};
+  React.useEffect(()=>{document.body.style.animation="lm-fade-in var(--dur-slow) var(--ease-out)";},[]);
+  const Page={home:NS.Home,produtos:NS.Produtos,contato:NS.Contato}[page]||NS.Home;
+  return <>
+    <NS.Header page={page} go={go} NS={NS}/>
+    <Page go={go} NS={NS}/>
+    <NS.Footer go={go} NS={NS}/>
+    <NS.ScrollProgress/>
+    <NS.StickyCTA/>
+  </>;
+}
+__loadDS().then(NS=>ReactDOM.createRoot(document.getElementById("root")).render(<App NS={NS}/>));
+</script></body></html>

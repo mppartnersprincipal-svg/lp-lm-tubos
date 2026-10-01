@@ -1,0 +1,12 @@
+import React from "react";
+/** Botão flutuante de WhatsApp com anel pulsante; aparece após rolar showAfter px. Inclui "voltar ao topo". */
+export function StickyCTA({href="https://wa.me/5562985587373",label="Falar no WhatsApp",showAfter=300}){
+  const [on,setOn]=React.useState(false); const [h,setH]=React.useState(false);
+  React.useEffect(()=>{const f=()=>setOn(window.scrollY>showAfter); f(); window.addEventListener("scroll",f,{passive:true}); return ()=>window.removeEventListener("scroll",f);},[showAfter]);
+  return React.createElement("div",{style:{position:"fixed",right:24,bottom:24,zIndex:90,display:"grid",gap:12,justifyItems:"end",pointerEvents:on?"auto":"none",opacity:on?1:0,transform:on?"none":"translateY(16px)",transition:"opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-spring)"}},
+    React.createElement("button",{onClick:()=>window.scrollTo({top:0,behavior:"smooth"}),"aria-label":"Voltar ao topo",style:{width:40,height:40,borderRadius:"50%",border:"1px solid var(--border-default)",background:"#fff",color:"var(--text-heading)",cursor:"pointer",boxShadow:"var(--shadow-sm)",display:"grid",placeItems:"center"}},
+      React.createElement("svg",{width:16,height:16,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2.5,strokeLinecap:"round",strokeLinejoin:"round"},React.createElement("path",{d:"M12 19V5"}),React.createElement("path",{d:"m5 12 7-7 7 7"}))),
+    React.createElement("a",{href,target:"_blank",rel:"noopener",onMouseEnter:()=>setH(true),onMouseLeave:()=>setH(false),style:{display:"inline-flex",alignItems:"center",gap:10,height:56,padding:"0 22px 0 18px",borderRadius:"var(--radius-pill)",background:"var(--color-whatsapp)",color:"#fff",font:"var(--type-button)",textDecoration:"none",boxShadow:"var(--shadow-whatsapp)",animation:h?"none":"lm-pulse-ring 2.2s ease-out infinite",transform:h?"var(--lift)":"none",transition:"transform var(--dur-base) var(--ease-spring)"}},
+      React.createElement("svg",{width:22,height:22,viewBox:"0 0 24 24",fill:"currentColor"},React.createElement("path",{d:"M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"})),
+      label));
+}

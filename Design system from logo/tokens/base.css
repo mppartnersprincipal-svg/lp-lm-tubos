@@ -1,0 +1,14 @@
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font:var(--type-body);color:var(--text-body);background:var(--surface-page);-webkit-font-smoothing:antialiased}
+a{color:var(--text-link);text-decoration:none;transition:color var(--dur-fast) var(--ease-standard)}
+a:hover{color:var(--text-link-hover)}
+h1,h2,h3,h4,h5{margin:0;color:var(--text-heading)}
+h1{font:var(--type-h1);letter-spacing:var(--tracking-tight)} h2{font:var(--type-h2);letter-spacing:var(--tracking-tight)} h3{font:var(--type-h3)} h4{font:var(--type-h4)} h5{font:var(--type-h5)}
+p{margin:0}
+img{max-width:100%;display:block}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
+::selection{background:var(--lm-red-100)}
+@media (hover:hover){a:hover{color:var(--text-link-hover)}}
+button,a{-webkit-tap-highlight-color:transparent}

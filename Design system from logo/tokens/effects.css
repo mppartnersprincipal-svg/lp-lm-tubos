@@ -1,0 +1,25 @@
+:root{
+  --radius-none:0; --radius-xs:2px; --radius-sm:4px; --radius-md:8px; --radius-lg:12px; --radius-xl:20px; --radius-pill:999px;
+  --radius-button:var(--radius-pill);   /* CTAs são pílulas */
+  --radius-control:var(--radius-md);    /* inputs/selects */
+  --border-w:1px; --border-w-strong:2px; --rule-w:3px;
+
+  --shadow-xs:0 1px 2px rgba(20,19,58,.08);
+  --shadow-sm:0 2px 6px rgba(20,19,58,.10);
+  --shadow-md:0 8px 24px rgba(20,19,58,.12);
+  --shadow-lg:0 20px 48px rgba(20,19,58,.18);
+  --shadow-focus:0 0 0 3px rgba(74,72,148,.35);
+
+  --ease-standard:cubic-bezier(.2,0,0,1);
+  --ease-out:cubic-bezier(0,0,.2,1);
+  --dur-fast:120ms; --dur-base:220ms; --dur-slow:420ms; --dur-reveal:700ms;
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --lift:translateY(-2px);
+  --shadow-primary:0 10px 24px -8px rgba(229,48,19,.55);
+  --shadow-secondary:0 10px 24px -8px rgba(43,42,111,.55);
+  --shadow-whatsapp:0 10px 24px -8px rgba(37,211,102,.55);
+
+  /* Faixa vermelha da fachada / régua da logo */
+  --brand-stripe:linear-gradient(90deg,var(--lm-red-500) 0 70%,var(--lm-navy-700) 70% 100%);
+  --overlay-photo:linear-gradient(180deg,rgba(20,19,58,.25),rgba(20,19,58,.75));
+}

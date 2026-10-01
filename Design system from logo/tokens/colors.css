@@ -1,0 +1,50 @@
+:root{
+  /* ---- Marca (extraídas do vetor da logo) ---- */
+  --lm-red-500:#E53013;        /* RGB 229,48,19 — "TUBOS" */
+  --lm-navy-700:#2B2A6F;       /* CMYK 100/100/10/10 — "LM" + tagline */
+  --lm-gray-500:#7F7F7F;       /* K50 — régua e sombra */
+  --lm-gray-400:#999999;       /* K40 */
+  --lm-gray-300:#CCCCCC;       /* K20 */
+
+  /* ---- Escalas ---- */
+  --lm-red-50:#FDECE8; --lm-red-100:#FAD3CB; --lm-red-300:#F2836E; --lm-red-600:#C92A10; --lm-red-700:#A32109;
+  --lm-navy-50:#EEEEF7; --lm-navy-100:#D9D9EE; --lm-navy-300:#8C8BC4; --lm-navy-500:#4A4894; --lm-navy-800:#1F1E52; --lm-navy-900:#14133A;
+  --lm-gray-0:#FFFFFF; --lm-gray-50:#F5F5F6; --lm-gray-100:#EBEBED; --lm-gray-200:#DCDCDF; --lm-gray-600:#5E5E63; --lm-gray-700:#414146; --lm-gray-800:#28282C; --lm-gray-900:#151517;
+
+  /* ---- Semânticas ---- */
+  --color-primary:var(--lm-red-500);
+  --color-primary-hover:var(--lm-red-600);
+  --color-primary-active:var(--lm-red-700);
+  --color-primary-soft:var(--lm-red-50);
+  --color-secondary:var(--lm-navy-700);
+  --color-secondary-hover:var(--lm-navy-800);
+  --color-secondary-soft:var(--lm-navy-50);
+  --color-whatsapp:#25D366;
+  --color-whatsapp-hover:#1DA851;
+
+  --color-success:#1E8E4A; --color-success-soft:#E4F4EA;
+  --color-warning:#C77700; --color-warning-soft:#FCF0DC;
+  --color-danger:var(--lm-red-600); --color-danger-soft:var(--lm-red-50);
+  --color-info:var(--lm-navy-500); --color-info-soft:var(--lm-navy-50);
+
+  --surface-page:var(--lm-gray-0);
+  --surface-subtle:var(--lm-gray-50);
+  --surface-card:var(--lm-gray-0);
+  --surface-tint:var(--lm-gray-50);
+  --surface-inverse:var(--lm-navy-800);
+  --surface-inverse-deep:var(--lm-navy-900);
+
+  --text-heading:var(--lm-navy-800);
+  --text-body:var(--lm-gray-800);
+  --text-muted:var(--lm-gray-600);
+  --text-on-primary:#FFFFFF;
+  --text-on-inverse:#FFFFFF;
+  --text-on-inverse-muted:var(--lm-navy-100);
+  --text-link:var(--lm-navy-700);
+  --text-link-hover:var(--lm-red-600);
+
+  --border-default:var(--lm-gray-200);
+  --border-strong:var(--lm-gray-300);
+  --border-focus:var(--lm-navy-500);
+  --rule-brand:var(--lm-gray-500);   /* a régua cinza sob o wordmark */
+}

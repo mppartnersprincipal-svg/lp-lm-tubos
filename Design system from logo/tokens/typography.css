@@ -1,0 +1,29 @@
+:root{
+  --font-display:"Sora","Segoe UI",system-ui,sans-serif;
+  --font-body:"Figtree","Segoe UI",system-ui,sans-serif;
+  --font-logo:"Calibri","Carlito","Figtree",sans-serif;
+
+  --text-xs:12px; --text-sm:14px; --text-md:16px; --text-lg:18px; --text-xl:20px;
+  --text-2xl:24px; --text-3xl:32px; --text-4xl:40px; --text-5xl:52px; --text-6xl:64px;
+
+  --leading-tight:1.1; --leading-snug:1.25; --leading-normal:1.5; --leading-relaxed:1.65;
+  --tracking-tight:-0.02em; --tracking-normal:0; --tracking-wide:0.06em; --tracking-caps:0.12em;
+
+  --weight-regular:400; --weight-medium:500; --weight-semibold:600; --weight-bold:700; --weight-extrabold:800;
+
+  /* Papéis */
+  --type-display:var(--weight-extrabold) var(--text-6xl)/var(--leading-tight) var(--font-display);
+  --type-h1:var(--weight-bold) var(--text-5xl)/var(--leading-tight) var(--font-display);
+  --type-h2:var(--weight-bold) var(--text-4xl)/var(--leading-tight) var(--font-display);
+  --type-h3:var(--weight-semibold) var(--text-3xl)/var(--leading-snug) var(--font-display);
+  --type-h4:var(--weight-semibold) var(--text-2xl)/var(--leading-snug) var(--font-display);
+  --type-h5:var(--weight-semibold) var(--text-xl)/var(--leading-snug) var(--font-display);
+  --type-eyebrow:var(--weight-bold) var(--text-xs)/1 var(--font-display);
+  --type-lead:var(--weight-regular) var(--text-xl)/var(--leading-relaxed) var(--font-body);
+  --type-body:var(--weight-regular) var(--text-md)/var(--leading-normal) var(--font-body);
+  --type-body-sm:var(--weight-regular) var(--text-sm)/var(--leading-normal) var(--font-body);
+  --type-label:var(--weight-semibold) var(--text-sm)/1.2 var(--font-body);
+  --type-caption:var(--weight-medium) var(--text-xs)/1.4 var(--font-body);
+  --type-button:var(--weight-semibold) var(--text-md)/1 var(--font-display);
+  --type-tagline:var(--weight-bold) var(--text-sm)/1 var(--font-logo);
+}
