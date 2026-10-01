@@ -13,6 +13,7 @@ envio para todo o Brasil). Agência: M|P Assessoria. Objetivo: conversas no What
 comercial (Roberto Silva, (62) 98558-7373). Stack: **HTML + CSS + JS puro, sem build**.
 Domínio previsto: `www.lmtubos.com.br` (ainda não publicado).
 Repositório: https://github.com/mppartnersprincipal-svg/lp-lm-tubos (branch `main`, **público**). `.claude/settings.local.json` fica fora do git.
+Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na raiz publica só a pasta `site/` (sem build).
 
 ## Regras que valem para tudo
 
@@ -43,7 +44,7 @@ Repositório: https://github.com/mppartnersprincipal-svg/lp-lm-tubos (branch `ma
 
 ## Pendências abertas
 
-- Lista completa (11 itens) em `site/README.md` → "Pendências com o cliente". Principais: IDs Meta/GA4/Ads, domínio definitivo, logo da Tupper (as outras 5 marcas já têm), aplicar as fotos do estoque (já recebidas em `Fotos_e_Logo/Fotos Estoque/`), horário de sábado, razão social, autorização EBM
+- Lista completa (11 itens) em `site/README.md` → "Pendências com o cliente". Principais: IDs Meta/GA4/Ads, domínio definitivo, logo da Tupper (as outras 5 marcas já têm), trocar as fotos de banco de imagens dos cards de `#destaques` por fotos do cliente, horário de sábado, razão social, autorização EBM
 
 ## Histórico (1 linha por entrega, mais recente no fim)
 
@@ -56,3 +57,5 @@ Repositório: https://github.com/mppartnersprincipal-svg/lp-lm-tubos (branch `ma
 - 01/10: cards de `#produtos` entram um a um no scroll, em cascata por linha (atributo `data-reveal-cards` + `initRevealCards` em main.js; reutilizável em outras listas)
 - 01/10: seção Marcas com os 5 logos do cliente em esteira (Tupper removida em todo o site até chegar o logo). Esteira virou genérica (`[data-marquee]`). Performance: fontes hospedadas no site + preload da Archivo, logos SVG otimizados, esteira iniciada após o load. LCP mobile 3,25 s → 2,72 s (meta ≤ 3 s); desktop 0,62 s
 - 01/10: projeto inteiro versionado no GitHub (commit inicial `2874a69`)
+- 01/10: seção `#estoque` com as 7 fotos reais do galpão (mosaico + foto ampliada ao clicar) e link "Estoque" no menu; menu ajustado para caber em 1024 px. LCP mobile com gzip 2,11 s (nota 99); sem gzip 2,93 s
+- 01/10: primeiro deploy na Vercel deu 404 (publicou a raiz do repo); criado `vercel.json` com `outputDirectory: site` + cache de assets
