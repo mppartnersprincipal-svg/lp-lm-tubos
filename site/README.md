@@ -38,7 +38,7 @@ O conteúdo de `site/` vai para a raiz do domínio. Nenhum passo de build.
 - **Vercel:** `vercel deploy site --prod`, ou importe o repositório com *Root Directory* = `site` e *Framework* = Other.
 
 Depois de publicar:
-1. Troque `https://www.lmtubos.com.br/` pelo domínio definitivo em `index.html` (canonical, `og:url`, `og:image`, `twitter:image`, JSON-LD), `robots.txt` e `sitemap.xml`.
+1. Domínio da LP: `www.lmtubos.com` (já em canonical, OG, JSON-LD, `robots.txt`, `sitemap.xml` e `llms.txt`). DNS na Hostinger: A `@` 216.198.79.1 e CNAME `www` para a Vercel. **Não usar `lmtubos.com.br`**: é o site WordPress do cliente (ligado à LP só via `sameAs` no JSON-LD) e tem o e-mail da Locaweb.
 2. Confira se o servidor entrega os arquivos com gzip/brotli (Hostinger, Netlify e Vercel já fazem isso).
 
 ## Onde editar
@@ -49,12 +49,18 @@ Tudo fica no topo de `js/main.js`:
 |---|---|
 | Número do WhatsApp e mensagem padrão | `WA_NUMBER`, `WA_DEFAULT` |
 | Faixa de promoção sazonal | `PROMO = { enabled: true, text: "…", href: "#orcamento" }` |
-| Meta Pixel, GA4 e Google Ads | `TRACKING = { metaPixelId, ga4Id, adsId, adsLabel }` |
+| Google Tag Manager | ID `GTM-KXWZWFS4` no `<head>` e no `<noscript>` de `index.html` e `obrigado.html` + `TRACKING.gtmId` em `main.js` (os três precisam ser iguais) |
+| Meta Pixel, GA4 e Google Ads direto (opcional) | `TRACKING = { metaPixelId, ga4Id, adsId, adsLabel }`. Prefira configurar dentro do GTM e deixar vazio |
 
 - **Mensagens de cada botão:** atributo `data-wa-msg` no HTML. O `data-wa-origin` identifica o botão nos eventos (`hero`, `destaque-conexoes`, `destaque-sprinklers`, `destaque-tubos`, `produtos-lista`, `orientacao`, `servicos`, `como-funciona`, `form`, `cta-final`, `flutuante`, `header` e `rodape`). O `href` já vem preenchido no HTML, então o link funciona mesmo sem JavaScript. Com JS, o `href` é refeito a partir do `data-wa-msg`, então ao mudar uma mensagem atualize os dois.
 - **UTM:** se a URL tiver `utm_source` ou `utm_campaign`, o JS acrescenta `[origem: fonte / campanha]` ao fim de todas as mensagens.
-- **Banner de cookies (LGPD):** só aparece quando algum ID de rastreamento está preenchido. Os scripts do Meta e do Google só carregam depois de "Aceitar", e a escolha fica salva em `localStorage` (`lm-consent`).
-- **Eventos:** Meta `PageView`, `Contact {content_name: origem}` em todo clique de WhatsApp e `Lead` no formulário. GA4 `whatsapp_click {origem}` e `generate_lead`. Google Ads `conversion` (`send_to: adsId/adsLabel`) no clique de WhatsApp.
+- **GTM + Consent Mode v2 (LGPD):** o GTM carrega sempre, mas o `<head>` define `ad_storage`, `ad_user_data`, `ad_personalization` e `analytics_storage` como **denied** antes dele. O aviso de cookies aparece na primeira visita; "Aceitar" chama `gtag('consent','update', granted)` e "Recusar" mantém negado. A escolha fica em `localStorage` (`lm-consent`) e já vale no `<head>` da visita seguinte.
+- **Eventos no dataLayer (para criar acionadores no GTM):**
+  - `whatsapp_click` com `whatsapp_origem` (header, hero, destaque-conexoes, destaque-sprinklers, destaque-tubos, produtos-lista, orientacao, servicos, como-funciona, estoque, cta-final, rodape, flutuante, form). Use como conversão de clique no WhatsApp (GA4 e Google Ads) e `Contact` no Meta.
+  - `generate_lead` com `lead_origem: formulario` no envio do formulário (também dispara `whatsapp_click` com origem `form`). Use como `Lead` no Meta.
+  - `consentimento_aceito` / `consentimento_recusado`. No GTM, as tags do Google respeitam o Consent Mode sozinhas; nas tags do Meta, use o acionador `consentimento_aceito` ou exija `ad_storage` em "Configurações de consentimento".
+  - Variáveis de página: `pagina` (`landing` ou `obrigado`) e `consentimento` (estado inicial).
+- **Tags diretas (opcional):** com `metaPixelId`, `ga4Id` ou `adsId` preenchidos, os scripts do Meta e do Google carregam direto, só depois do aceite. Eventos: Meta `PageView`, `Contact` e `Lead`; GA4 `whatsapp_click` e `generate_lead`; Ads `conversion`. Não use junto com as mesmas tags no GTM.
 
 ## Decisões de implementação
 
@@ -72,7 +78,7 @@ Tudo fica no topo de `js/main.js`:
 - Sem rolagem horizontal em 360, 768, 1024 e 1440 px.
 - Menu mobile navegável por teclado (foco preso no menu, Esc fecha e devolve o foco); FAQ com `<details>` nativo.
 - Os 15 links de WhatsApp com a mensagem e a origem corretas, mais o sufixo de UTM. O formulário valida em PT e abre o WhatsApp com a mensagem montada.
-- Consentimento: nada carrega sem aceite; com "Recusar", nenhum script externo.
+- Consentimento: GTM carrega com tudo negado (Consent Mode v2); só libera cookies de anúncio e análise depois de "Aceitar".
 - Lighthouse mobile, 4 execuções locais com gzip: Performance entre 91 e 99; Acessibilidade, Boas Práticas e SEO em 100.
 - 01/10/2026, Lighthouse 12 sem gzip (servidor local simples), 3 execuções: mobile LCP 2,71 a 2,79 s (mediana 2,72 s), CLS 0; desktop LCP 0,62 s, nota 100. Meta do cliente: LCP até 3 s.
 - 01/10/2026, depois da seção Estoque, 3 execuções mobile: sem gzip LCP 2,93 s; **com gzip (como numa hospedagem real) nota 99, LCP 2,11 s, CLS 0, TBT ~5 ms**. Na hospedagem, confirmar que gzip ou brotli está ligado para HTML, CSS, JS e SVG (sem isso o HTML de 76 KB pesa ~4x mais).
@@ -89,7 +95,7 @@ Cada uma está marcada com `[PENDENTE]` em comentário no código.
 5. Logo da Tupper (as outras 5 marcas já têm logo no site; Tupper foi retirada até o logo chegar).
 6. Certificações específicas, se o cliente quiser nomeá-las (FAQ e JSON-LD).
 7. Fotos de produtos e do estoque (hoje só há fotos da fachada e do galpão). Substituir os ícones dos cards de destaque.
-8. IDs do Meta Pixel, GA4 e Google Ads (`TRACKING` em `js/main.js`).
-9. Domínio definitivo (canonical, OG, JSON-LD e sitemap).
+8. Tags dentro do GTM `GTM-KXWZWFS4`: GA4, conversão do Google Ads (clique no WhatsApp) e Meta Pixel, usando os eventos do dataLayer acima.
+9. (resolvido em 05/10: domínio da LP é `www.lmtubos.com`)
 10. Promoções sazonais: a faixa `.promo-bar` está pronta, basta ligar `PROMO.enabled` em `js/main.js`.
 11. Confirmar o lote e a sala do endereço (Lt. 17, Sala 2, conforme a placa, contra Lt. 16 no PRD).

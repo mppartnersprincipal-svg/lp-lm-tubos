@@ -3,6 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Tag Manager com Consent Mode v2: tudo começa negado e só libera quando o visitante aceita
+       o aviso de cookies (js/main.js atualiza o consentimento). A escolha fica salva em localStorage "lm-consent". -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    (function () {
+      var aceito = false;
+      try { aceito = localStorage.getItem("lm-consent") === "granted"; } catch (e) {}
+      var estado = aceito ? "granted" : "denied";
+      gtag("consent", "default", {
+        ad_storage: estado, ad_user_data: estado, ad_personalization: estado, analytics_storage: estado,
+        functionality_storage: "granted", security_storage: "granted", wait_for_update: 500
+      });
+      dataLayer.push({ pagina: "obrigado", consentimento: estado });
+    })();
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KXWZWFS4');
+  </script>
+  <!-- End Google Tag Manager -->
   <title>Obrigado | LM Tubos · Materiais Contra Incêndio</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#2C2A7C">
@@ -13,6 +35,9 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KXWZWFS4" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <!-- Página opcional de conversão (PRD 8.3). Por padrão o formulário NÃO redireciona para cá. -->
   <header class="site-header">
     <div class="container site-header__inner">

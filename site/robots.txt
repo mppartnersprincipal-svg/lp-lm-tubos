@@ -2,5 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /obrigado.html
 
-# [PENDENTE: domínio definitivo]
-Sitemap: https://www.lmtubos.com.br/sitemap.xml
+Sitemap: https://www.lmtubos.com/sitemap.xml

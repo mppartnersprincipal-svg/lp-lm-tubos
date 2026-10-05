@@ -3,14 +3,36 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Tag Manager com Consent Mode v2: tudo começa negado e só libera quando o visitante aceita
+       o aviso de cookies (js/main.js atualiza o consentimento). A escolha fica salva em localStorage "lm-consent". -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    (function () {
+      var aceito = false;
+      try { aceito = localStorage.getItem("lm-consent") === "granted"; } catch (e) {}
+      var estado = aceito ? "granted" : "denied";
+      gtag("consent", "default", {
+        ad_storage: estado, ad_user_data: estado, ad_personalization: estado, analytics_storage: estado,
+        functionality_storage: "granted", security_storage: "granted", wait_for_update: 500
+      });
+      dataLayer.push({ pagina: "landing", consentimento: estado });
+    })();
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KXWZWFS4');
+  </script>
+  <!-- End Google Tag Manager -->
   <title>Materiais contra incêndio em Goiânia a pronta entrega | LM Tubos</title>
   <meta name="description" content="Materiais contra incêndio em Goiânia: tubos pintados, conexões ranhuradas, sprinklers, hidrantes e extintores em estoque. Envio para todo o Brasil.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="geo.region" content="BR-GO">
   <meta name="geo.placename" content="Goiânia">
   <meta name="theme-color" content="#2C2A7C">
-  <!-- [PENDENTE: domínio definitivo. Atualizar canonical, og:url, og:image, JSON-LD, sitemap.xml e llms.txt] -->
-  <link rel="canonical" href="https://www.lmtubos.com.br/">
+  <!-- Domínio da LP: www.lmtubos.com (lmtubos.com.br é o site WordPress do cliente, ligado aqui via sameAs) -->
+  <link rel="canonical" href="https://www.lmtubos.com/">
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
@@ -18,15 +40,15 @@
   <meta property="og:site_name" content="LM Tubos Materiais Contra Incêndio">
   <meta property="og:title" content="Materiais contra incêndio em Goiânia a pronta entrega | LM Tubos">
   <meta property="og:description" content="Tubos pintados, conexões e válvulas ranhuradas, sprinklers, hidrantes e extintores em estoque em Goiânia. A equipe confere sua lista e enviamos para todo o Brasil.">
-  <meta property="og:url" content="https://www.lmtubos.com.br/">
-  <meta property="og:image" content="https://www.lmtubos.com.br/assets/img/og-image.jpg">
+  <meta property="og:url" content="https://www.lmtubos.com/">
+  <meta property="og:image" content="https://www.lmtubos.com/assets/img/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Fachada do galpão da LM Tubos Materiais Contra Incêndio em Goiânia">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Materiais contra incêndio em Goiânia | LM Tubos">
   <meta name="twitter:description" content="Material para sistema de incêndio em estoque, com conferência técnica da lista e envio para todo o Brasil.">
-  <meta name="twitter:image" content="https://www.lmtubos.com.br/assets/img/og-image.jpg">
+  <meta name="twitter:image" content="https://www.lmtubos.com/assets/img/og-image.jpg">
 
   <!-- Favicon -->
   <link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
@@ -45,19 +67,19 @@
   {
     "@context": "https://schema.org",
     "@type": "Store",
-    "@id": "https://www.lmtubos.com.br/#empresa",
+    "@id": "https://www.lmtubos.com/#empresa",
     "name": "LM Tubos",
     "alternateName": "LM Tubos Materiais Contra Incêndio",
     "legalName": "LM Tubos Materiais Contra Incêndio LTDA",
     "taxID": "39.770.705/0001-23",
     "description": "Distribuidora de materiais para sistemas de combate a incêndio em Goiânia (GO), com estoque próprio e envio para todo o Brasil. Vende tubos pintados, conexões e válvulas ranhuradas, sprinklers, hidrantes, alarme, extintores e sinalização de emergência. Também faz projeto de prevenção contra incêndio, instalação, manutenção e teste hidrostático de mangueiras.",
-    "url": "https://www.lmtubos.com.br/",
-    "logo": "https://www.lmtubos.com.br/assets/logo/logo-lm-tubos.png",
+    "url": "https://www.lmtubos.com/",
+    "logo": "https://www.lmtubos.com/assets/logo/logo-lm-tubos.png",
     "image": [
-      "https://www.lmtubos.com.br/assets/img/og-image.jpg",
-      "https://www.lmtubos.com.br/assets/img/fachada-galpao-aberto-1280.jpg",
-      "https://www.lmtubos.com.br/assets/img/estoque/estoque-conexoes-ranhuradas-899.jpg",
-      "https://www.lmtubos.com.br/assets/img/estoque/estoque-valvulas-embaladas-899.jpg"
+      "https://www.lmtubos.com/assets/img/og-image.jpg",
+      "https://www.lmtubos.com/assets/img/fachada-galpao-aberto-1280.jpg",
+      "https://www.lmtubos.com/assets/img/estoque/estoque-conexoes-ranhuradas-899.jpg",
+      "https://www.lmtubos.com/assets/img/estoque/estoque-valvulas-embaladas-899.jpg"
     ],
     "telephone": "+55-62-98558-7373",
     "email": "vendas01@lmtubos.com.br",
@@ -104,18 +126,18 @@
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Teste hidrostático de mangueiras"}}
       ]
     },
-    "sameAs": ["https://www.instagram.com/lmtubos/"]
+    "sameAs": ["https://www.instagram.com/lmtubos/", "https://lmtubos.com.br/"]
   }
   </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://www.lmtubos.com.br/#pagina",
-    "url": "https://www.lmtubos.com.br/",
+    "@id": "https://www.lmtubos.com/#pagina",
+    "url": "https://www.lmtubos.com/",
     "name": "Materiais contra incêndio em Goiânia a pronta entrega | LM Tubos",
     "inLanguage": "pt-BR",
-    "about": {"@id": "https://www.lmtubos.com.br/#empresa"},
+    "about": {"@id": "https://www.lmtubos.com/#empresa"},
     "dateModified": "2026-09-30"
   }
   </script>
@@ -141,6 +163,9 @@
   </script>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KXWZWFS4" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <!-- Sprite de ícones (Lucide, ISC) + WhatsApp -->
   <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>

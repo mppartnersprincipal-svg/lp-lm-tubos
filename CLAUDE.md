@@ -11,7 +11,7 @@
 Landing page da **LM Tubos · Materiais Contra Incêndio** (distribuidora em Goiânia-GO,
 envio para todo o Brasil). Agência: M|P Assessoria. Objetivo: conversas no WhatsApp
 comercial (Roberto Silva, (62) 98558-7373). Stack: **HTML + CSS + JS puro, sem build**.
-Domínio previsto: `www.lmtubos.com.br` (ainda não publicado).
+**Domínio da LP: `www.lmtubos.com`** (apex `lmtubos.com` redireciona). DNS na Hostinger (ns atlas/hyperion.dns-parking.com): A `@` 216.198.79.1, CNAME `www` d7da5e5515572bbb.vercel-dns-017.com. ⚠️ `lmtubos.com.br` é o site WordPress do cliente (+ e-mail Locaweb): não mexer, só aparece no `sameAs` do JSON-LD.
 Repositório: https://github.com/mppartnersprincipal-svg/lp-lm-tubos (branch `main`, **público**). `.claude/settings.local.json` fica fora do git.
 Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na raiz publica só a pasta `site/` (sem build).
 
@@ -24,6 +24,7 @@ Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na ra
 - `Fotos_e_Logo/` = originais, não editar. Fotos otimizadas vão em `site/assets/img/` (WebP + JPG)
 - Pendências do cliente ficam como comentário `[PENDENTE: …]` no código
 - Endereço usado: Qd. 2, **Lt. 17, Sala 2** (placa do CNPJ), não Lt. 16 do PRD
+- **DNS / e-mail:** o e-mail do cliente (vendas01@) roda na **Locaweb** (MX `mx.core.locaweb.com.br` etc. + SPF). Nunca trocar nameservers para a Vercel nem "Redefinir registros DNS" na Hostinger: só editar A `@`, AAAA `@` e CNAME `www`
 
 ## Mapa das pastas
 
@@ -34,6 +35,7 @@ Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na ra
 | `Briefing_LP_LM_Tubos*.pdf` | Briefing original do cliente | — |
 | `Design system from logo/` | Design system gerado do logo (só consulta; PRD prevalece) | `readme.md` lá dentro |
 | `Fotos_e_Logo/` | Fotos (fachada/galpão) e logos originais | — |
+| `gtm/` | Arquivo de importação do contêiner GTM-KXWZWFS4 (gerado pelo Claude) | — |
 
 ## Seção de avaliações (`#avaliacoes`)
 
@@ -44,7 +46,7 @@ Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na ra
 
 ## Pendências abertas
 
-- Lista completa (11 itens) em `site/README.md` → "Pendências com o cliente". Principais: IDs Meta/GA4/Ads, domínio definitivo, logo da Tupper (as outras 5 marcas já têm), trocar as fotos de banco de imagens dos cards de `#destaques` por fotos do cliente, horário de sábado, razão social, autorização EBM
+- Lista completa (11 itens) em `site/README.md` → "Pendências com o cliente". Principais: importar e publicar o GTM, Pixel do Meta (não enviado), logo da Tupper (as outras 5 marcas já têm), trocar as fotos de banco de imagens dos cards de `#destaques` por fotos do cliente, horário de sábado, razão social, autorização EBM
 
 ## Histórico (1 linha por entrega, mais recente no fim)
 
@@ -62,3 +64,12 @@ Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na ra
 - 01/10: deploy corrigido e no ar em https://lp-lm-tubos.vercel.app (commits `e187242`, `df2f5fa`); Vercel serve com brotli e cache de assets
 - 01/10: botões em formato pílula (token `--radius-pill`), com padding lateral menor no celular
 - 01/10: Lighthouse mobile no site no ar: Performance 98, LCP 2,13 s, CLS 0, Acessibilidade/Boas práticas/SEO 100
+- 05/10: domínio `www.lmtubos.com.br` confirmado; removidos os `[PENDENTE: domínio]` do código. Falta ligar o domínio na Vercel
+- 05/10: DNS na Hostinger (ns dns-parking.com). Registros pedidos pela Vercel: A @ 216.198.79.1 e CNAME www d7da5e5515572bbb.vercel-dns-017.com. Na checagem ainda respondia o antigo (A 147.93.38.85 + AAAA IPv6 da Hostinger): falta salvar/propagar e apagar o AAAA
+- 05/10: a zona editada pelo usuário não era a do lmtubos.com.br (só 2 registros; a real tem MX Locaweb, SPF, autodiscover, mail e serial 2026100101 sem mudança). Domínio parece ligado a um site da hospedagem Hostinger (IP 147.93.38.85, LiteSpeed). Orientado a achar a zona certa e trocar só A/AAAA/CNAME
+- 05/10: CORREÇÃO: lmtubos.com.br é o site WordPress do cliente, não a LP. A confirmação de domínio do mesmo dia estava errada. Pedido ao usuário o domínio real da LP e a remoção de lmtubos.com.br/www da Vercel
+- 05/10: domínio da LP = `www.lmtubos.com` (DNS já apontando para a Vercel). Trocado em canonical, OG, JSON-LD, sitemap, robots e llms.txt; `lmtubos.com.br` adicionado ao `sameAs`
+- 05/10: GTM `GTM-KXWZWFS4` instalado (head + noscript, index e obrigado) com Consent Mode v2 ligado ao aviso de cookies; eventos no dataLayer: `whatsapp_click {whatsapp_origem}`, `generate_lead`, `consentimento_aceito/recusado`. Detalhes no site/README.md
+- 05/10: `www.lmtubos.com` ligado na Vercel (usuário confirmou que deu certo)
+- 05/10: `gtm/GTM-KXWZWFS4_lm-tubos_importar.json` (importar com Substituir; contêiner vazio): Google Tag GA4 `G-WBE4K48M82`, eventos GA4 whatsapp_click/generate_lead, vinculador e conversão Ads `AW-18483352869` / `FYWOCM-lupIdEKWqxu1E` no whatsapp_click (exceto origem form). Formulário vai ter conversão própria (categoria "Enviar formulário de lead")
+- 05/10: conversão Ads do formulário (`E4A_CNm7u5IdEKWqxu1E`, evento generate_lead) adicionada ao mesmo arquivo do GTM (agora 6 tags; importar com Substituir)

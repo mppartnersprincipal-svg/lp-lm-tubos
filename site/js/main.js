@@ -15,12 +15,16 @@
     href: ""    // opcional: link da faixa (ex.: "#orcamento")
   };
 
-  // Rastreamento: os scripts só carregam se o ID estiver preenchido E o visitante aceitar os cookies.
+  // Rastreamento.
+  // GTM: o snippet fica no <head> do HTML (com Consent Mode v2). O ID aqui só liga o aviso de cookies
+  // e o envio dos eventos; mantenha igual ao do HTML. Configure GA4, Google Ads e Meta DENTRO do GTM
+  // e deixe os IDs diretos abaixo vazios, para não contar tudo em dobro.
   const TRACKING = {
-    metaPixelId: "", // [PENDENTE: ID do Meta Pixel]
-    ga4Id: "",       // [PENDENTE: G-XXXXXXXXXX]
-    adsId: "",       // [PENDENTE: AW-XXXXXXXXX]
-    adsLabel: ""     // [PENDENTE: label da conversão do Google Ads para clique no WhatsApp]
+    gtmId: "GTM-KXWZWFS4",
+    metaPixelId: "", // opcional, só se não usar o GTM para o Meta
+    ga4Id: "",       // opcional (G-XXXXXXXXXX), só se não usar o GTM para o GA4
+    adsId: "",       // opcional (AW-XXXXXXXXX), só se não usar o GTM para o Google Ads
+    adsLabel: ""     // opcional: label da conversão do Google Ads para clique no WhatsApp
   };
 
   const CONSENT_KEY = "lm-consent";
@@ -52,7 +56,8 @@
   /* ---------------------------------------------------------------
      Consentimento + rastreamento
      --------------------------------------------------------------- */
-  const hasAnyTracking = () => Boolean(TRACKING.metaPixelId || TRACKING.ga4Id || TRACKING.adsId);
+  const hasAnyTracking = () => Boolean(TRACKING.gtmId || TRACKING.metaPixelId || TRACKING.ga4Id || TRACKING.adsId);
+  const hasDirectTags = () => Boolean(TRACKING.metaPixelId || TRACKING.ga4Id || TRACKING.adsId);
 
   function readConsent() {
     try { return window.localStorage.getItem(CONSENT_KEY); } catch (err) { return null; }
@@ -96,8 +101,24 @@
     loadScript(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ids[0])}`);
   }
 
+  // Envia um evento para o GTM (dataLayer). O próprio GTM respeita o consentimento em cada tag.
+  function pushEvent(data) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(data);
+  }
+
+  // Consent Mode v2: o <head> já começa tudo como "denied"; aqui atualizamos conforme a escolha.
+  function updateConsent(granted) {
+    if (typeof window.gtag !== "function") return;
+    const state = granted ? "granted" : "denied";
+    window.gtag("consent", "update", {
+      ad_storage: state, ad_user_data: state, ad_personalization: state, analytics_storage: state
+    });
+    pushEvent({ event: granted ? "consentimento_aceito" : "consentimento_recusado" });
+  }
+
   function startTracking() {
-    if (trackingOn || !hasAnyTracking()) return;
+    if (trackingOn || !hasDirectTags()) return;
     trackingOn = true;
     if (TRACKING.metaPixelId) loadMetaPixel(TRACKING.metaPixelId);
     const googleIds = [TRACKING.ga4Id, TRACKING.adsId].filter(Boolean);
@@ -105,6 +126,7 @@
   }
 
   function trackWhatsApp(origin) {
+    pushEvent({ event: "whatsapp_click", whatsapp_origem: origin });
     if (!trackingOn) return;
     if (TRACKING.metaPixelId && window.fbq) window.fbq("track", "Contact", { content_name: origin });
     if (!window.gtag) return;
@@ -115,6 +137,7 @@
   }
 
   function trackLead() {
+    pushEvent({ event: "generate_lead", lead_origem: "formulario" });
     if (!trackingOn) return;
     if (TRACKING.metaPixelId && window.fbq) window.fbq("track", "Lead");
     if (TRACKING.ga4Id && window.gtag) window.gtag("event", "generate_lead", { origem: "form" });
@@ -123,7 +146,7 @@
   function initConsent() {
     if (!hasAnyTracking()) return;
     const stored = readConsent();
-    if (stored === "granted") { startTracking(); return; }
+    if (stored === "granted") { updateConsent(true); startTracking(); return; }
     if (stored === "denied") return;
 
     const bar = document.getElementById("cookie-bar");
@@ -142,6 +165,7 @@
       bar.hidden = true;
       document.body.classList.remove("has-cookie-bar");
       window.removeEventListener("resize", syncHeight);
+      updateConsent(choice === "granted");
       if (choice === "granted") startTracking();
     });
   }
