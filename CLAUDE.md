@@ -36,6 +36,7 @@ Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na ra
 | `Design system from logo/` | Design system gerado do logo (só consulta; PRD prevalece) | `readme.md` lá dentro |
 | `Fotos_e_Logo/` | Fotos (fachada/galpão) e logos originais | — |
 | `gtm/` | Arquivo de importação do contêiner GTM-KXWZWFS4 (gerado pelo Claude) | — |
+| `docs/` | Roteiros operacionais (ex.: montar o dashboard no Looker Studio) | `docs/dashboard-looker-studio.md` |
 
 ## Seção de avaliações (`#avaliacoes`)
 
@@ -76,3 +77,4 @@ Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na ra
 - 05/10: commit `ccec985` (domínio lmtubos.com, GTM, pasta gtm/) enviado ao GitHub; Vercel publicou e o GTM já está no ar em www.lmtubos.com. Falta importar/publicar o contêiner no GTM e configurar eventos principais + dimensões no GA4
 - 05/10: GTM v2 publicado e testado no site no ar: consentimento G100→G111 ao aceitar, whatsapp_click no GA4 e as 2 conversões Ads disparando. Alerta "taxa de consentimento 0%" no GTM = pouco tráfego ainda (default negado por LGPD). O teste gerou 1 conversão falsa de cada no Ads (lead "Teste Claude")
 - 05/10: corrigido gatilho da conversão Ads "Clique WhatsApp" no JSON do GTM (o "não é igual a form" tinha virado "igual a form": só disparava no formulário) e criado cache-busting `?v=` em css/js (a Vercel guarda 24 h e o debug pegava o main.js antigo)
+- 05/10: roteiro do dashboard Looker Studio (GA4) em `docs/dashboard-looker-studio.md`; falta o Pedro montar após 24–48 h de dados
