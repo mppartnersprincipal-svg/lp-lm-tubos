@@ -73,3 +73,4 @@ Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na ra
 - 05/10: `www.lmtubos.com` ligado na Vercel (usuário confirmou que deu certo)
 - 05/10: `gtm/GTM-KXWZWFS4_lm-tubos_importar.json` (importar com Substituir; contêiner vazio): Google Tag GA4 `G-WBE4K48M82`, eventos GA4 whatsapp_click/generate_lead, vinculador e conversão Ads `AW-18483352869` / `FYWOCM-lupIdEKWqxu1E` no whatsapp_click (exceto origem form). Formulário vai ter conversão própria (categoria "Enviar formulário de lead")
 - 05/10: conversão Ads do formulário (`E4A_CNm7u5IdEKWqxu1E`, evento generate_lead) adicionada ao mesmo arquivo do GTM (agora 6 tags; importar com Substituir)
+- 05/10: commit `ccec985` (domínio lmtubos.com, GTM, pasta gtm/) enviado ao GitHub; Vercel publicou e o GTM já está no ar em www.lmtubos.com. Falta importar/publicar o contêiner no GTM e configurar eventos principais + dimensões no GA4
