@@ -378,7 +378,6 @@
         "filter": [
           {
             "type": "EQUALS",
-            "negate": true,
             "parameter": [
               {
                 "type": "TEMPLATE",
@@ -389,6 +388,11 @@
                 "type": "TEMPLATE",
                 "key": "arg1",
                 "value": "form"
+              },
+              {
+                "type": "BOOLEAN",
+                "key": "negate",
+                "value": "true"
               }
             ]
           }

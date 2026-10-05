@@ -43,6 +43,8 @@ Depois de publicar:
 
 ## Onde editar
 
+> **Cache:** a Vercel guarda `css/` e `js/` por 24 h no navegador. Ao alterar `styles.css` ou `main.js`, troque o `?v=AAAAMMDD` nos `<link>`/`<script>` de `index.html` e `obrigado.html`; senão quem já visitou continua com a versão antiga.
+
 Tudo fica no topo de `js/main.js`:
 
 | O quê | Constante |
