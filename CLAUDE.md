@@ -50,7 +50,7 @@ Deploy: Vercel, ligado ao GitHub. **O projeto do domínio é `lp-lm-tubos-yfx2`*
 
 ## Pendências abertas
 
-- Lista completa (11 itens) em `site/README.md` → "Pendências com o cliente". Principais: no GTM trocar o acionador "CE - whatsapp_click (sem formulário)" para "não é igual a form" e publicar, no GA4 criar eventos principais (whatsapp_click, generate_lead) e dimensões (whatsapp_origem, lead_origem), Pixel do Meta (não enviado), logo da Tupper (as outras 5 marcas já têm), trocar as fotos de banco de imagens dos cards de `#destaques` por fotos do cliente, horário de sábado, razão social, autorização EBM. Confirmar no GA4 (Admin → Vinculações → Google Ads) que a propriedade vinculada à conta 328-578-6686 é a da LP (`G-WBE4K48M82`). Painel: excluir o projeto Vercel duplicado `lp-lm-tubos`, opcional rotacionar as credenciais da MCC (foram coladas no chat)
+- Lista completa (11 itens) em `site/README.md` → "Pendências com o cliente". Principais: no GTM trocar o acionador "CE - whatsapp_click (sem formulário)" para "não é igual a form" e publicar, no GA4 criar eventos principais (whatsapp_click, generate_lead) e dimensões (whatsapp_origem, lead_origem), Pixel do Meta (não enviado), logo da Tupper (as outras 5 marcas já têm), trocar as fotos de banco de imagens dos cards de `#destaques` por fotos do cliente, horário de sábado, razão social, autorização EBM. Painel: excluir o projeto Vercel duplicado `lp-lm-tubos`, opcional rotacionar as credenciais da MCC (foram coladas no chat)
 
 ## Histórico (1 linha por entrega, mais recente no fim)
 
@@ -85,3 +85,4 @@ Deploy: Vercel, ligado ao GitHub. **O projeto do domínio é `lp-lm-tubos-yfx2`*
 - 06/10: painel no ar em www.lmtubos.com/dashboard (login, visitas e Google Ads testados em produção). Envs estavam no projeto Vercel errado; cadastradas no `lp-lm-tubos-yfx2` (dono do domínio)
 - 06/10: sessões de teste `qa-seed` apagadas no Supabase (pelo usuário no SQL Editor); restam só visitas reais
 - 06/10: vínculo GA4 ↔ Ads confirmado pela API (3 conversões GA4 'LM Tubos (web)' ocultas/secundárias); principais = 2 conversões do GTM; auto-tagging ligado. Falta confirmar se a propriedade vinculada é a da LP
+- 06/10: usuário confirmou no GA4 (propriedade 'LM Tubos', conta MP Assessoria) o vínculo com o Ads 328-578-6686, feito em 05/10, com publicidade personalizada ativada
