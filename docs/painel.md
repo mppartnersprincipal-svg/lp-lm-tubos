@@ -45,7 +45,6 @@ O servidor local grava no mesmo Supabase de produção. Marque as visitas de tes
 delete from public.lmtubos_sessions where utm_content = 'qa-seed';
 ```
 
-(Há 5 sessões de teste de 06/10/2026, campanhas `qa-teste`, `qa-teste2` e `qa-producao`, ainda não apagadas.)
 
 ## Cuidados
 
