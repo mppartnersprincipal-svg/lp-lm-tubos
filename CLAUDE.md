@@ -50,7 +50,7 @@ Deploy: Vercel, ligado ao GitHub. **O projeto do domínio é `lp-lm-tubos-yfx2`*
 
 ## Pendências abertas
 
-- Lista completa (11 itens) em `site/README.md` → "Pendências com o cliente". Principais: no GTM trocar o acionador "CE - whatsapp_click (sem formulário)" para "não é igual a form" e publicar, no GA4 criar eventos principais (whatsapp_click, generate_lead) e dimensões (whatsapp_origem, lead_origem), Pixel do Meta (não enviado), logo da Tupper (as outras 5 marcas já têm), trocar as fotos de banco de imagens dos cards de `#destaques` por fotos do cliente, horário de sábado, razão social, autorização EBM
+- Lista completa (11 itens) em `site/README.md` → "Pendências com o cliente". Principais: no GTM trocar o acionador "CE - whatsapp_click (sem formulário)" para "não é igual a form" e publicar, no GA4 criar eventos principais (whatsapp_click, generate_lead) e dimensões (whatsapp_origem, lead_origem), Pixel do Meta (não enviado), logo da Tupper (as outras 5 marcas já têm), trocar as fotos de banco de imagens dos cards de `#destaques` por fotos do cliente, horário de sábado, razão social, autorização EBM. Painel: apagar as 5 sessões de teste `qa-seed` no Supabase, excluir o projeto Vercel duplicado `lp-lm-tubos`, opcional rotacionar as credenciais da MCC (foram coladas no chat)
 
 ## Histórico (1 linha por entrega, mais recente no fim)
 
