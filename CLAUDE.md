@@ -23,6 +23,8 @@ Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na ra
 - Sem framework/Tailwind/React. Componentes de terceiros (ex.: 21st.dev/shadcn) são **recriados** em HTML/CSS com os tokens da marca, sem instalar nada
 - `Fotos_e_Logo/` = originais, não editar. Fotos otimizadas vão em `site/assets/img/` (WebP + JPG)
 - Pendências do cliente ficam como comentário `[PENDENTE: …]` no código
+- **Segredos** (Google Ads, Supabase, senha do painel) só em `.env.local` (ignorado) e na Vercel. Repo é público: nunca commitar valores. Conta Ads da LM = `3285786686` (a `7929387435` é da M|P)
+- Dashboard da agência = **modelo Sólida/Gaspar** (painel próprio + API do Google Ads), não Looker Studio
 - Endereço usado: Qd. 2, **Lt. 17, Sala 2** (placa do CNPJ), não Lt. 16 do PRD
 - **DNS / e-mail:** o e-mail do cliente (vendas01@) roda na **Locaweb** (MX `mx.core.locaweb.com.br` etc. + SPF). Nunca trocar nameservers para a Vercel nem "Redefinir registros DNS" na Hostinger: só editar A `@`, AAAA `@` e CNAME `www`
 
@@ -36,7 +38,8 @@ Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na ra
 | `Design system from logo/` | Design system gerado do logo (só consulta; PRD prevalece) | `readme.md` lá dentro |
 | `Fotos_e_Logo/` | Fotos (fachada/galpão) e logos originais | — |
 | `gtm/` | Arquivo de importação do contêiner GTM-KXWZWFS4 (gerado pelo Claude) | — |
-| `docs/` | Roteiros operacionais (ex.: montar o dashboard no Looker Studio) | `docs/dashboard-looker-studio.md` |
+| `docs/` | Docs operacionais | `docs/painel.md` (painel /dashboard) |
+| `api/` + `supabase/` + `site/dashboard/` + `site/js/tracker.js` | Painel first-party em `/dashboard` (modelo Sólida/Gaspar): coleta própria no Supabase (tabelas `lmtubos_`) + Google Ads ao vivo pela API | `docs/painel.md` |
 
 ## Seção de avaliações (`#avaliacoes`)
 
@@ -78,3 +81,4 @@ Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na ra
 - 05/10: GTM v2 publicado e testado no site no ar: consentimento G100→G111 ao aceitar, whatsapp_click no GA4 e as 2 conversões Ads disparando. Alerta "taxa de consentimento 0%" no GTM = pouco tráfego ainda (default negado por LGPD). O teste gerou 1 conversão falsa de cada no Ads (lead "Teste Claude")
 - 05/10: corrigido gatilho da conversão Ads "Clique WhatsApp" no JSON do GTM (o "não é igual a form" tinha virado "igual a form": só disparava no formulário) e criado cache-busting `?v=` em css/js (a Vercel guarda 24 h e o debug pegava o main.js antigo)
 - 05/10: roteiro do dashboard Looker Studio (GA4) em `docs/dashboard-looker-studio.md`; falta o Pedro montar após 24–48 h de dados
+- 06/10: Looker Studio descartado (roteiro apagado). Painel `/dashboard` no modelo Sólida/Gaspar: coleta própria (Supabase `lmtubos_*`, migration aplicada), login por senha, Google Ads ao vivo (API, conta 3285786686 via MCC) com campanhas e termos de pesquisa. 10 envs na Vercel (Sensitive). Testado ponta a ponta local; 4 sessões de teste `qa-seed` ficaram no banco. Detalhes em `docs/painel.md`

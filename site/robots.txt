@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /obrigado.html
+Disallow: /dashboard
+Disallow: /api/
 
 Sitemap: https://www.lmtubos.com/sitemap.xml

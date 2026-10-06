@@ -49,7 +49,8 @@
   function initWaLinks() {
     document.querySelectorAll("a[data-wa-msg]").forEach((link) => {
       link.href = waLink(withUtm(link.dataset.waMsg || WA_DEFAULT));
-      link.addEventListener("click", () => trackWhatsApp(link.dataset.waOrigin || "desconhecida"));
+      const label = (link.getAttribute("aria-label") || link.textContent || "").replace(/\s+/g, " ").trim().slice(0, 80);
+      link.addEventListener("click", () => trackWhatsApp(link.dataset.waOrigin || "desconhecida", label));
     });
   }
 
@@ -125,8 +126,15 @@
     if (googleIds.length) loadGtag(googleIds);
   }
 
-  function trackWhatsApp(origin) {
+  // Espelho no coletor first-party do painel /dashboard (js/tracker.js), se carregado.
+  // Independe do aceite de cookies: a coleta do painel é anônima (ver site/README.md).
+  function collect(name, props) {
+    if (typeof window.lmCollect === "function") window.lmCollect(name, props);
+  }
+
+  function trackWhatsApp(origin, label) {
     pushEvent({ event: "whatsapp_click", whatsapp_origem: origin });
+    collect("whatsapp_click", { source: origin, label: label || "" });
     if (!trackingOn) return;
     if (TRACKING.metaPixelId && window.fbq) window.fbq("track", "Contact", { content_name: origin });
     if (!window.gtag) return;
@@ -138,6 +146,7 @@
 
   function trackLead() {
     pushEvent({ event: "generate_lead", lead_origem: "formulario" });
+    collect("lead", { source: "formulario" });
     if (!trackingOn) return;
     if (TRACKING.metaPixelId && window.fbq) window.fbq("track", "Lead");
     if (TRACKING.ga4Id && window.gtag) window.gtag("event", "generate_lead", { origem: "form" });
@@ -162,6 +171,7 @@
       if (!button) return;
       const choice = button.dataset.consent;
       saveConsent(choice);
+      collect("cookie_consent", { consent_choice: choice === "granted" ? "accepted" : "denied" });
       bar.hidden = true;
       document.body.classList.remove("has-cookie-bar");
       window.removeEventListener("resize", syncHeight);
@@ -219,7 +229,7 @@
 
       const link = waLink(withUtm(buildFormMessage(new FormData(form))));
       trackLead();
-      trackWhatsApp("form");
+      trackWhatsApp("form", "Formulário de orçamento");
       // Sem a feature "noopener": com ela window.open sempre retorna null e não dá para detectar bloqueio.
       const opened = window.open(link, "_blank");
       if (opened) opened.opener = null;

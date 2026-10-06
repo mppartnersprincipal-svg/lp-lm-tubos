@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Painel · LM Tubos</title>
+  <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../assets/fonts/archivo-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face { font-family: 'Archivo'; font-style: italic; font-weight: 800 900; font-display: swap; src: url('../assets/fonts/archivo-italic-latin.woff2') format('woff2'); }
+    @font-face { font-family: 'Carlito'; font-style: normal; font-weight: 400; font-display: swap; src: url('../assets/fonts/carlito-normal-400-latin.woff2') format('woff2'); }
+    @font-face { font-family: 'Carlito'; font-style: normal; font-weight: 700; font-display: swap; src: url('../assets/fonts/carlito-normal-700-latin.woff2') format('woff2'); }
+    :root{
+      --navy-900:#1B1A52;--navy-700:#2C2A7C;--navy-500:#4A48A0;--navy-300:#8C8BC4;--navy-50:#EEEEF6;
+      --red-500:#E53013;--red-600:#C8290F;--red-50:#FDECE8;
+      --gray-100:#F4F4F5;--gray-200:#E6E7E8;--gray-300:#D1D3D4;--white:#FFFFFF;
+      --text-strong:#1E1F2B;--text:#3A3C44;--text-muted:#5E6068;
+      --ok:#1E8E4A;--ok-50:#E4F4EA;
+      --display:'Archivo','Arial Black',sans-serif;--body:'Carlito',Calibri,'Segoe UI',Arial,sans-serif;
+      --shadow:0 1px 2px rgba(27,26,82,.06),0 4px 16px rgba(27,26,82,.06);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--gray-100);color:var(--text);font:400 16px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+    a{color:var(--navy-700)}
+    button,input,select{font-family:inherit}
+    .wrap{max-width:1280px;margin:0 auto;padding:0 20px}
+    h1,h2{font-family:var(--display);font-style:italic;font-weight:900;color:var(--navy-700);margin:0;letter-spacing:-.01em;line-height:1.1}
+    h2{font-size:26px}
+    h3{font-size:18px;font-weight:700;color:var(--text-strong);margin:0}
+    .muted{color:var(--text-muted)}
+    .hidden{display:none!important}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 22px;border-radius:999px;border:2px solid var(--navy-700);background:transparent;color:var(--navy-700);font:700 13px var(--body);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .2s,color .2s}
+    .btn:hover{background:var(--navy-700);color:var(--white)}
+    .btn--solid{background:var(--red-600);border-color:var(--red-600);color:var(--white)}
+    .btn--solid:hover{background:#A8220C;border-color:#A8220C}
+    .btn--sm{min-height:36px;padding:4px 16px;font-size:12px}
+    .btn--light{border-color:rgba(255,255,255,.6);color:var(--white)}
+    .btn--light:hover{background:var(--white);color:var(--navy-900)}
+    :focus-visible{outline:3px solid var(--red-500);outline-offset:2px}
+
+    /* Login */
+    #login{min-height:100svh;display:grid;place-items:center;padding:20px;background:var(--navy-900)}
+    .login-card{width:100%;max-width:420px;padding:40px 32px;border-radius:12px;text-align:center;background:var(--white);box-shadow:0 20px 50px rgba(0,0,0,.35);border-top:4px solid var(--red-500)}
+    .login-card img{height:52px;margin-bottom:18px}
+    .login-card p{margin:8px 0 24px}
+    .field{width:100%;min-height:52px;padding:12px 16px;border-radius:8px;border:1px solid var(--gray-300);background:var(--white);color:var(--text-strong);font-size:16px;outline:none}
+    .field:focus{border-color:var(--navy-700);box-shadow:0 0 0 3px rgba(44,42,124,.2)}
+    .error{color:var(--red-600);font-weight:700;font-size:14px;min-height:20px;margin:10px 0 0}
+
+    /* Topo */
+    .top{position:sticky;top:0;z-index:20;background:var(--navy-900);color:var(--white)}
+    .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand img{height:38px}
+    .brand span{font-family:var(--display);font-style:italic;font-weight:900;font-size:20px}
+    .top-actions{display:flex;gap:8px;align-items:center}
+    .secnav{display:flex;gap:4px;overflow-x:auto;padding:8px 0;scrollbar-width:none;border-top:1px solid rgba(255,255,255,.12)}
+    .secnav a{white-space:nowrap;font-size:13px;font-weight:700;text-decoration:none;color:rgba(255,255,255,.75);padding:6px 12px;border-radius:999px}
+    .secnav a:hover{color:var(--white);background:rgba(255,255,255,.1)}
+
+    /* Filtros */
+    .filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:20px 0}
+    .chip{min-height:36px;padding:6px 14px;border-radius:999px;border:1px solid var(--gray-300);background:var(--white);color:var(--text);font:700 13px var(--body);cursor:pointer}
+    .chip:hover{border-color:var(--navy-700);color:var(--navy-700)}
+    .chip.is-active{background:var(--navy-700);border-color:var(--navy-700);color:var(--white)}
+    .filters input[type=date],.filters select{min-height:36px;padding:6px 12px;border-radius:999px;border:1px solid var(--gray-300);background:var(--white);color:var(--text-strong);font-size:14px}
+    .filters .spacer{flex:1}
+    .updated{font-size:13px;color:var(--text-muted)}
+
+    /* Cartões */
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:4px 0 24px}
+    .kpi{background:var(--white);border:1px solid var(--gray-200);border-radius:8px;padding:16px;box-shadow:var(--shadow)}
+    .kpi .lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+    .kpi .val{font-family:var(--display);font-style:italic;font-weight:900;font-size:32px;line-height:1.1;color:var(--navy-700);margin:6px 0 2px;font-variant-numeric:tabular-nums}
+    .kpi .hint{font-size:12px;color:var(--text-muted)}
+    .kpi .delta{font-size:13px;font-weight:700}
+    .delta.up{color:var(--ok)}.delta.down{color:var(--red-600)}
+    .grid{display:grid;gap:16px;margin-bottom:24px}
+    @media(min-width:900px){.g-2{grid-template-columns:2fr 1fr}.g-3{grid-template-columns:repeat(3,1fr)}.g-11{grid-template-columns:1fr 1fr}}
+    .card{background:var(--white);border:1px solid var(--gray-200);border-radius:8px;padding:20px;box-shadow:var(--shadow);min-width:0}
+    .card header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px}
+    .card header p{margin:2px 0 0;font-size:14px;color:var(--text-muted)}
+    .chart{position:relative;height:260px}
+    .chart--tall{height:320px}
+    section.block{padding-top:12px;scroll-margin-top:130px}
+    section.block>h2{margin:8px 0 14px;padding-bottom:10px;border-bottom:4px solid var(--gray-300)}
+    .lead-note{margin:-6px 0 14px;font-size:14px;color:var(--text-muted)}
+
+    /* Barras / tabelas */
+    .bars{display:flex;flex-direction:column;gap:10px}
+    .bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;font-size:15px}
+    .bar .name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-strong)}
+    .bar .track{grid-column:1/-1;height:8px;border-radius:999px;background:var(--navy-50);overflow:hidden}
+    .bar .fill{height:100%;background:var(--navy-700);border-radius:999px;transition:width .6s ease}
+    .bar .num{color:var(--text);font-weight:700;font-variant-numeric:tabular-nums}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--gray-200);white-space:nowrap}
+    td{padding:10px;border-bottom:1px solid var(--gray-200);color:var(--text-strong);vertical-align:top}
+    td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+    .tbl-wrap{overflow-x:auto}
+    .empty{padding:28px;text-align:center;color:var(--text-muted)}
+    .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;background:var(--navy-50);color:var(--navy-700);white-space:nowrap}
+    .tag.ads{background:var(--red-50);color:var(--red-600)}
+    .tag.ok{background:var(--ok-50);color:var(--ok)}
+    .tag.off{background:var(--gray-100);color:var(--text-muted)}
+    .note{margin:16px 0 0;padding-top:14px;border-top:1px solid var(--gray-200);font-size:13px;line-height:1.7;color:var(--text-muted)}
+    .note b{color:var(--text)}
+    .alert{padding:16px 18px;border-radius:8px;background:var(--navy-50);color:var(--navy-700);font-weight:700}
+
+    /* Funil */
+    .funnel{display:flex;flex-direction:column;gap:8px}
+    .funnel .step{display:grid;grid-template-columns:170px 1fr 52px;gap:12px;align-items:center;font-size:14px}
+    .funnel .step .track{height:24px;border-radius:4px;background:var(--navy-50);overflow:hidden}
+    .funnel .step .fill{height:100%;background:var(--navy-700);display:flex;align-items:center;padding-left:8px;font-size:12px;font-weight:700;color:var(--white);transition:width .6s ease}
+    @media(max-width:600px){.funnel .step{grid-template-columns:110px 1fr 44px}}
+
+    /* Heatmap */
+    .heat{display:grid;grid-template-columns:40px repeat(24,1fr);gap:3px;font-size:11px;color:var(--text-muted)}
+    .heat .c{aspect-ratio:1;border-radius:3px}
+    .heat .h{text-align:center}
+    .heat .d{display:flex;align-items:center}
+
+    /* Jornadas */
+    .journey{background:var(--white);border:1px solid var(--gray-200);border-left:4px solid var(--navy-700);border-radius:8px;padding:14px 16px;margin-bottom:10px}
+    .journey .meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px;color:var(--text-muted);margin-bottom:10px}
+    .journey .meta b{color:var(--text-strong)}
+    .trail{display:flex;flex-wrap:wrap;gap:6px}
+    .trail span{font-size:13px;padding:3px 10px;border-radius:999px;background:var(--gray-100);color:var(--text)}
+    .trail span.wa{background:var(--red-600);color:var(--white);font-weight:700}
+    .trail span.section{background:var(--navy-50);color:var(--navy-700)}
+    .trail span.leave{opacity:.7}
+
+    /* Termos */
+    .st-controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+    .st-controls input,.st-controls select{min-height:40px;padding:8px 14px;border-radius:999px;border:1px solid var(--gray-300);background:var(--white);font-size:15px;outline:none}
+    .st-controls input{flex:1 1 260px;max-width:420px}
+    .st-total{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:14px;margin-bottom:14px}
+    .st-total b{color:var(--navy-700)}
+    th.sortable{cursor:pointer;user-select:none}
+    th.sortable:hover,th.sortable.is-sorted{color:var(--navy-700)}
+    .kw{display:block;font-size:12px;color:var(--text-muted);margin-top:2px}
+
+    /* Ao vivo */
+    .live{display:flex;flex-direction:column;gap:6px;max-height:420px;overflow:auto}
+    .live .ev{display:grid;grid-template-columns:56px 1fr auto;gap:12px;font-size:14px;padding:8px 10px;border-radius:6px;background:var(--gray-100)}
+    .live .ev time{color:var(--text-muted);font-variant-numeric:tabular-nums}
+    .pulse{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--ok);margin-right:10px;vertical-align:middle;animation:pulse 1.6s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+    @media (prefers-reduced-motion:reduce){.pulse{animation:none}.bar .fill,.funnel .step .fill{transition:none}}
+    footer.foot{padding:40px 0;text-align:center;font-size:13px;color:var(--text-muted)}
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN (senha única: DASHBOARD_PASSWORD na Vercel) -->
+  <div id="login">
+    <form class="login-card" id="login-form" autocomplete="off">
+      <img src="../assets/logo/logo-lm-tubos.svg" alt="LM Tubos · Materiais Contra Incêndio">
+      <h1 style="font-size:28px">Painel da LP</h1>
+      <p class="muted">Visitas, cliques no WhatsApp e Google Ads</p>
+      <label class="hidden" for="pwd">Senha</label>
+      <input class="field" type="password" id="pwd" placeholder="Senha de acesso" required autofocus>
+      <p class="error" id="login-error" role="alert"></p>
+      <button class="btn btn--solid" type="submit" style="width:100%;margin-top:6px">Entrar</button>
+    </form>
+  </div>
+
+  <!-- APP -->
+  <div id="app" class="hidden">
+    <div class="top">
+      <div class="wrap">
+        <div class="brand"><img src="../assets/logo/logo-lm-tubos-negativo.svg" alt="LM Tubos"><span>Painel</span></div>
+        <div class="top-actions">
+          <a class="btn btn--sm btn--light" href="../" target="_blank" rel="noopener">Ver site</a>
+          <button class="btn btn--sm btn--light" type="button" id="logout">Sair</button>
+        </div>
+      </div>
+      <div class="wrap">
+        <nav class="secnav" aria-label="Seções do painel">
+          <a href="#visao">Visão geral</a><a href="#google-ads">Google Ads</a><a href="#termos">Termos de pesquisa</a><a href="#whatsapp">WhatsApp</a><a href="#leitura">Leitura</a><a href="#interesse">FAQ</a><a href="#campanhas">UTMs</a><a href="#jornadas">Jornadas</a><a href="#quando">Quando</a><a href="#onde">Onde</a><a href="#cliques">Cliques</a><a href="#publico">Público</a><a href="#aovivo">Ao vivo</a>
+        </nav>
+      </div>
+    </div>
+
+    <main class="wrap">
+      <div class="filters" id="filters">
+        <button class="chip" data-periodo="hoje">Hoje</button>
+        <button class="chip" data-periodo="7d">7 dias</button>
+        <button class="chip is-active" data-periodo="30d">30 dias</button>
+        <button class="chip" data-periodo="90d">90 dias</button>
+        <input type="date" id="de" aria-label="De"> <input type="date" id="ate" aria-label="Até">
+        <select id="origem" aria-label="Origem das visitas">
+          <option value="todas">Todas as origens</option>
+          <option value="google_ads">Google Ads</option>
+          <option value="google_organic">Google (orgânico)</option>
+          <option value="meta_ads">Meta Ads</option>
+          <option value="instagram">Instagram</option>
+          <option value="facebook">Facebook</option>
+          <option value="direct">Direto</option>
+          <option value="referral">Indicação</option>
+          <option value="search_other">Outros buscadores</option>
+          <option value="other">Outro</option>
+        </select>
+        <span class="spacer"></span>
+        <span class="updated" id="updated"></span>
+      </div>
+
+      <section class="block" id="visao">
+        <div class="kpis" id="kpis"></div>
+        <div class="grid g-2">
+          <div class="card"><header><div><h3>Visitas por dia</h3><p>Sessões e cliques no WhatsApp</p></div></header><div class="chart chart--tall"><canvas id="c-daily"></canvas></div></div>
+          <div class="card"><header><div><h3>Origem</h3><p>Todas as visitas do período (ignora o filtro de origem)</p></div></header><div class="chart chart--tall"><canvas id="c-channels"></canvas></div></div>
+        </div>
+        <div class="grid g-3">
+          <div class="card"><header><h3>Dispositivo</h3></header><div class="chart"><canvas id="c-devices"></canvas></div></div>
+          <div class="card"><header><h3>Novo × recorrente</h3></header><div class="chart"><canvas id="c-audience"></canvas></div></div>
+          <div class="card"><header><div><h3>Aviso de cookies</h3><p>"Aceitou" = o que GA4 e Ads enxergam com cookies</p></div></header><div class="chart"><canvas id="c-consent"></canvas></div></div>
+        </div>
+      </section>
+
+      <section class="block" id="google-ads">
+        <h2>Google Ads</h2>
+        <p class="lead-note" id="ads-sub">Dados da conta de anúncios, direto da API do Google Ads. Segue o período escolhido; o filtro de origem vale só para as visitas.</p>
+        <div id="ads-body"><div class="card"><div class="empty">Carregando o Google Ads…</div></div></div>
+      </section>
+
+      <section class="block" id="termos">
+        <h2>Termos de pesquisa</h2>
+        <div class="card">
+          <header><div><h3>O que digitaram no Google</h3><p>Vem do relatório da conta do Ads (não segue o filtro de origem).</p></div></header>
+          <div class="st-total" id="st-total"></div>
+          <div class="st-controls hidden" id="st-controls">
+            <input type="search" id="st-busca" placeholder="Buscar termo ou palavra-chave" aria-label="Buscar termo ou palavra-chave">
+            <select id="st-grupo" aria-label="Grupo de anúncios"><option value="todos">Todos os grupos</option></select>
+          </div>
+          <div class="tbl-wrap" id="st-tbl"><div class="empty">Carregando…</div></div>
+          <p class="note">
+            <b>Um termo não se liga a um lead específico.</b> O Google entrega a busca só no total por dia e palavra-chave, não por clique.<br>
+            <b>O Google esconde termos de baixo volume</b> por privacidade, então a soma desta tabela é menor que o total de cliques da campanha.
+          </p>
+        </div>
+      </section>
+
+      <section class="block" id="whatsapp">
+        <h2>WhatsApp: qual botão converte</h2>
+        <div class="grid g-11">
+          <div class="card"><header><div><h3>Por onde clicaram</h3><p>Botão (origem) do clique</p></div></header><div class="bars" id="wa-source"></div></div>
+          <div class="card"><header><div><h3>Texto do botão</h3><p>O que estava escrito no botão clicado</p></div></header><div class="bars" id="wa-label"></div></div>
+        </div>
+        <div class="card"><header><h3>Botão × origem do visitante</h3></header><div class="tbl-wrap" id="wa-pivot"></div></div>
+      </section>
+
+      <section class="block" id="leitura">
+        <h2>Funil de leitura</h2>
+        <div class="card"><header><div><h3>Até onde as pessoas chegam</h3><p>% das sessões que viram cada seção da LP</p></div></header><div class="funnel" id="funnel"></div></div>
+      </section>
+
+      <section class="block" id="interesse">
+        <h2>Dúvidas abertas no FAQ</h2>
+        <div class="card"><header><div><h3>Perguntas mais abertas</h3><p>Objeções que aparecem antes do contato</p></div></header><div class="bars" id="faq-bars"></div></div>
+      </section>
+
+      <section class="block" id="campanhas">
+        <h2>Campanhas na LP (UTMs)</h2>
+        <div class="card"><header><div><h3>Visitas por campanha</h3><p>Como as visitas chegaram (utm_campaign, utm_content, utm_term) e quantas clicaram no WhatsApp</p></div></header><div class="tbl-wrap" id="campaigns"></div></div>
+      </section>
+
+      <section class="block" id="jornadas">
+        <h2>Jornadas</h2>
+        <div class="filters" style="padding:0 0 14px">
+          <button class="chip is-active" data-jornadas="conv">Só quem clicou no WhatsApp</button>
+          <button class="chip" data-jornadas="todas">Todas as sessões</button>
+        </div>
+        <div id="journeys"></div>
+      </section>
+
+      <section class="block" id="quando">
+        <h2>Quando visitam</h2>
+        <div class="card"><header><div><h3>Dia da semana × hora</h3><p id="heat-peak"></p></div></header><div class="heat" id="heat"></div></div>
+      </section>
+
+      <section class="block" id="onde">
+        <h2>Onde estão</h2>
+        <div class="grid g-11">
+          <div class="card"><header><h3>Cidades</h3></header><div class="bars" id="cities"></div></div>
+          <div class="card"><header><h3>Estados</h3></header><div class="bars" id="regions"></div></div>
+        </div>
+      </section>
+
+      <section class="block" id="cliques">
+        <h2>Tudo que foi clicado</h2>
+        <div class="card"><div class="tbl-wrap" id="clicks"></div></div>
+      </section>
+
+      <section class="block" id="publico">
+        <h2>Público</h2>
+        <div class="grid g-11">
+          <div class="card"><header><h3>Navegadores</h3></header><div class="bars" id="browsers"></div></div>
+          <div class="card"><header><h3>Sistemas</h3></header><div class="bars" id="os"></div></div>
+        </div>
+      </section>
+
+      <section class="block" id="aovivo">
+        <h2><span class="pulse" aria-hidden="true"></span>Ao vivo</h2>
+        <div class="card"><header><div><h3>Últimos eventos</h3><p>Atualiza a cada 30 s</p></div></header><div class="live" id="live"></div></div>
+      </section>
+    </main>
+    <footer class="foot">LM Tubos · Painel first-party · M|P Assessoria</footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script>
+  (function () {
+    'use strict';
+    var TOKEN_KEY = 'lm-dash-token';
+    var CH = { google_ads: 'Google Ads', google_organic: 'Google (orgânico)', instagram: 'Instagram', meta_ads: 'Meta Ads', facebook: 'Facebook', direct: 'Direto', referral: 'Indicação', search_other: 'Outros buscadores', other: 'Outro' };
+    var CONSENT = { accepted: 'Aceitou', denied: 'Recusou', nao_respondeu: 'Não respondeu' };
+    var COLORS = ['#2C2A7C', '#E53013', '#8C8BC4', '#1B1A52', '#F2836E', '#4A48A0', '#A7A9AC', '#C8290F', '#D1D3D4'];
+    var SEC = { inicio: 'Topo (hero)', hero: 'Topo (hero)', header: 'Cabeçalho', 'destaque-conexoes': 'Destaque: conexões', 'destaque-sprinklers': 'Destaque: sprinklers', 'destaque-tubos': 'Destaque: tubos', 'produtos-lista': 'Linha completa (lista)', estoque: 'Estoque', orientacao: 'Orientação técnica', servicos: 'Serviços', 'como-funciona': 'Como funciona', 'cta-final': 'CTA final', rodape: 'Rodapé', flutuante: 'Botão flutuante', form: 'Formulário', destaques: 'Mais procurados', produtos: 'Linha completa', clientes: 'Para quem', marcas: 'Marcas', sobre: 'Nossa história', avaliacoes: 'Avaliações', entrega: 'Entrega e pagamento', orcamento: 'Formulário', duvidas: 'Dúvidas (FAQ)', footer: 'Rodapé', cookies: 'Aviso de cookies', desconhecida: 'Outro', outro: 'Outro' };
+    var charts = {};
+    var state = { periodo: '30d', de: null, ate: null, origem: 'todas', jornadas: 'conv' };
+    var $ = function (s) { return document.querySelector(s); };
+    var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); };
+    var fmt = function (n) { return Number(n || 0).toLocaleString('pt-BR'); };
+    var money = function (v) { return v == null ? '—' : Number(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); };
+    var pct = function (v) { return v == null ? '—' : String(v).replace('.', ',') + '%'; };
+    function sectionName(k) { return SEC[k] || k; }
+
+    Chart.defaults.color = '#5E6068';
+    Chart.defaults.borderColor = '#E6E7E8';
+    Chart.defaults.font.family = 'Carlito, Calibri, sans-serif';
+    Chart.defaults.font.size = 13;
+
+    // ---------- Login ----------
+    var token = null;
+    try { token = localStorage.getItem(TOKEN_KEY); } catch (e) {}
+    function showApp() { $('#login').classList.add('hidden'); $('#app').classList.remove('hidden'); readUrl(); load(); startLive(); }
+    function showLogin(msg) { try { localStorage.removeItem(TOKEN_KEY); } catch (e) {} token = null; stopLive(); $('#app').classList.add('hidden'); $('#login').classList.remove('hidden'); if (msg) $('#login-error').textContent = msg; }
+    $('#login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      $('#login-error').textContent = '';
+      fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: $('#pwd').value }) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (x) { if (!x.ok) throw new Error(x.j.error || 'Falha no login'); token = x.j.token; try { localStorage.setItem(TOKEN_KEY, token); } catch (e) {} $('#pwd').value = ''; showApp(); })
+        .catch(function (err) { $('#login-error').textContent = err.message; });
+    });
+    $('#logout').addEventListener('click', function () { showLogin(); });
+
+    // ---------- Filtros (ficam na URL) ----------
+    function ymd(d) { return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
+    function periodDates(p) {
+      var today = new Date(); var de = new Date();
+      if (p === 'hoje') de = today; else if (p === '7d') de.setDate(today.getDate() - 6); else if (p === '90d') de.setDate(today.getDate() - 89); else de.setDate(today.getDate() - 29);
+      return { de: ymd(de), ate: ymd(today) };
+    }
+    function readUrl() {
+      var u = new URLSearchParams(location.search);
+      state.periodo = u.get('periodo') || '30d'; state.de = u.get('de'); state.ate = u.get('ate'); state.origem = u.get('origem') || 'todas'; state.jornadas = u.get('jornadas') || 'conv';
+      if (!state.de || !state.ate) { var d = periodDates(state.periodo); state.de = d.de; state.ate = d.ate; }
+      syncFilters();
+    }
+    function writeUrl() { var u = new URLSearchParams({ periodo: state.periodo, de: state.de, ate: state.ate, origem: state.origem, jornadas: state.jornadas }); history.replaceState(null, '', '?' + u.toString() + location.hash); }
+    function syncFilters() {
+      document.querySelectorAll('[data-periodo]').forEach(function (b) { b.classList.toggle('is-active', b.dataset.periodo === state.periodo); });
+      document.querySelectorAll('[data-jornadas]').forEach(function (b) { b.classList.toggle('is-active', b.dataset.jornadas === state.jornadas); });
+      $('#de').value = state.de; $('#ate').value = state.ate; $('#origem').value = state.origem;
+    }
+    document.querySelectorAll('[data-periodo]').forEach(function (b) { b.addEventListener('click', function () { state.periodo = b.dataset.periodo; var d = periodDates(state.periodo); state.de = d.de; state.ate = d.ate; syncFilters(); writeUrl(); load(); }); });
+    document.querySelectorAll('[data-jornadas]').forEach(function (b) { b.addEventListener('click', function () { state.jornadas = b.dataset.jornadas; syncFilters(); writeUrl(); loadSite(); }); });
+    ['de', 'ate'].forEach(function (id) { $('#' + id).addEventListener('change', function () { if ($('#de').value && $('#ate').value && $('#de').value <= $('#ate').value) { state.periodo = 'custom'; state.de = $('#de').value; state.ate = $('#ate').value; syncFilters(); writeUrl(); load(); } }); });
+    $('#origem').addEventListener('change', function () { state.origem = $('#origem').value; writeUrl(); loadSite(); });
+
+    // ---------- Dados ----------
+    function api(path, qs) {
+      return fetch('/api/' + path + '?' + qs, { headers: { Authorization: 'Bearer ' + token } }).then(function (r) {
+        if (r.status === 401) { showLogin('Sessão expirada. Entre novamente.'); throw new Error('401'); }
+        return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.error || 'Erro ' + r.status); return j; });
+      });
+    }
+    function load() { loadSite(); loadAds(); }
+    function loadSite() {
+      $('#updated').textContent = 'Carregando…';
+      api('dashboard', new URLSearchParams({ de: state.de, ate: state.ate, origem: state.origem, jornadas: state.jornadas }).toString())
+        .then(render)
+        .catch(function (e) { if (e.message !== '401') $('#updated').textContent = 'Erro: ' + e.message; });
+    }
+
+    // ---------- Visitas (coleta própria da LP) ----------
+    function render(d) {
+      $('#updated').textContent = 'Período ' + brDate(d.range.de) + ' a ' + brDate(d.range.ate) + ' · atualizado às ' + new Date(d.generated_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      var c = d.kpis.current, p = d.kpis.previous;
+      $('#kpis').innerHTML = [
+        kpi('Visitas', c.sessions, p.sessions), kpi('Visitantes', c.visitors, p.visitors),
+        kpi('Cliques no WhatsApp', c.wa_clicks, p.wa_clicks, null, null, 'Inclui o envio do formulário'),
+        kpi('Leads do formulário', d.leads, null),
+        kpi('Taxa de conversão', c.conversion_rate + '%', null, c.conversion_rate - p.conversion_rate, 'pp', 'Visitas com clique no WhatsApp'),
+        kpi('Tempo médio', c.avg_duration_s + ' s', c.avg_duration_s, p.avg_duration_s), kpi('Rolagem média', c.avg_scroll_pct + '%'),
+        kpi('Via Google Ads', c.google_ads_share + '%', null, c.google_ads_share - p.google_ads_share, 'pp', 'Parte das visitas'),
+      ].join('');
+
+      chart('c-daily', { type: 'bar', data: { labels: d.daily.map(function (x) { return brDate(x.date, true); }), datasets: [
+        { type: 'line', label: 'Cliques no WhatsApp', data: d.daily.map(function (x) { return x.wa_clicks; }), borderColor: '#E53013', backgroundColor: '#E53013', tension: .35, pointRadius: 3, yAxisID: 'y1' },
+        { label: 'Visitas', data: d.daily.map(function (x) { return x.sessions; }), backgroundColor: '#2C2A7C', borderRadius: 4 },
+      ] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, y1: { position: 'right', beginAtZero: true, grid: { drawOnChartArea: false }, ticks: { precision: 0 } } }, plugins: { legend: { position: 'bottom' } } } });
+      donut('c-channels', d.channels.map(function (x) { return { key: CH[x.key] || x.key, value: x.value }; }));
+      donut('c-devices', d.devices.map(function (x) { return { key: ({ mobile: 'Celular', tablet: 'Tablet', desktop: 'Computador' })[x.key] || x.key, value: x.value }; }));
+      donut('c-audience', d.audience.map(function (x) { return { key: x.key === 'novo' ? 'Novo' : 'Recorrente', value: x.value }; }));
+      donut('c-consent', d.consent.map(function (x) { return { key: CONSENT[x.key] || x.key, value: x.value }; }));
+
+      bars('#wa-source', d.wa_by_source, sectionName);
+      bars('#wa-label', d.wa_by_label);
+      pivotTable('#wa-pivot', d.wa_source_x_channel);
+      funnel(d.sections);
+      bars('#faq-bars', d.faq);
+      campaigns(d.campaigns);
+      journeys(d.journeys);
+      heatmap(d.heatmap);
+      bars('#cities', d.cities); bars('#regions', d.regions);
+      clicks(d.clicks);
+      bars('#browsers', d.browsers); bars('#os', d.os);
+    }
+    function kpi(label, value, prev, deltaOverride, unit, hint) {
+      var delta = deltaOverride != null ? deltaOverride : (prev == null || typeof value !== 'number' ? null : (prev === 0 ? (value > 0 ? 100 : 0) : Math.round((value - prev) / prev * 100)));
+      var deltaHtml = delta == null ? '' : '<div class="delta ' + (delta > 0 ? 'up' : delta < 0 ? 'down' : '') + '">' + (delta > 0 ? '▲ ' : delta < 0 ? '▼ ' : '') + String(Math.abs(Math.round(delta * 10) / 10)).replace('.', ',') + (unit || '%') + ' vs período anterior</div>';
+      return '<div class="kpi"><div class="lbl">' + esc(label) + '</div><div class="val">' + (typeof value === 'number' ? fmt(value) : esc(value)) + '</div>' + (hint ? '<div class="hint">' + esc(hint) + '</div>' : '') + deltaHtml + '</div>';
+    }
+    function chart(id, cfg) { var el = document.getElementById(id); if (!el) return; if (charts[id]) charts[id].destroy(); charts[id] = new Chart(el, cfg); }
+    function donut(id, items) {
+      var host = document.getElementById(id);
+      if (!host) return;
+      var box = host.parentElement; var empty = box.querySelector('.empty');
+      if (!items.length) { if (charts[id]) { charts[id].destroy(); delete charts[id]; } host.classList.add('hidden'); if (!empty) box.insertAdjacentHTML('beforeend', '<div class="empty">Sem dados no período</div>'); return; }
+      host.classList.remove('hidden'); if (empty) empty.remove();
+      chart(id, { type: 'doughnut', data: { labels: items.map(function (x) { return x.key; }), datasets: [{ data: items.map(function (x) { return x.value; }), backgroundColor: COLORS, borderColor: '#FFFFFF', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '64%', plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 12 } } } } });
+    }
+    function bars(sel, items, labelFn) {
+      var el = $(sel); if (!items || !items.length) { el.innerHTML = '<div class="empty">Sem dados no período</div>'; return; }
+      var max = items[0].value;
+      el.innerHTML = items.slice(0, 12).map(function (x) { return '<div class="bar"><span class="name" title="' + esc(x.key) + '">' + esc(labelFn ? labelFn(x.key) : x.key) + '</span><span class="num">' + fmt(x.value) + '</span><div class="track"><div class="fill" style="width:' + Math.max(3, x.value / max * 100) + '%"></div></div></div>'; }).join('');
+    }
+    function pivotTable(sel, rows) {
+      var el = $(sel); if (!rows.length) { el.innerHTML = '<div class="empty">Sem cliques no período</div>'; return; }
+      var cols = []; rows.forEach(function (r) { Object.keys(r.cols).forEach(function (c) { if (cols.indexOf(c) < 0) cols.push(c); }); });
+      el.innerHTML = '<table><thead><tr><th>Botão</th>' + cols.map(function (c) { return '<th class="n">' + esc(CH[c] || c) + '</th>'; }).join('') + '<th class="n">Total</th></tr></thead><tbody>' +
+        rows.map(function (r) { var t = 0; var tds = cols.map(function (c) { var v = r.cols[c] || 0; t += v; return '<td class="n">' + (v || '·') + '</td>'; }).join(''); return '<tr><td>' + esc(sectionName(r.row)) + '</td>' + tds + '<td class="n"><b>' + t + '</b></td></tr>'; }).join('') + '</tbody></table>';
+    }
+    function funnel(steps) {
+      var el = $('#funnel'); var max = Math.max.apply(null, steps.map(function (s) { return s.value; }).concat([1]));
+      el.innerHTML = steps.map(function (s) { return '<div class="step"><span>' + esc(s.label) + '</span><div class="track"><div class="fill" style="width:' + (s.value / max * 100) + '%">' + (s.value ? fmt(s.value) : '') + '</div></div><span class="num muted">' + s.pct + '%</span></div>'; }).join('');
+    }
+    function campaigns(rows) {
+      var el = $('#campaigns'); if (!rows.length) { el.innerHTML = '<div class="empty">Nenhuma visita de campanha no período. Use UTMs nos anúncios (utm_campaign, utm_content, utm_term).</div>'; return; }
+      el.innerHTML = '<table><thead><tr><th>Campanha</th><th>Grupo / anúncio</th><th>Termo</th><th>Canal</th><th class="n">Visitas</th><th class="n">WhatsApp</th><th class="n">Conv.</th></tr></thead><tbody>' +
+        rows.map(function (r) { return '<tr><td>' + esc(r.campaign) + '</td><td>' + esc(r.content || '·') + '</td><td>' + esc(r.term || '·') + '</td><td><span class="tag ' + (r.channel === 'google_ads' ? 'ads' : '') + '">' + esc(CH[r.channel] || r.channel) + '</span></td><td class="n">' + r.sessions + '</td><td class="n">' + r.wa_clicks + '</td><td class="n">' + (r.sessions ? Math.round(r.wa_clicks / r.sessions * 100) : 0) + '%</td></tr>'; }).join('') + '</tbody></table>';
+    }
+    function journeys(list) {
+      var el = $('#journeys'); if (!list.length) { el.innerHTML = '<div class="card"><div class="empty">Nenhuma jornada no período</div></div>'; return; }
+      el.innerHTML = list.map(function (j) {
+        var origem = (CH[j.channel] || j.channel || 'Outro') + (j.campaign ? ' · ' + j.campaign : '') + (j.content ? ' · ' + j.content : '') + (j.term ? ' · "' + j.term + '"' : '');
+        return '<div class="journey"><div class="meta"><span>' + brDateTime(j.started_at) + '</span><span><b>' + esc(origem) + '</b></span><span>' + esc([j.device, j.browser, j.os].filter(Boolean).join(' · ')) + '</span>' + (j.city ? '<span>' + esc(j.city + (j.region ? ' · ' + j.region : '')) + '</span>' : '') + '<span>' + j.duration_s + ' s no site' + (j.max_scroll_pct != null ? ' · ' + j.max_scroll_pct + '% da página' : '') + '</span>' + (j.returning ? '<span class="tag">já visitou antes</span>' : '') + '</div><div class="trail">' +
+          j.trail.map(function (s) { return '<span class="' + esc(s.kind) + '">' + esc(s.kind === 'section' ? sectionName(s.text) : s.text) + '</span>'; }).join('') + '</div></div>';
+      }).join('');
+    }
+    function heatmap(m) {
+      var days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']; var max = 0, peak = null;
+      m.forEach(function (row, d) { row.forEach(function (v, h) { if (v > max) { max = v; peak = { d: d, h: h }; } }); });
+      var html = '<div></div>' + Array.from({ length: 24 }, function (_, h) { return '<div class="h">' + (h % 3 === 0 ? h + 'h' : '') + '</div>'; }).join('');
+      m.forEach(function (row, d) { html += '<div class="d">' + days[d] + '</div>' + row.map(function (v, h) { var a = max ? v / max : 0; return '<div class="c" title="' + days[d] + ' ' + h + 'h: ' + v + '" style="background:rgba(44,42,124,' + (0.06 + a * 0.94) + ')"></div>'; }).join(''); });
+      $('#heat').innerHTML = html;
+      $('#heat-peak').textContent = peak && max ? 'Pico: ' + days[peak.d] + ' às ' + peak.h + 'h (' + max + ' visitas)' : 'Sem dados no período';
+    }
+    function clicks(rows) {
+      var el = $('#clicks'); if (!rows.length) { el.innerHTML = '<div class="empty">Sem cliques no período</div>'; return; }
+      el.innerHTML = '<table><thead><tr><th>Elemento</th><th>Onde</th><th class="n">Cliques</th></tr></thead><tbody>' + rows.map(function (r) { return '<tr><td>' + esc(r.text) + '</td><td class="muted">' + esc(sectionName(r.section)) + '</td><td class="n">' + r.value + '</td></tr>'; }).join('') + '</tbody></table>';
+    }
+
+    // ---------- Google Ads (API, carregamento separado) ----------
+    var STATUS = { ENABLED: ['Ativa', 'ok'], PAUSED: ['Pausada', 'off'], REMOVED: ['Removida', 'ads'] };
+    function loadAds() {
+      $('#ads-body').innerHTML = '<div class="card"><div class="empty">Carregando o Google Ads…</div></div>';
+      $('#st-tbl').innerHTML = '<div class="empty">Carregando…</div>'; $('#st-total').innerHTML = ''; $('#st-controls').classList.add('hidden');
+      var periodo = { de: state.de, ate: state.ate };
+      api('google-ads', new URLSearchParams(periodo).toString()).then(function (r) {
+        if (periodo.de !== state.de || periodo.ate !== state.ate) return; // resposta de um filtro antigo
+        renderAds(r);
+      }).catch(function (e) { if (e.message !== '401') renderAds({ status: 'error', message: e.message }); });
+    }
+    function renderAds(r) {
+      if (r.status !== 'ready') {
+        var title = r.status === 'not_configured' ? 'Conexão com o Google Ads pendente' : 'Não foi possível carregar o Google Ads';
+        $('#ads-body').innerHTML = '<div class="card"><div class="alert">' + esc(title) + '</div><p class="muted" style="margin:10px 0 0">' + esc(r.message || '') + '</p></div>';
+        searchTerms([], r.status);
+        return;
+      }
+      $('#ads-sub').textContent = 'Conta ' + r.customer.name + ' · ' + brDate(r.de) + ' a ' + brDate(r.ate) + ' · fuso ' + r.customer.time_zone + '. O filtro de origem vale só para as visitas.';
+      var t = r.totals;
+      var cards = [
+        kpi('Investimento', money(t.cost), null, null, null, 'Valor gasto em anúncios'),
+        kpi('Impressões', t.impressions, null, null, null, 'Exibições dos anúncios'),
+        kpi('Cliques', t.clicks, null, null, null, 'Cliques nos anúncios'),
+        kpi('CTR', pct(t.ctr), null, null, null, 'Cliques ÷ impressões'),
+        kpi('CPC médio', money(t.cpc), null, null, null, 'Custo médio por clique'),
+        kpi('Conversões', String(t.conversions).replace('.', ','), null, null, null, 'WhatsApp + formulário (tags do GTM)'),
+        kpi('Custo por conversão', money(t.cpa), null, null, null, 'Investimento ÷ conversões'),
+      ].join('');
+      var camp = r.campaigns.length ? '<table><thead><tr><th>Campanha</th><th>Status</th><th class="n">Investimento</th><th class="n">Impressões</th><th class="n">Cliques</th><th class="n">CTR</th><th class="n">CPC</th><th class="n">Conversões</th><th class="n">Custo / conv.</th></tr></thead><tbody>' +
+        r.campaigns.map(function (c) { var s = STATUS[c.status] || ['Não informado', 'off']; return '<tr><td><b>' + esc(c.name) + '</b></td><td><span class="tag ' + s[1] + '">' + s[0] + '</span></td><td class="n">' + money(c.cost) + '</td><td class="n">' + fmt(c.impressions) + '</td><td class="n">' + fmt(c.clicks) + '</td><td class="n">' + pct(c.ctr) + '</td><td class="n">' + money(c.cpc) + '</td><td class="n">' + String(c.conversions).replace('.', ',') + '</td><td class="n">' + money(c.cpa) + '</td></tr>'; }).join('') + '</tbody></table>'
+        : '<div class="empty">Nenhuma campanha com resultados no período.</div>';
+      $('#ads-body').innerHTML = '<div class="kpis">' + cards + '</div>' +
+        '<div class="card" style="margin-bottom:16px"><header><div><h3>Investimento × conversões por dia</h3></div></header><div class="chart"><canvas id="c-ads"></canvas></div></div>' +
+        '<div class="card"><header><div><h3>Resultados por campanha</h3><p>As conversões seguem a atribuição do Google Ads (data do clique no anúncio) e podem mudar nos dias seguintes.</p></div></header><div class="tbl-wrap">' + camp + '</div></div>';
+      if (charts['c-ads']) { charts['c-ads'].destroy(); delete charts['c-ads']; }
+      if (r.daily.length) {
+        chart('c-ads', { type: 'bar', data: { labels: r.daily.map(function (x) { return brDate(x.date, true); }), datasets: [
+          { type: 'line', label: 'Conversões', data: r.daily.map(function (x) { return x.conversions; }), borderColor: '#E53013', backgroundColor: '#E53013', tension: .35, pointRadius: 3, yAxisID: 'y1' },
+          { label: 'Investimento (R$)', data: r.daily.map(function (x) { return x.cost; }), backgroundColor: '#2C2A7C', borderRadius: 4 },
+        ] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true }, y1: { position: 'right', beginAtZero: true, grid: { drawOnChartArea: false } } }, plugins: { legend: { position: 'bottom' } } } });
+      } else {
+        $('#c-ads').parentElement.outerHTML = '<div class="empty">Sem investimento no período.</div>';
+      }
+      searchTerms(r.search_terms, 'ready');
+    }
+
+    // ---------- Termos de pesquisa ----------
+    var ST_STATUS = {
+      ADDED: { cls: 'ok', label: 'palavra-chave', title: 'Já é palavra-chave da campanha.' },
+      EXCLUDED: { cls: 'ads', label: 'negativada', title: 'Já é palavra-chave negativa.' },
+      ADDED_EXCLUDED: { cls: 'ads', label: 'kw + negativa', title: 'Palavra-chave e também negativada em algum grupo.' },
+      NONE: { cls: 'off', label: 'a decidir', title: 'Nem palavra-chave nem negativa: avaliar se vale adicionar ou negativar.' },
+    };
+    var ST_MATCH = { EXACT: 'Exata', PHRASE: 'Frase', BROAD: 'Ampla', NEAR_EXACT: 'Exata (variação)', NEAR_PHRASE: 'Frase (variação)' };
+    var stRows = [], stState = 'ready', stSort = { key: 'clicks', dir: 'desc' };
+    function searchTerms(rows, status) {
+      stRows = rows || []; stState = status;
+      var groups = []; stRows.forEach(function (r) { r.ad_groups.forEach(function (g) { if (groups.indexOf(g) < 0) groups.push(g); }); }); groups.sort();
+      var sel = $('#st-grupo'); var atual = groups.indexOf(sel.value) >= 0 ? sel.value : 'todos';
+      sel.innerHTML = '<option value="todos">Todos os grupos</option>' + groups.map(function (g) { return '<option value="' + esc(g) + '">' + esc(g) + '</option>'; }).join('');
+      sel.value = atual;
+      $('#st-controls').classList.toggle('hidden', !stRows.length);
+      var tot = stRows.reduce(function (a, r) { a.i += r.impressions; a.c += r.clicks; a.$ += r.cost; a.v += r.conversions; return a; }, { i: 0, c: 0, $: 0, v: 0 });
+      $('#st-total').innerHTML = stRows.length ? [['Termos', fmt(stRows.length)], ['Impressões', fmt(tot.i)], ['Cliques', fmt(tot.c)], ['Custo', money(tot.$)], ['Conversões', String(+tot.v.toFixed(2)).replace('.', ',')]]
+        .map(function (x) { return '<span>' + x[0] + ' <b>' + x[1] + '</b></span>'; }).join('') : '';
+      stRender();
+    }
+    function stValue(r, k) {
+      if (k === 'term') return r.term || '';
+      if (k === 'keyword') return (r.keywords[0] && r.keywords[0].text) || '';
+      if (k === 'group') return r.ad_groups.join(', ');
+      if (k === 'status') return r.status || '';
+      return r[k] || 0;
+    }
+    function stRender() {
+      var el = $('#st-tbl');
+      if (!stRows.length) { el.innerHTML = '<div class="empty">' + (stState === 'ready' ? 'Sem termos no período. Aparecem quando a campanha de pesquisa recebe cliques.' : 'Indisponível enquanto o Google Ads não carrega.') + '</div>'; return; }
+      var busca = ($('#st-busca').value || '').trim().toLowerCase(), grupo = $('#st-grupo').value;
+      var rows = stRows.filter(function (r) {
+        if (grupo !== 'todos' && r.ad_groups.indexOf(grupo) < 0) return false;
+        return !busca || (r.term + ' ' + r.keywords.map(function (k) { return k.text; }).join(' ')).toLowerCase().indexOf(busca) >= 0;
+      });
+      if (!rows.length) { el.innerHTML = '<div class="empty">Nenhum termo com esse filtro</div>'; return; }
+      var k = stSort.key, dir = stSort.dir === 'asc' ? 1 : -1;
+      rows = rows.slice().sort(function (a, b) { var va = stValue(a, k), vb = stValue(b, k); return typeof va === 'string' ? dir * va.localeCompare(vb, 'pt-BR') : (va === vb ? 0 : dir * (va - vb)); });
+      var cols = [{ k: 'term', t: 'Termo digitado' }, { k: 'keyword', t: 'Palavra-chave' }, { k: 'group', t: 'Grupo' }, { k: 'status', t: 'Situação' }, { k: 'impressions', t: 'Impr.', n: 1 }, { k: 'clicks', t: 'Cliques', n: 1 }, { k: 'ctr', t: 'CTR', n: 1 }, { k: 'cost', t: 'Custo', n: 1 }, { k: 'conversions', t: 'Conv.', n: 1 }];
+      el.innerHTML = '<table><thead><tr>' + cols.map(function (c) { var on = stSort.key === c.k; return '<th class="sortable' + (on ? ' is-sorted' : '') + (c.n ? ' n' : '') + '" data-sort="' + c.k + '">' + c.t + ' ' + (on ? (stSort.dir === 'asc' ? '▲' : '▼') : '⇅') + '</th>'; }).join('') + '</tr></thead><tbody>' +
+        rows.map(function (r) {
+          var st = ST_STATUS[r.status] || ST_STATUS.NONE;
+          var kws = r.keywords.length ? r.keywords : [{ text: '·', match_type: null }];
+          return '<tr><td>' + esc(r.term) + '</td><td>' + kws.map(function (x) { return esc(x.text) + (x.match_type ? '<span class="kw">' + esc(ST_MATCH[x.match_type] || x.match_type) + '</span>' : ''); }).join('') + '</td><td class="muted">' + esc(r.ad_groups.join(', ') || '·') + '</td><td><span class="tag ' + st.cls + '" title="' + esc(st.title) + '">' + esc(st.label) + '</span></td><td class="n">' + fmt(r.impressions) + '</td><td class="n">' + fmt(r.clicks) + '</td><td class="n">' + pct(r.ctr) + '</td><td class="n">' + money(r.cost) + '</td><td class="n">' + String(r.conversions).replace('.', ',') + '</td></tr>';
+        }).join('') + '</tbody></table>';
+    }
+    $('#st-busca').addEventListener('input', stRender);
+    $('#st-grupo').addEventListener('change', stRender);
+    $('#st-tbl').addEventListener('click', function (e) {
+      var th = e.target.closest('th[data-sort]'); if (!th) return;
+      var k = th.dataset.sort;
+      if (stSort.key === k) stSort.dir = stSort.dir === 'asc' ? 'desc' : 'asc';
+      else { stSort.key = k; stSort.dir = ['term', 'keyword', 'group', 'status'].indexOf(k) >= 0 ? 'asc' : 'desc'; }
+      stRender();
+    });
+
+    // ---------- Ao vivo ----------
+    var liveTimer = null;
+    function startLive() { stopLive(); tickLive(); liveTimer = setInterval(function () { if (!document.hidden) tickLive(); }, 30000); }
+    function stopLive() { if (liveTimer) { clearInterval(liveTimer); liveTimer = null; } }
+    function tickLive() {
+      api('dashboard', 'live=1').then(function (d) {
+        var el = $('#live'); if (!d.events.length) { el.innerHTML = '<div class="empty">Nenhum evento ainda</div>'; return; }
+        el.innerHTML = d.events.map(function (e) {
+          var s = e.session || {}; var p = e.props || {}; var what = e.name;
+          if (e.name === 'whatsapp_click') what = 'WhatsApp: ' + (p.label || '') + ' (' + sectionName(p.source) + ')';
+          else if (e.name === 'lead') what = 'Enviou o formulário de orçamento';
+          else if (e.name === 'section_view') what = 'Viu: ' + sectionName(p.section);
+          else if (e.name === 'click') what = 'Clicou: ' + (p.text || '');
+          else if (e.name === 'page_view') what = 'Entrou na página';
+          else if (e.name === 'faq_open') what = 'FAQ: ' + p.question;
+          else if (e.name === 'cookie_consent') what = 'Cookies: ' + (p.consent_choice === 'accepted' ? 'aceitou' : 'recusou');
+          return '<div class="ev"><time>' + new Date(e.ts).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + '</time><span>' + esc(what) + '</span><span class="muted">' + esc([CH[s.channel] || s.channel, s.device, s.city].filter(Boolean).join(' · ')) + '</span></div>';
+        }).join('');
+      }).catch(function () {});
+    }
+    function brDate(v, short) { var p = String(v).split('-'); return short ? p[2] + '/' + p[1] : p[2] + '/' + p[1] + '/' + p[0]; }
+    function brDateTime(iso) { return new Date(iso).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }); }
+
+    if (token) showApp();
+  })();
+  </script>
+</body>
+</html>

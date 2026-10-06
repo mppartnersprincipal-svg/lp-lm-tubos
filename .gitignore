@@ -9,3 +9,11 @@ desktop.ini
 # Dependências e relatórios temporários
 node_modules/
 *.log
+
+# Segredos (credenciais do Google Ads, Supabase e senha do painel): NUNCA no git, o repositório é público
+.env
+.env*
+!.env.example
+
+# Vínculo local com o projeto da Vercel (vercel link)
+.vercel/

@@ -1,0 +1,6 @@
+{
+  "name": "lp-lm-tubos",
+  "private": true,
+  "type": "module",
+  "description": "LP estática (pasta site/) + funções /api do painel first-party"
+}
