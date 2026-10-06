@@ -38,7 +38,7 @@ Deploy: Vercel, ligado ao GitHub. **O projeto do domínio é `lp-lm-tubos-yfx2`*
 | `Design system from logo/` | Design system gerado do logo (só consulta; PRD prevalece) | `readme.md` lá dentro |
 | `Fotos_e_Logo/` | Fotos (fachada/galpão) e logos originais | — |
 | `gtm/` | Arquivo de importação do contêiner GTM-KXWZWFS4 (gerado pelo Claude) | — |
-| `docs/` | Docs operacionais | `docs/painel.md` (painel /dashboard) |
+| `docs/` | Docs operacionais | `docs/painel.md` (painel /dashboard), `docs/utms-google-ads.md` (URLs/UTMs dos anúncios) |
 | `api/` + `supabase/` + `site/dashboard/` + `site/js/tracker.js` | Painel first-party em `/dashboard` (modelo Sólida/Gaspar): coleta própria no Supabase (tabelas `lmtubos_`) + Google Ads ao vivo pela API | `docs/painel.md` |
 
 ## Seção de avaliações (`#avaliacoes`)
@@ -86,3 +86,4 @@ Deploy: Vercel, ligado ao GitHub. **O projeto do domínio é `lp-lm-tubos-yfx2`*
 - 06/10: sessões de teste `qa-seed` apagadas no Supabase (pelo usuário no SQL Editor); restam só visitas reais
 - 06/10: vínculo GA4 ↔ Ads confirmado pela API (3 conversões GA4 'LM Tubos (web)' ocultas/secundárias); principais = 2 conversões do GTM; auto-tagging ligado. Falta confirmar se a propriedade vinculada é a da LP
 - 06/10: usuário confirmou no GA4 (propriedade 'LM Tubos', conta MP Assessoria) o vínculo com o Ads 328-578-6686, feito em 05/10, com publicidade personalizada ativada
+- 06/10: URLs com UTM das 2 campanhas de pesquisa (7 grupos) em `docs/utms-google-ads.md`; padrão google/cpc, campanha e grupo em slug, `utm_term={keyword}`, sufixo por grupo
