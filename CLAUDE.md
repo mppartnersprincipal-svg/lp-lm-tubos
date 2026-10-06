@@ -13,7 +13,7 @@ envio para todo o Brasil). Agência: M|P Assessoria. Objetivo: conversas no What
 comercial (Roberto Silva, (62) 98558-7373). Stack: **HTML + CSS + JS puro, sem build**.
 **Domínio da LP: `www.lmtubos.com`** (apex `lmtubos.com` redireciona). DNS na Hostinger (ns atlas/hyperion.dns-parking.com): A `@` 216.198.79.1, CNAME `www` d7da5e5515572bbb.vercel-dns-017.com. ⚠️ `lmtubos.com.br` é o site WordPress do cliente (+ e-mail Locaweb): não mexer, só aparece no `sameAs` do JSON-LD.
 Repositório: https://github.com/mppartnersprincipal-svg/lp-lm-tubos (branch `main`, **público**). `.claude/settings.local.json` fica fora do git.
-Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na raiz publica só a pasta `site/` (sem build).
+Deploy: Vercel, ligado ao GitHub. **O projeto do domínio é `lp-lm-tubos-yfx2`** (envs do painel ficam nele); há um 2º projeto `lp-lm-tubos` (`lp-lm-tubos.vercel.app`) no mesmo repo, sem domínio. A pasta local está linkada (`.vercel/`) ao `-yfx2`. `vercel.json` na raiz publica só a pasta `site/` (sem build).
 
 ## Regras que valem para tudo
 
@@ -82,3 +82,4 @@ Deploy: Vercel (`lp-lm-tubos.vercel.app`), ligado ao GitHub. `vercel.json` na ra
 - 05/10: corrigido gatilho da conversão Ads "Clique WhatsApp" no JSON do GTM (o "não é igual a form" tinha virado "igual a form": só disparava no formulário) e criado cache-busting `?v=` em css/js (a Vercel guarda 24 h e o debug pegava o main.js antigo)
 - 05/10: roteiro do dashboard Looker Studio (GA4) em `docs/dashboard-looker-studio.md`; falta o Pedro montar após 24–48 h de dados
 - 06/10: Looker Studio descartado (roteiro apagado). Painel `/dashboard` no modelo Sólida/Gaspar: coleta própria (Supabase `lmtubos_*`, migration aplicada), login por senha, Google Ads ao vivo (API, conta 3285786686 via MCC) com campanhas e termos de pesquisa. 10 envs na Vercel (Sensitive). Testado ponta a ponta local; 4 sessões de teste `qa-seed` ficaram no banco. Detalhes em `docs/painel.md`
+- 06/10: painel no ar em www.lmtubos.com/dashboard (login, visitas e Google Ads testados em produção). Envs estavam no projeto Vercel errado; cadastradas no `lp-lm-tubos-yfx2` (dono do domínio)

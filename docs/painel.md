@@ -21,7 +21,7 @@ Painel privado em **https://www.lmtubos.com/dashboard**, no modelo do site da S�
 
 ## Variáveis de ambiente
 
-Cadastradas na Vercel (Production, como **Sensitive**) em 06/10/2026. A cópia local fica em `.env.local`, que é ignorado pelo git (o repositório é público). Os nomes estão em `.env.example`.
+Cadastradas na Vercel (Production, como **Sensitive**) em 06/10/2026 no projeto **`lp-lm-tubos-yfx2`**, que é o dono do domínio `www.lmtubos.com`. Atenção: existe um segundo projeto, `lp-lm-tubos` (só `lp-lm-tubos.vercel.app`), ligado ao mesmo repositório; ele também recebeu as variáveis, mas não atende o domínio. A cópia local fica em `.env.local`, que é ignorado pelo git (o repositório é público). Os nomes estão em `.env.example`.
 
 | Variável | Observação |
 |---|---|
@@ -45,7 +45,7 @@ O servidor local grava no mesmo Supabase de produção. Marque as visitas de tes
 delete from public.lmtubos_sessions where utm_content = 'qa-seed';
 ```
 
-(Há 4 sessões de teste de 06/10/2026, campanha `qa-teste` / `qa-teste2`, ainda não apagadas.)
+(Há 5 sessões de teste de 06/10/2026, campanhas `qa-teste`, `qa-teste2` e `qa-producao`, ainda não apagadas.)
 
 ## Cuidados
 
