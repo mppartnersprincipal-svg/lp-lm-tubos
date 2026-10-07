@@ -87,3 +87,5 @@ Deploy: Vercel, ligado ao GitHub. **O projeto do domínio é `lp-lm-tubos-yfx2`*
 - 06/10: vínculo GA4 ↔ Ads confirmado pela API (3 conversões GA4 'LM Tubos (web)' ocultas/secundárias); principais = 2 conversões do GTM; auto-tagging ligado. Falta confirmar se a propriedade vinculada é a da LP
 - 06/10: usuário confirmou no GA4 (propriedade 'LM Tubos', conta MP Assessoria) o vínculo com o Ads 328-578-6686, feito em 05/10, com publicidade personalizada ativada
 - 06/10: URLs com UTM das 2 campanhas de pesquisa (7 grupos) em `docs/utms-google-ads.md`; padrão google/cpc, campanha e grupo em slug, `utm_term={keyword}`, sufixo por grupo
+- 07/10: card de destaque renomeado para "Tubos de aço carbono pintados"; card "Tubos e conexões" cita grooved, válvula de governo e alarme e válvula gaveta; "Bombas de incêndio" ganhou card próprio em #produtos (grade ajustada: CTA em linha inteira no tablet, 3x3 no desktop)
+- 07/10: "tubos de aço carbono pintados" também na meta/OG, texto do topo, FAQ (visível + JSON-LD), OfferCatalog (bombas em item próprio) e llms.txt; sitemap lastmod 07/10

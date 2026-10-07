@@ -1,6 +1,6 @@
 # LM Tubos Materiais Contra Incêndio
 
-> Distribuidora de materiais para sistemas de combate a incêndio em Goiânia (GO), com estoque em galpão próprio e envio para todo o Brasil. Vende tubos pintados, conexões e válvulas ranhuradas, sprinklers, hidrantes, alarme, extintores e sinalização de emergência. Também faz projeto de prevenção contra incêndio, instalação, manutenção e teste hidrostático de mangueiras.
+> Distribuidora de materiais para sistemas de combate a incêndio em Goiânia (GO), com estoque em galpão próprio e envio para todo o Brasil. Vende tubos de aço carbono pintados, conexões e válvulas ranhuradas (grooved), bombas de incêndio, sprinklers, hidrantes, alarme, extintores e sinalização de emergência. Também faz projeto de prevenção contra incêndio, instalação, manutenção e teste hidrostático de mangueiras.
 
 ## Dados da empresa
 
@@ -16,8 +16,9 @@
 
 ## Produtos
 
-- Tubos pintados e conexões ranhuradas (acoplamentos, curvas, tês e reduções)
-- Válvulas importadas, registros e bombas de incêndio
+- Tubos de aço carbono pintados e conexões ranhuradas grooved (acoplamentos, curvas, tês e reduções)
+- Válvulas importadas e registros, incluindo válvula de governo e alarme e válvula gaveta
+- Bombas de incêndio
 - Sprinklers (bicos de chuveiro automático) e acessórios
 - Hidrantes: mangueiras, esguichos e abrigos
 - Alarme e detecção: centrais, acionadores manuais e detectores

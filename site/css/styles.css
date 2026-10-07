@@ -484,10 +484,15 @@ a.topbar__item:hover { color: var(--white); }
   background: var(--navy-50); border-color: var(--navy-50);
 }
 .card--cta p { font-weight: 700; font-size: 1.1875rem; color: var(--navy-700); line-height: 1.35; }
-@media (min-width: 768px) { .products { grid-template-columns: repeat(2, 1fr); gap: var(--space-5); } }
+/* 8 cards + CTA: no tablet o CTA ocupa a linha inteira; no desktop fecha a grade 3x3 */
+@media (min-width: 768px) {
+  .products { grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
+  .card--cta { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; }
+  .card--cta .btn { flex-shrink: 0; }
+}
 @media (min-width: 1024px) {
   .products { grid-template-columns: repeat(3, 1fr); }
-  .card--cta { grid-column: span 2; flex-direction: row; align-items: center; justify-content: space-between; }
+  .card--cta { grid-column: auto; flex-direction: column; align-items: stretch; justify-content: center; }
 }
 
 /* ---------- 12b. Estoque (mosaico de fotos reais) ---------- */
