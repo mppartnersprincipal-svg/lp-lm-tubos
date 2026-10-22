@@ -32,7 +32,7 @@ Deploy: Vercel, ligado ao GitHub. **O projeto do domínio é `lp-lm-tubos-yfx2`*
 
 | Pasta/arquivo | O que é | Doc detalhado |
 |---|---|---|
-| `site/` | A landing (index.html, obrigado.html, css/styles.css, js/main.js, assets, robots, sitemap, llms.txt) | `site/README.md` (estrutura, onde editar, decisões, verificação, pendências) |
+| `site/` | A landing (index.html, obrigado.html, politica-de-privacidade.html, css/styles.css, js/main.js, assets, robots, sitemap, llms.txt) | `site/README.md` (estrutura, onde editar, decisões, verificação, pendências) |
 | `PRD_LP_LM_Tubos.md` | Especificação completa: seções, design system, copy, integrações, SEO | — |
 | `Briefing_LP_LM_Tubos*.pdf` | Briefing original do cliente | — |
 | `Design system from logo/` | Design system gerado do logo (só consulta; PRD prevalece) | `readme.md` lá dentro |
@@ -50,7 +50,7 @@ Deploy: Vercel, ligado ao GitHub. **O projeto do domínio é `lp-lm-tubos-yfx2`*
 
 ## Pendências abertas
 
-- Lista completa (11 itens) em `site/README.md` → "Pendências com o cliente". Principais: no GTM trocar o acionador "CE - whatsapp_click (sem formulário)" para "não é igual a form" e publicar, no GA4 criar eventos principais (whatsapp_click, generate_lead) e dimensões (whatsapp_origem, lead_origem), Pixel do Meta (não enviado), logo da Tupper (as outras 5 marcas já têm), trocar as fotos de banco de imagens dos cards de `#destaques` por fotos do cliente, horário de sábado, razão social, autorização EBM. Painel: excluir o projeto Vercel duplicado `lp-lm-tubos`, opcional rotacionar as credenciais da MCC (foram coladas no chat)
+- Lista completa (13 itens) em `site/README.md` → "Pendências com o cliente". Principais: **especificação dos tubos de aço carbono** (normas DIN 2440/NBR 5580, sch 40/80, costura, faixa de bitolas, acabamento, barra de 6 m, grooved: hoje a LP só diz ao comprador o que informar, sem afirmar estoque), prazos de guarda e Pixel da Meta na política de privacidade, no GTM trocar o acionador "CE - whatsapp_click (sem formulário)" para "não é igual a form" e publicar, no GA4 criar eventos principais (whatsapp_click, generate_lead) e dimensões (whatsapp_origem, lead_origem), Pixel do Meta (não enviado), logo da Tupper (as outras 5 marcas já têm), trocar as fotos de banco de imagens dos cards de `#destaques` por fotos do cliente, horário de sábado, razão social, autorização EBM. Painel: excluir o projeto Vercel duplicado `lp-lm-tubos`, opcional rotacionar as credenciais da MCC (foram coladas no chat)
 
 ## Histórico (1 linha por entrega, mais recente no fim)
 
@@ -90,3 +90,4 @@ Deploy: Vercel, ligado ao GitHub. **O projeto do domínio é `lp-lm-tubos-yfx2`*
 - 07/10: card de destaque renomeado para "Tubos de aço carbono pintados"; card "Tubos e conexões" cita grooved, válvula de governo e alarme e válvula gaveta; "Bombas de incêndio" ganhou card próprio em #produtos (grade ajustada: CTA em linha inteira no tablet, 3x3 no desktop)
 - 07/10: "tubos de aço carbono pintados" também na meta/OG, texto do topo, FAQ (visível + JSON-LD), OfferCatalog (bombas em item próprio) e llms.txt; sitemap lastmod 07/10
 - 07/10: Search Console verificado (propriedade de domínio lmtubos.com via TXT na Hostinger), sitemap enviado e indexação da home pedida
+- 21/10: a partir dos termos do Google Ads (sch 40, din 2440, 2 polegadas, com costura; 41 cliques, 0 conversões, LP "abaixo da média"): card de tubos em `#destaques` ganhou tabela Norma/Schedule/Bitola/Costura/Acabamento (sem afirmar estoque até a LM confirmar; `[PENDENTE]` no HTML), card "Tubos e conexões", FAQ (HTML + FAQPage, agora 12), meta/OG, JSON-LD Store e llms.txt citam norma/schedule/bitola. Criada `site/politica-de-privacidade.html` (LGPD, indexável, no sitemap), ligada no rodapé, no banner de cookies ("Saiba mais") e abaixo do botão do formulário. Campo Empresa já era opcional. CSS `?v=20261021`. **Não deployado: aguardando aprovação do Pedro**

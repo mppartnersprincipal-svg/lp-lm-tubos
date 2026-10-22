@@ -8,6 +8,7 @@ Site estático (HTML + CSS + JS puro, sem build) da M|P Assessoria para a LM Tub
 site/
 ├── index.html          página única (seções 0–16 do PRD)
 ├── obrigado.html       página de conversão opcional (noindex; o form NÃO redireciona para cá por padrão)
+├── politica-de-privacidade.html  política LGPD (indexável; ligada no rodapé, no banner de cookies e no formulário)
 ├── css/styles.css      tokens (:root) + componentes + seções, mobile-first
 ├── js/main.js          WhatsApp, formulário, header/menu, animações, cookies e rastreamento
 ├── robots.txt · sitemap.xml
@@ -86,9 +87,24 @@ Tudo fica no topo de `js/main.js`:
 - 01/10/2026, depois da seção Estoque, 3 execuções mobile: sem gzip LCP 2,93 s; **com gzip (como numa hospedagem real) nota 99, LCP 2,11 s, CLS 0, TBT ~5 ms**. Na hospedagem, confirmar que gzip ou brotli está ligado para HTML, CSS, JS e SVG (sem isso o HTML de 76 KB pesa ~4x mais).
 - **Seção Estoque (`#estoque`):** 7 fotos reais em `assets/img/estoque/` (480 e 899 px, WebP + JPG, `loading="lazy"`). Clicar amplia a foto num `<dialog>` (`initLightbox` em main.js); sem suporte, o link abre a foto. Originais em `Fotos_e_Logo/Fotos Estoque/`.
 
+## Especificação dos tubos e política de privacidade (21/10/2026)
+
+Mudanças feitas a partir dos termos de pesquisa do Google Ads (campanha "Tubos Aço Carbono": buscas por "sch 40", "din 2440", "2 polegadas", "com costura") e do avaliador de página de destino (faltava política de privacidade):
+
+- **Card "Tubos de aço carbono pintados" (`#destaques`):** lista `<dl class="spec">` com Norma, Schedule, Bitola, Costura e Acabamento + frase "Não achou a bitola? Pergunte no WhatsApp". Até a LM confirmar o que tem em estoque, as linhas dizem ao comprador **o que informar** (ex.: "DIN 2440 ou NBR 5580"), sem afirmar estoque. Depois da confirmação, reescrever como afirmação (o comentário `[PENDENTE]` no HTML lista o que confirmar).
+- **Card "Tubos e conexões" (`#produtos`), FAQ (`#duvidas` + JSON-LD FAQPage), meta description, og:description, JSON-LD Store (`description`, `knowsAbout`, OfferCatalog com item próprio para tubos) e `llms.txt`:** citam norma, schedule, bitola e costura com a mesma lógica. Nenhum deles afirma "DIN 2440 / sch 40" como estoque até a confirmação.
+- **`politica-de-privacidade.html`:** mesmo design system (header com logo + "Voltar ao site", classes `.legal*` em `styles.css`), 12 seções (controlador, dados, finalidades, bases legais, compartilhamento, cookies, prazos, segurança, direitos, menores, alterações, contato), botão "Apagar minha escolha de cookies" (limpa `lm-consent`, `lm-v` e `lm-s` com script inline) e JSON-LD `WebPage`. Carrega o GTM (com Consent Mode) e o `tracker.js`, mas não o `main.js` (sem banner nessa página). Está no `sitemap.xml` e no `llms.txt`.
+- **Links para a política:** rodapé (`.footer__bottom`), banner de cookies ("Saiba mais", `.cookie-bar__link`) e linha abaixo do botão do formulário (`.form__micro` + `.form__link`).
+- **Formulário:** o campo Empresa já era opcional (sem `required`, label "(opcional)"); nada mudou nos `name`/`id` nem no envio.
+- Cache: `styles.css?v=20261021` em `index.html` e na política. `obrigado.html` e `main.js` não foram tocados.
+- Verificação: JSON-LD dos 3 blocos parseando, FAQ visível igual ao FAQPage (12 perguntas), meta description com 159 caracteres, sem travessão nos arquivos do site, sem rolagem horizontal a 390 px (`scrollWidth` 489 < `innerWidth` 504 no Chrome headless), capturas mobile/desktop dos cards, do formulário, do FAQ e da política conferidas.
+
 ## Pendências com o cliente
 
 Cada uma está marcada com `[PENDENTE]` em comentário no código.
+
+12. **Especificação dos tubos de aço carbono** (card de `#destaques`, card de `#produtos`, FAQ, meta/OG, OfferCatalog, llms.txt): normas em estoque (DIN 2440 e/ou NBR 5580, classe), schedule (sch 40 e/ou sch 80), com e/ou sem costura, faixa de bitolas (de __" a __"), acabamento (pintado em qual cor, preto, galvanizado), barra de 6 m, pontas lisas e/ou ranhuradas (grooved).
+13. **Política de privacidade:** prazos de guarda das conversas e do cadastro (sugestão: 12 meses sem venda, 5 anos com venda); se a LM não for anunciar na Meta, remover as menções ao Pixel da Meta (seções 2, 5 e 6). Agência: definir rotina de limpeza das tabelas `lmtubos_*` no Supabase para cumprir os 13 meses declarados.
 
 1. Confirmar a razão social exata (o briefing traz "MATERIAS").
 2. Horário de sábado.

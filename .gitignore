@@ -17,3 +17,6 @@ node_modules/
 
 # Vínculo local com o projeto da Vercel (vercel link)
 .vercel/
+
+# Estado do plugin oh-my-claudecode (local)
+.omc/

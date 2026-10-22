@@ -16,7 +16,8 @@
 
 ## Produtos
 
-- Tubos de aço carbono pintados e conexões ranhuradas grooved (acoplamentos, curvas, tês e reduções)
+- Tubos de aço carbono pintados para rede de incêndio, cotados pela especificação do projeto: norma (DIN 2440 ou NBR 5580), schedule (sch 40 ou sch 80), bitola em polegadas, com ou sem costura
+- Conexões ranhuradas grooved (acoplamentos, curvas, tês e reduções)
 - Válvulas importadas e registros, incluindo válvula de governo e alarme e válvula gaveta
 - Bombas de incêndio
 - Sprinklers (bicos de chuveiro automático) e acessórios
@@ -44,3 +45,4 @@ Marcas: Remadi, Segurimax, Metalcasty, Intelbras e Ilumac.
 ## Páginas
 
 - [Página principal](https://www.lmtubos.com/): produtos, serviços, como pedir, avaliações e perguntas frequentes
+- [Política de privacidade](https://www.lmtubos.com/politica-de-privacidade.html): dados coletados, cookies, prazos e direitos do titular (LGPD)
