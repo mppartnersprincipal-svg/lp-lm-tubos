@@ -1,6 +1,9 @@
 {
   "name": "lp-lm-tubos",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "type": "module",
   "description": "LP estática (pasta site/) + funções /api do painel first-party"
 }
