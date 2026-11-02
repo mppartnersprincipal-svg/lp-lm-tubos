@@ -17,13 +17,17 @@
       });
       dataLayer.push({ pagina: "mangueiras-de-incendio", consentimento: estado });
     })();
-    // O GTM entra no evento load: a foto do topo (LCP) pinta antes das tags do Ads/GA4 ocuparem a CPU.
-    // Cliques feitos antes disso ficam na fila do dataLayer e são processados quando o GTM chega.
+    // O GTM entra 3 s depois do load ou na primeira interação (toque, clique, tecla, rolagem), o que vier antes:
+    // a foto do topo (LCP) pinta antes das tags do Ads/GA4 ocuparem a CPU. Um toque no WhatsApp carrega o GTM
+    // na hora (pointerdown vem antes do click) e o whatsapp_click espera na fila do dataLayer.
     (function(w,d,s,l,i){function gtm(){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
-    if(d.readyState==='complete')gtm();else w.addEventListener('load',gtm,{once:true});
+    var ok=false,ev=['pointerdown','keydown','touchstart','scroll'];function go(){if(ok)return;ok=true;
+    ev.forEach(function(e){w.removeEventListener(e,go,true)});gtm();}
+    ev.forEach(function(e){w.addEventListener(e,go,{capture:true,passive:true})});
+    function later(){setTimeout(go,3000);}if(d.readyState==='complete')later();else w.addEventListener('load',later,{once:true});
     })(window,document,'script','dataLayer','GTM-KXWZWFS4');
   </script>
   <!-- End Google Tag Manager -->
@@ -52,7 +56,6 @@
   <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
 
   <link rel="preload" href="/assets/fonts/archivo-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" type="image/webp" imagesrcset="/assets/img/paginas/topo-esguichos-hidrante-480.webp 480w, /assets/img/paginas/topo-esguichos-hidrante-880.webp 880w" imagesizes="(min-width: 1024px) 500px, calc(100vw - 52px)" fetchpriority="high">
   <link rel="stylesheet" href="/css/styles.css?v=20261102">
   <script>document.documentElement.classList.add("js");if(location.hash)document.documentElement.classList.add("cv-off");</script>
 
@@ -248,7 +251,7 @@
           <!-- [PENDENTE: trocar por foto real das mangueiras de incêndio no estoque (hoje mostra esguichos, adaptadores e registros de hidrante)] -->
           <picture>
             <source type="image/webp" srcset="/assets/img/paginas/topo-esguichos-hidrante-480.webp 480w, /assets/img/paginas/topo-esguichos-hidrante-880.webp 880w" sizes="(min-width: 1024px) 500px, calc(100vw - 52px)">
-            <img src="/assets/img/paginas/topo-esguichos-hidrante-480.jpg" srcset="/assets/img/paginas/topo-esguichos-hidrante-480.jpg 480w, /assets/img/paginas/topo-esguichos-hidrante-880.jpg 880w" sizes="(min-width: 1024px) 500px, calc(100vw - 52px)" width="880" height="550" fetchpriority="high" decoding="async" alt="Estoque da LM Tubos com esguichos, adaptadores e registros de hidrante, peças que acompanham a mangueira de incêndio">
+            <img src="/assets/img/paginas/topo-esguichos-hidrante-480.jpg" srcset="/assets/img/paginas/topo-esguichos-hidrante-480.jpg 480w, /assets/img/paginas/topo-esguichos-hidrante-880.jpg 880w" sizes="(min-width: 1024px) 500px, calc(100vw - 52px)" width="880" height="550" fetchpriority="high" alt="Estoque da LM Tubos com esguichos, adaptadores e registros de hidrante, peças que acompanham a mangueira de incêndio">
           </picture>
         </div>
         <div class="p-hero__cta">
