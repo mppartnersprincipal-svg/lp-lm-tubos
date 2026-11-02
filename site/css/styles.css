@@ -862,6 +862,8 @@ a.topbar__item:hover { color: var(--white); }
   .wa-float:hover .wa-float__tip, .wa-float:focus-visible .wa-float__tip { opacity: 1; }
 }
 body.has-cookie-bar .wa-float { bottom: calc(var(--cookie-h, 160px) + 28px); }
+/* Com o aviso de cookies aberto, o fim do rodapé (CNPJ e política) não pode ficar escondido atrás dele */
+body.has-cookie-bar .footer__bottom { padding-bottom: calc(var(--cookie-h, 160px) + 24px); }
 
 /* ---------- 26. Banner de cookies ---------- */
 .cookie-bar {
