@@ -125,6 +125,14 @@ Objetivo: subir o Índice de Qualidade do Google Ads ("experiência na página d
 - **UTM:** além da URL, o `main.js` guarda `utm_source`/`utm_campaign` em `sessionStorage` (`lm-utm`), então o `[origem: ...]` continua na mensagem quando o visitante vai de uma página para outra.
 - **Home:** card "Alarme e detecção" sem "Centrais" (a LM não vende central, confirmado em 02/11); links "Ver [produto]" nos cards de `#destaques` e `#produtos`; coluna "Produtos" no rodapé; `url` das páginas no OfferCatalog.
 - **Para editar a copy:** edite o HTML da página direto. Ao mudar uma pergunta do FAQ, mude também o `FAQPage` no `<head>`.
+- **Cookie bar x rodapé (vale para todas as páginas):** com o aviso de cookies aberto, `.footer__bottom` ganha `padding-bottom` da altura do aviso, para o CNPJ e o link da política não ficarem escondidos atrás dele no fim da página. O Lighthouse continua apontando contraste nesse parágrafo (o axe rola o texto até a borda da tela, onde o aviso fixo fica por cima): é o motivo da Acessibilidade 97, igual na home.
+
+**Verificação no ar (02/11/2026):**
+- PageSpeed Insights mobile (Lighthouse 13.6, pagespeed.web.dev), Desempenho / Acessibilidade / Boas práticas / SEO: conexões 100/97/100/100 (LCP 1,8 s); sprinklers 100/97/100/100 (1,7 s); mangueiras 99/97/100/100 (1,8 s); bombas 100/97/100/100 (1,7 s); tubulação 100/97/100/100 (1,7 s); tubos de aço carbono 100/97/100/100 (1,7 s). CLS 0 e TBT 0 ms em todas. Antes do GTM atrasado e do preload da Carlito: desempenho 45 a 71, LCP 6 a 7 s.
+- Medição com throttling real (4G lento + CPU 4×, Chrome local): LCP de 1,8 a 2,9 s; a home deu 2,9 s no mesmo teste.
+- Teste de pesquisa aprimorada: Breadcrumb válido. O Google não lista mais FAQ nesse teste (resultado de FAQ restrito a sites de governo e saúde desde 2023). Schema Markup Validator: WebPage (com BreadcrumbList) e FAQPage com 0 erros e 0 avisos nas 6 páginas.
+- Tag Assistant (GTM-KXWZWFS4, versão publicada): em /sprinklers e /mangueiras-de-incendio o `whatsapp_click` disparou "GA4 - Evento whatsapp_click" e "Google Ads - Conversão Clique WhatsApp"; o formulário disparou "GA4 - Evento generate_lead" e "Google Ads - Conversão Formulário de orçamento", e o `whatsapp_click` de origem `form` disparou só o GA4 (sem conversão de clique em dobro). Teste feito sem aceitar cookies; o formulário de teste usou o nome "Teste Claude (ignorar)".
+- Search Console (propriedade de domínio lmtubos.com): indexação solicitada para as 6 URLs.
 
 ## Pendências com o cliente
 
