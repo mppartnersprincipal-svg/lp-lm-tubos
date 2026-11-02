@@ -160,4 +160,4 @@ Cada uma está marcada com `[PENDENTE]` em comentário no código.
 9. (resolvido em 05/10: domínio da LP é `www.lmtubos.com`)
 10. Promoções sazonais: a faixa `.promo-bar` está pronta, basta ligar `PROMO.enabled` em `js/main.js`.
 11. ~~Lote e sala do endereço~~ Resolvido em 02/11/2026: R. Pedro Galvão, 65, Qd. 2, Lt. 16, Jardim Imperial (Perfil da Empresa no Google).
-21. **Telefone:** o Perfil da Empresa no Google mostra (62) 98538-7272; o site usa o WhatsApp do Roberto (62) 98558-7373. Confirmar qual é o principal (perguntado no questionário de 02/11).
+21. ~~Telefone~~ Resolvido em 02/11/2026: o telefone oficial é o do site, WhatsApp do Roberto (62) 98558-7373. Obs.: o print do Perfil da Empresa no Google mostrava (62) 98538-7272; se estiver assim no perfil, corrigir lá para bater com o site.
