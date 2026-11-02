@@ -16,13 +16,14 @@
 
 ## Produtos
 
-- Tubos de aço carbono pintados para rede de incêndio, cotados pela especificação do projeto: norma (DIN 2440 ou NBR 5580), schedule (sch 40 ou sch 80), bitola em polegadas, com ou sem costura
-- Conexões ranhuradas grooved (acoplamentos, curvas, tês e reduções)
+- Tubos de aço carbono pintados para rede de incêndio, cotados pela especificação do projeto: norma (DIN 2440 ou NBR 5580), schedule (sch 40 ou sch 80), bitola em polegadas, com ou sem costura. Página: https://www.lmtubos.com/tubos-de-aco-carbono
+- Tubulação de hidrante e de sprinkler: tubos, conexões ranhuradas e galvanizadas, registros e válvulas. Página: https://www.lmtubos.com/tubulacao-de-incendio
+- Conexões ranhuradas grooved (acoplamentos, curvas, tês e reduções). Página: https://www.lmtubos.com/conexoes-ranhuradas
 - Válvulas importadas e registros, incluindo válvula de governo e alarme e válvula gaveta
-- Bombas de incêndio
-- Sprinklers (bicos de chuveiro automático) e acessórios
-- Hidrantes: mangueiras, esguichos e abrigos
-- Alarme e detecção: centrais, acionadores manuais e detectores
+- Bombas de incêndio para rede de hidrantes e sprinklers, cotadas pela vazão e pressão do projeto. Página: https://www.lmtubos.com/bombas-de-incendio
+- Sprinklers (bicos de chuveiro automático) e acessórios. Página: https://www.lmtubos.com/sprinklers
+- Hidrantes: mangueiras de incêndio, esguichos e abrigos. Página: https://www.lmtubos.com/mangueiras-de-incendio
+- Alarme e detecção: acionadores manuais e detectores (a LM não vende centrais de alarme)
 - Extintores para cada classe de incêndio
 - Sinalização fotoluminescente e iluminação de emergência
 
@@ -45,4 +46,10 @@ Marcas: Remadi, Segurimax, Metalcasty, Intelbras e Ilumac.
 ## Páginas
 
 - [Página principal](https://www.lmtubos.com/): produtos, serviços, como pedir, avaliações e perguntas frequentes
-- [Política de privacidade](https://www.lmtubos.com/politica-de-privacidade.html): dados coletados, cookies, prazos e direitos do titular (LGPD)
+- [Conexões ranhuradas grooved](https://www.lmtubos.com/conexoes-ranhuradas): acoplamentos, tês, curvas, reduções, VGA e válvula gaveta; o que informar no pedido
+- [Bico de sprinkler](https://www.lmtubos.com/sprinklers): modelos (pendente, upright, embutido, oculto), temperatura da ampola e fator K
+- [Mangueira de incêndio para hidrante](https://www.lmtubos.com/mangueiras-de-incendio): tipos pela NBR 11861, diâmetro, comprimento e teste hidrostático
+- [Bombas de incêndio](https://www.lmtubos.com/bombas-de-incendio): bomba principal, a diesel e jockey; como especificar vazão e pressão
+- [Tubulação de hidrante](https://www.lmtubos.com/tubulacao-de-incendio): tubos, conexões, registros e válvulas da rede de incêndio
+- [Tubos de aço carbono](https://www.lmtubos.com/tubos-de-aco-carbono): norma, schedule, bitola, costura e acabamento
+- [Política de privacidade](https://www.lmtubos.com/politica-de-privacidade): dados coletados, cookies, prazos e direitos do titular (LGPD)

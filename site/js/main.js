@@ -28,6 +28,7 @@
   };
 
   const CONSENT_KEY = "lm-consent";
+  const UTM_KEY = "lm-utm";
   const FLOAT_AFTER = 400;
   const HEADER_SHADOW_AFTER = 10;
 
@@ -38,19 +39,31 @@
     return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
   }
 
-  function withUtm(msg) {
+  // UTM da URL de entrada. Fica guardada na sessão para continuar no WhatsApp quando o visitante
+  // passa de uma página de produto para outra (os links internos não carregam a query string).
+  function readUtm() {
     const params = new URLSearchParams(window.location.search);
-    const source = params.get("utm_source");
-    const campaign = params.get("utm_campaign");
+    const fromUrl = { source: params.get("utm_source"), campaign: params.get("utm_campaign") };
+    if (fromUrl.source || fromUrl.campaign) {
+      try { window.sessionStorage.setItem(UTM_KEY, JSON.stringify(fromUrl)); } catch (err) { /* armazenamento bloqueado */ }
+      return fromUrl;
+    }
+    try { return JSON.parse(window.sessionStorage.getItem(UTM_KEY)) || {}; } catch (err) { return {}; }
+  }
+
+  function withUtm(msg) {
+    const { source, campaign } = readUtm();
     if (!source && !campaign) return msg;
     return `${msg}\n\n[origem: ${source || "-"} / ${campaign || "-"}]`;
   }
 
+  // data-wa-origin = de onde veio o clique (nas páginas de produto, o slug da página);
+  // data-wa-button (opcional) = qual botão da página (topo, como-pedir, flutuante...).
   function initWaLinks() {
     document.querySelectorAll("a[data-wa-msg]").forEach((link) => {
       link.href = waLink(withUtm(link.dataset.waMsg || WA_DEFAULT));
       const label = (link.getAttribute("aria-label") || link.textContent || "").replace(/\s+/g, " ").trim().slice(0, 80);
-      link.addEventListener("click", () => trackWhatsApp(link.dataset.waOrigin || "desconhecida", label));
+      link.addEventListener("click", () => trackWhatsApp(link.dataset.waOrigin || "desconhecida", label, link.dataset.waButton));
     });
   }
 
@@ -132,8 +145,10 @@
     if (typeof window.lmCollect === "function") window.lmCollect(name, props);
   }
 
-  function trackWhatsApp(origin, label) {
-    pushEvent({ event: "whatsapp_click", whatsapp_origem: origin });
+  function trackWhatsApp(origin, label, button) {
+    const event = { event: "whatsapp_click", whatsapp_origem: origin };
+    if (button) event.whatsapp_botao = button;
+    pushEvent(event);
     collect("whatsapp_click", { source: origin, label: label || "" });
     if (!trackingOn) return;
     if (TRACKING.metaPixelId && window.fbq) window.fbq("track", "Contact", { content_name: origin });

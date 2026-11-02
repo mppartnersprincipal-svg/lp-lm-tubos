@@ -6,7 +6,10 @@ Site estático (HTML + CSS + JS puro, sem build) da M|P Assessoria para a LM Tub
 
 ```
 site/
-├── index.html          página única (seções 0–16 do PRD)
+├── index.html          página principal (seções 0–16 do PRD)
+├── conexoes-ranhuradas.html · sprinklers.html · mangueiras-de-incendio.html
+├── bombas-de-incendio.html · tubulacao-de-incendio.html · tubos-de-aco-carbono.html
+│                       páginas de produto (uma por grupo de anúncio), servidas sem .html (cleanUrls)
 ├── obrigado.html       página de conversão opcional (noindex; o form NÃO redireciona para cá por padrão)
 ├── politica-de-privacidade.html  política LGPD (indexável; ligada no rodapé, no banner de cookies e no formulário)
 ├── css/styles.css      tokens (:root) + componentes + seções, mobile-first
@@ -44,7 +47,7 @@ Depois de publicar:
 
 ## Onde editar
 
-> **Cache:** a Vercel guarda `css/` e `js/` por 24 h no navegador. Ao alterar `styles.css` ou `main.js`, troque o `?v=AAAAMMDD` nos `<link>`/`<script>` de `index.html` e `obrigado.html`; senão quem já visitou continua com a versão antiga.
+> **Cache:** a Vercel guarda `css/` e `js/` por 24 h no navegador. Ao alterar `styles.css` ou `main.js`, troque o `?v=AAAAMMDD` nos `<link>`/`<script>` de **todas** as páginas (`index.html`, `obrigado.html`, `politica-de-privacidade.html` e as 6 páginas de produto); senão quem já visitou continua com a versão antiga.
 
 Tudo fica no topo de `js/main.js`:
 
@@ -99,11 +102,42 @@ Mudanças feitas a partir dos termos de pesquisa do Google Ads (campanha "Tubos 
 - Cache: `styles.css?v=20261021` em `index.html` e na política. `obrigado.html` e `main.js` não foram tocados.
 - Verificação: JSON-LD dos 3 blocos parseando, FAQ visível igual ao FAQPage (12 perguntas), meta description com 159 caracteres, sem travessão nos arquivos do site, sem rolagem horizontal a 390 px (`scrollWidth` 489 < `innerWidth` 504 no Chrome headless), capturas mobile/desktop dos cards, do formulário, do FAQ e da política conferidas.
 
+## Páginas de produto (02/11/2026)
+
+Objetivo: subir o Índice de Qualidade do Google Ads ("experiência na página de destino" abaixo da média em quase todas as keywords). Cada grupo de anúncio ganhou uma página focada na busca dele.
+
+| Grupo do Ads | URL final | Foto do topo |
+|---|---|---|
+| Conexões ranhuradas | `/conexoes-ranhuradas` | estoque de conexões ranhuradas (real) |
+| Sprinklers | `/sprinklers` | fachada do galpão (falta foto dos sprinklers) |
+| Mangueiras | `/mangueiras-de-incendio` | esguichos e registros de hidrante (falta foto das mangueiras) |
+| Bombas | `/bombas-de-incendio` | fachada do galpão (falta foto das bombas) |
+| Tubos para incêndio | `/tubulacao-de-incendio` | curvas, tês e niples galvanizados (real) |
+| Tubos de aço carbono (campanha própria) | `/tubos-de-aco-carbono` | conexões de aço carbono (falta foto das barras) |
+
+- **Arquivos:** `site/<slug>.html`, servidos como `/<slug>` pelo `"cleanUrls": true` do `vercel.json` (o `.html` redireciona com 308). Por isso a política virou `/politica-de-privacidade` (canonical, sitemap, llms.txt e links atualizados). O `scripts/dev-server.mjs` já imita o cleanUrls.
+- **Caminhos absolutos** (`/css/...`, `/assets/...`) nas páginas de produto. Fotos do topo em `assets/img/paginas/` (recorte 16:10 das fotos reais, 480 e 880 px, WebP + JPG), com `preload` + `fetchpriority="high"`.
+- **Estrutura de cada página:** trilha (Início › produto), H1 com a keyword, linha de apoio, foto e botão de WhatsApp (no celular nessa ordem, acima da dobra), texto de abertura com a keyword, Tipos e modelos (`#tipos`), tabela "o que informar" (`#especificacao`), Para que serve (`#aplicacao`), chamada de serviço (mangueiras: `#teste-hidrostatico`; bombas: `#projeto`), Como fazer o pedido (`#como-pedir`), 2 avaliações reais + nota 5,0/81 (`#avaliacoes`), formulário (`#orcamento`, o mesmo da home), FAQ de 5 perguntas (`#duvidas`), links para as outras páginas (`#outros-produtos`), CTA final e rodapé com coluna "Produtos" (o rodapé da home também ganhou essa coluna).
+- **JSON-LD:** um `@graph` com `WebPage` (about/publisher = `https://www.lmtubos.com/#empresa`, a Store da home), `BreadcrumbList` e `FAQPage`. Sem `Product` e sem preço. FAQ visível igual ao FAQPage (conferido por script).
+- **Copy:** fatos só do PRD, da home e do pedido de 02/11. Onde a LM ainda não confirmou o que tem, a página **explica o produto e diz ao comprador o que informar** (mesma lógica do card de tubos de 21/10), sem afirmar estoque. Cada página tem um comentário `[PENDENTE: ...]` logo depois de `<main>` com o que confirmar.
+- **Rastreamento:** todos os botões de WhatsApp têm `data-wa-origin="<slug>"` e `data-wa-button` (topbar, menu, header, topo, especificacao, teste-hidrostatico/projeto, como-pedir, cta-final, rodape, flutuante). O `main.js` manda `whatsapp_click {whatsapp_origem: <slug>, whatsapp_botao: <posição>}`. O formulário continua com `whatsapp_origem: form` + `generate_lead`, para a conversão de clique (que exclui `form`) não contar o formulário em dobro. `pagina` no dataLayer = slug.
+- **UTM:** além da URL, o `main.js` guarda `utm_source`/`utm_campaign` em `sessionStorage` (`lm-utm`), então o `[origem: ...]` continua na mensagem quando o visitante vai de uma página para outra.
+- **Home:** card "Alarme e detecção" sem "Centrais" (a LM não vende central, confirmado em 02/11); links "Ver [produto]" nos cards de `#destaques` e `#produtos`; coluna "Produtos" no rodapé; `url` das páginas no OfferCatalog.
+- **Para editar a copy:** edite o HTML da página direto. Ao mudar uma pergunta do FAQ, mude também o `FAQPage` no `<head>`.
+
 ## Pendências com o cliente
 
 Cada uma está marcada com `[PENDENTE]` em comentário no código.
 
 12. **Especificação dos tubos de aço carbono** (card de `#destaques`, card de `#produtos`, FAQ, meta/OG, OfferCatalog, llms.txt): normas em estoque (DIN 2440 e/ou NBR 5580, classe), schedule (sch 40 e/ou sch 80), com e/ou sem costura, faixa de bitolas (de __" a __"), acabamento (pintado em qual cor, preto, galvanizado), barra de 6 m, pontas lisas e/ou ranhuradas (grooved).
+14. **Conexões ranhuradas** (`/conexoes-ranhuradas`): acoplamento rígido e/ou flexível, adaptador de flange ranhurado, redução concêntrica, tê mecânico (aparece na foto), ângulos de curva, válvula gaveta ranhurada, faixa de bitolas, pressão de trabalho, marcas e certificação (UL/FM).
+15. **Sprinklers** (`/sprinklers`): modelos em estoque (pendente, upright, lateral, embutido, oculto), temperaturas, fator K, resposta rápida/padrão, roscas, acabamentos, marcas, sprinkler para câmara fria e foto real dos bicos.
+16. **Mangueiras** (`/mangueiras-de-incendio`): tipos (1 a 5), diâmetros, comprimentos, engate, marca/certificação, se vende semirrígida/mangotinho; teste hidrostático (prazo, se entrega laudo); foto real das mangueiras.
+17. **Bombas** (`/bombas-de-incendio`): quais vende (elétrica, diesel, jockey), potências, marcas, painel de comando, conjunto montado, se instala casa de bombas, se tem a pronta entrega; foto real.
+18. **Tubulação** (`/tubulacao-de-incendio`): tubo galvanizado (ex.: 2½"), cor da pintura, barra de 6 m, faixa de bitolas.
+19. **Tubos de aço carbono** (`/tubos-de-aco-carbono`): os itens da pendência 12 + ASTM A53 e faixa de 1" a 16"; foto das barras de tubo.
+20. **Alarme:** se vende acionador manual, detector e sirene (card da home; central não vende).
+
 13. **Política de privacidade:** prazos de guarda das conversas e do cadastro (sugestão: 12 meses sem venda, 5 anos com venda); se a LM não for anunciar na Meta, remover as menções ao Pixel da Meta (seções 2, 5 e 6). Agência: definir rotina de limpeza das tabelas `lmtubos_*` no Supabase para cumprir os 13 meses declarados.
 
 1. Confirmar a razão social exata (o briefing traz "MATERIAS").

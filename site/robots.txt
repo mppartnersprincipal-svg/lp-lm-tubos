@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /obrigado.html
+Disallow: /obrigado
 Disallow: /dashboard
 Disallow: /api/
 

@@ -59,7 +59,7 @@
 
   <!-- Fonte do título principal (LCP): pré-carregada; as demais vêm pelo @font-face do CSS -->
   <link rel="preload" href="assets/fonts/archivo-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/styles.css?v=20261021">
+  <link rel="stylesheet" href="css/styles.css?v=20261102">
   <script>document.documentElement.classList.add("js");if(location.hash)document.documentElement.classList.add("cv-off");</script>
 
   <!-- Dados estruturados -->
@@ -115,12 +115,12 @@
       "@type": "OfferCatalog",
       "name": "Materiais e serviços contra incêndio",
       "itemListElement": [
-        {"@type": "OfferCatalog", "name": "Tubos de aço carbono pintados para rede de incêndio (por norma, schedule e bitola)"},
-        {"@type": "OfferCatalog", "name": "Conexões ranhuradas (grooved)"},
+        {"@type": "OfferCatalog", "name": "Tubos de aço carbono pintados para rede de incêndio (por norma, schedule e bitola)", "url": "https://www.lmtubos.com/tubos-de-aco-carbono"},
+        {"@type": "OfferCatalog", "name": "Conexões ranhuradas (grooved)", "url": "https://www.lmtubos.com/conexoes-ranhuradas"},
         {"@type": "OfferCatalog", "name": "Válvulas e registros (válvula de governo e alarme, válvula gaveta)"},
-        {"@type": "OfferCatalog", "name": "Bombas de incêndio"},
-        {"@type": "OfferCatalog", "name": "Sprinklers e acessórios"},
-        {"@type": "OfferCatalog", "name": "Hidrantes, mangueiras, esguichos e abrigos"},
+        {"@type": "OfferCatalog", "name": "Bombas de incêndio", "url": "https://www.lmtubos.com/bombas-de-incendio"},
+        {"@type": "OfferCatalog", "name": "Sprinklers e acessórios", "url": "https://www.lmtubos.com/sprinklers"},
+        {"@type": "OfferCatalog", "name": "Hidrantes, mangueiras, esguichos e abrigos", "url": "https://www.lmtubos.com/mangueiras-de-incendio"},
         {"@type": "OfferCatalog", "name": "Alarme e detecção de incêndio"},
         {"@type": "OfferCatalog", "name": "Extintores"},
         {"@type": "OfferCatalog", "name": "Sinalização e iluminação de emergência"},
@@ -142,7 +142,7 @@
     "name": "Materiais contra incêndio em Goiânia a pronta entrega | LM Tubos",
     "inLanguage": "pt-BR",
     "about": {"@id": "https://www.lmtubos.com/#empresa"},
-    "dateModified": "2026-10-21"
+    "dateModified": "2026-11-02"
   }
   </script>
   <!-- Manter este bloco igual às perguntas visíveis na seção #duvidas -->
@@ -213,7 +213,7 @@
 
   <!-- Banner de cookies (LGPD). Só aparece quando há algum ID de rastreamento configurado em js/main.js -->
   <div class="cookie-bar" id="cookie-bar" role="dialog" aria-labelledby="cookie-text" hidden>
-    <p id="cookie-text">Usamos cookies para medir o desempenho dos nossos anúncios. Você aceita? <a class="cookie-bar__link" href="politica-de-privacidade.html">Saiba mais</a></p>
+    <p id="cookie-text">Usamos cookies para medir o desempenho dos nossos anúncios. Você aceita? <a class="cookie-bar__link" href="/politica-de-privacidade">Saiba mais</a></p>
     <div class="cookie-bar__actions">
       <button class="btn btn--secondary" type="button" data-consent="denied">Recusar</button>
       <button class="btn btn--primary" type="button" data-consent="granted">Aceitar</button>
@@ -353,6 +353,7 @@
               <a class="btn btn--primary" href="https://wa.me/5562985587373?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20cotar%20conex%C3%B5es%20e%20v%C3%A1lvulas%20ranhuradas." data-wa-msg="Olá! Vim pelo site e quero cotar conexões e válvulas ranhuradas." data-wa-origin="destaque-conexoes" target="_blank" rel="noopener">
                 <svg class="icon icon--wa" aria-hidden="true"><use href="#i-wa"/></svg>Cotar conexões
               </a>
+              <a class="feature__more" href="/conexoes-ranhuradas">Ver conexões ranhuradas</a>
             </div>
           </article>
           <article class="feature">
@@ -367,6 +368,7 @@
               <a class="btn btn--primary" href="https://wa.me/5562985587373?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20cotar%20sprinklers." data-wa-msg="Olá! Vim pelo site e quero cotar sprinklers." data-wa-origin="destaque-sprinklers" target="_blank" rel="noopener">
                 <svg class="icon icon--wa" aria-hidden="true"><use href="#i-wa"/></svg>Cotar sprinklers
               </a>
+              <a class="feature__more" href="/sprinklers">Ver sprinklers</a>
             </div>
           </article>
           <article class="feature">
@@ -393,6 +395,7 @@
               <a class="btn btn--primary" href="https://wa.me/5562985587373?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20cotar%20tubos%20para%20sistema%20de%20inc%C3%AAndio." data-wa-msg="Olá! Vim pelo site e quero cotar tubos para sistema de incêndio." data-wa-origin="destaque-tubos" target="_blank" rel="noopener">
                 <svg class="icon icon--wa" aria-hidden="true"><use href="#i-wa"/></svg>Cotar tubos
               </a>
+              <a class="feature__more" href="/tubos-de-aco-carbono">Ver tubos de aço carbono</a>
             </div>
           </article>
         </div>
@@ -414,31 +417,42 @@
             <p>Tubos de aço carbono pintados e conexões ranhuradas (grooved), com válvula de governo e alarme e válvula gaveta, para a rede de hidrantes e sprinklers.</p>
             <!-- [PENDENTE: confirmar com a LM normas, schedule, costura e bitolas em estoque (mesma lista do card de tubos em #destaques)] -->
             <p>O tubo é cotado pela especificação do projeto: norma (DIN 2440 ou NBR 5580), schedule (sch 40 ou sch 80), bitola em polegadas, com ou sem costura.</p>
+            <p class="card__links">
+              <a class="card__link" href="/tubulacao-de-incendio">Ver tubulação de incêndio</a>
+              <a class="card__link" href="/tubos-de-aco-carbono">Ver tubos de aço carbono</a>
+              <a class="card__link" href="/conexoes-ranhuradas">Ver conexões ranhuradas</a>
+            </p>
           </li>
           <li class="card">
             <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg></span>
             <h3>Válvulas e registros</h3>
             <p>Válvulas importadas e registros para a rede de incêndio.</p>
+            <a class="card__link" href="/conexoes-ranhuradas">Ver válvulas ranhuradas</a>
           </li>
           <li class="card">
             <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg></span>
             <h3>Bombas de incêndio</h3>
             <p>Bombas para pressurizar a rede de hidrantes e sprinklers.</p>
+            <a class="card__link" href="/bombas-de-incendio">Ver bombas de incêndio</a>
           </li>
           <li class="card">
             <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-shower-head"/></svg></span>
             <h3>Sprinklers</h3>
             <p>Bicos de sprinkler e acessórios para a rede de chuveiros automáticos.</p>
+            <a class="card__link" href="/sprinklers">Ver sprinklers</a>
           </li>
           <li class="card">
             <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-droplets"/></svg></span>
             <h3>Hidrantes e acessórios</h3>
             <p>Mangueiras, esguichos, abrigos e o resto do conjunto de hidrante.</p>
+            <a class="card__link" href="/mangueiras-de-incendio">Ver mangueiras de incêndio</a>
           </li>
           <li class="card">
             <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-bell-ring"/></svg></span>
             <h3>Alarme e detecção</h3>
-            <p>Centrais, acionadores manuais e detectores para alarme de incêndio.</p>
+            <!-- A LM NÃO vende centrais de alarme (confirmado em 02/11/2026).
+                 [PENDENTE: confirmar se vende acionador manual, detector e sirene; se não, ajustar ou remover este card] -->
+            <p>Acionadores manuais e detectores para alarme de incêndio.</p>
           </li>
           <li class="card">
             <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-fire-extinguisher"/></svg></span>
@@ -843,7 +857,7 @@
           <button class="btn btn--primary btn--block btn--lg" type="submit">
             <svg class="icon icon--wa" aria-hidden="true"><use href="#i-wa"/></svg>Enviar pelo WhatsApp
           </button>
-          <p class="form__micro">Seus dados vão só para o nosso atendimento comercial. Ao enviar, você concorda com a <a class="form__link" href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
+          <p class="form__micro">Seus dados vão só para o nosso atendimento comercial. Ao enviar, você concorda com a <a class="form__link" href="/politica-de-privacidade">Política de Privacidade</a>.</p>
           <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -945,6 +959,17 @@
         </ul>
       </div>
       <div>
+        <h2 class="footer__title">Produtos</h2>
+        <ul class="footer__links">
+          <li><a href="/conexoes-ranhuradas">Conexões e válvulas ranhuradas (grooved)</a></li>
+          <li><a href="/sprinklers">Bicos de sprinkler</a></li>
+          <li><a href="/mangueiras-de-incendio">Mangueiras de incêndio e teste hidrostático</a></li>
+          <li><a href="/bombas-de-incendio">Bombas de incêndio</a></li>
+          <li><a href="/tubulacao-de-incendio">Tubulação de hidrante e incêndio</a></li>
+          <li><a href="/tubos-de-aco-carbono">Tubos de aço carbono</a></li>
+        </ul>
+      </div>
+      <div>
         <h2 class="footer__title">Endereço</h2>
         <!-- [PENDENTE: confirmar lote/sala com o cliente. PRD dizia Lt. 16; placa da fachada indica Lt. 17, Sala 2] -->
         <address>R. Pedro Galvão, Qd. 2, Lt. 17, Sala 2, Jardim Imperial, Goiânia (GO), CEP 74492-215</address>
@@ -960,7 +985,7 @@
     </div>
     <div class="container footer__bottom">
       <!-- [PENDENTE: confirmar grafia exata da razão social no cartão CNPJ] -->
-      <p>© 2026 LM Tubos Materiais Contra Incêndio LTDA · CNPJ 39.770.705/0001-23 · <a href="politica-de-privacidade.html">Política de Privacidade</a> · Desenvolvido por M|P Assessoria</p>
+      <p>© 2026 LM Tubos Materiais Contra Incêndio LTDA · CNPJ 39.770.705/0001-23 · <a href="/politica-de-privacidade">Política de Privacidade</a> · Desenvolvido por M|P Assessoria</p>
     </div>
   </footer>
 
@@ -980,6 +1005,6 @@
 
   <!-- Coletor anônimo do painel /dashboard (antes do main.js, que alimenta window.lmCollect) -->
   <script src="js/tracker.js?v=20261006" defer></script>
-  <script src="js/main.js?v=20261006" defer></script>
+  <script src="js/main.js?v=20261102" defer></script>
 </body>
 </html>

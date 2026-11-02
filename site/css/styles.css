@@ -837,7 +837,7 @@ a.topbar__item:hover { color: var(--white); }
 .footer__bottom { border-top: 1px solid var(--line-on-dark); padding-block: var(--space-5) 104px; font-size: 14px; }
 @media (min-width: 768px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1024px) {
-  .footer__grid { grid-template-columns: 1.2fr 1fr 1.4fr .7fr; gap: var(--space-7); }
+  .footer__grid { grid-template-columns: 1.1fr .9fr 1fr 1.3fr .6fr; gap: var(--space-6); }
   .footer__bottom { padding-bottom: var(--space-5); }
 }
 
@@ -875,6 +875,8 @@ body.has-cookie-bar .wa-float { bottom: calc(var(--cookie-h, 160px) + 28px); }
 .cookie-bar__link:hover { color: var(--navy-500); }
 .cookie-bar__actions { display: flex; gap: var(--space-3); }
 .cookie-bar__actions .btn { flex: 1; min-height: 44px; padding: 8px 16px; font-size: .875rem; }
+/* Celular: aviso mais baixo, para não cobrir o botão de WhatsApp do topo na primeira visita */
+@media (max-width: 767px) { .cookie-bar { gap: var(--space-3); padding: var(--space-4); left: 8px; right: 8px; bottom: 8px; } }
 @media (min-width: 768px) { .cookie-bar { left: auto; right: 20px; bottom: 20px; max-width: 480px; } }
 
 /* ---------- 27. Página de obrigado ---------- */
@@ -909,6 +911,113 @@ body.has-cookie-bar .wa-float { bottom: calc(var(--cookie-h, 160px) + 28px); }
 .legal__consent p:empty { display: none; }
 .legal__footer .footer__bottom { padding-bottom: var(--space-5); text-align: center; }
 @media (min-width: 768px) { .legal__toc ol { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- 27c. Páginas de produto (uma por grupo de anúncio: /sprinklers, /conexoes-ranhuradas...) ---------- */
+.crumbs { margin-bottom: var(--space-4); font-size: var(--fs-small); color: var(--text-muted); }
+.crumbs ol { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.crumbs li + li::before { content: "›"; margin-right: var(--space-2); color: var(--gray-500); }
+.crumbs a { color: var(--navy-700); font-weight: 700; text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Celular: H1 → linha de apoio → foto → botão (tudo acima da dobra). Desktop: texto à esquerda, foto à direita. */
+.p-hero { padding-block: var(--space-4) var(--space-7); background-color: var(--white); }
+.p-hero__grid { display: grid; gap: var(--space-4); grid-template-areas: "texto" "foto" "acao"; }
+.p-hero .crumbs { margin-bottom: var(--space-3); }
+.p-hero__text { grid-area: texto; }
+.p-hero__media { grid-area: foto; }
+.p-hero__cta { grid-area: acao; display: flex; flex-direction: column; gap: var(--space-4); }
+.p-hero h1 { font-size: clamp(2rem, 1.5rem + 2.2vw, 3.25rem); }
+.p-hero__support { display: flex; align-items: flex-start; gap: var(--space-2); margin-top: var(--space-3); font-weight: 700; color: var(--text-strong); line-height: 1.4; }
+.p-hero__support .icon { flex: none; margin-top: 1px; color: var(--red-500); }
+.p-hero__intro { order: 2; max-width: 65ch; }
+.p-hero__cta .btn { width: 100%; }
+.p-hero__rating {
+  order: 1; display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--space-2);
+  width: fit-content; font-size: var(--fs-small); font-weight: 700; color: var(--text-strong); text-decoration: none;
+}
+.p-hero__rating:hover span:last-child { text-decoration: underline; text-decoration-color: var(--red-500); text-underline-offset: 3px; }
+.p-hero .photo-frame { margin: 0 12px 12px 0; }
+.p-hero .photo-frame::before { transform: translate(12px, 12px); }
+.p-hero .photo-frame::after { transform: translate(6px, 6px); }
+.p-hero .photo-frame img { aspect-ratio: 16 / 10; }
+@media (min-width: 768px) { .p-hero__cta .btn { width: auto; align-self: flex-start; } }
+@media (min-width: 1024px) {
+  .p-hero { padding-block: var(--space-7) var(--space-8); }
+  .p-hero__grid {
+    grid-template-columns: 1.1fr .9fr; grid-template-areas: "texto foto" "acao foto";
+    column-gap: var(--space-8); row-gap: var(--space-5); align-items: start;
+  }
+  .p-hero__media { align-self: center; }
+  .p-hero__intro { order: 0; }
+  .p-hero .photo-frame { margin: 0 24px 24px 0; }
+  .p-hero .photo-frame::before { transform: translate(24px, 24px); }
+  .p-hero .photo-frame::after { transform: translate(12px, 12px); }
+}
+
+/* Tipos e modelos do produto */
+.types { display: grid; gap: var(--space-4); }
+.types .card h3 { font-size: 1.1875rem; }
+.types .card p + p { margin-top: var(--space-3); }
+@media (min-width: 768px) { .types { grid-template-columns: repeat(2, 1fr); gap: var(--space-5); } }
+@media (min-width: 1024px) { .types--3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* Tabela de especificação (o que informar no pedido) */
+.spec-wrap { overflow-x: auto; }
+.spec-table {
+  width: 100%; border-collapse: separate; border-spacing: 0; font-size: var(--fs-small); line-height: 1.5;
+  background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-md); box-shadow: var(--shadow-card);
+}
+.spec-table caption { caption-side: bottom; padding-top: var(--space-3); text-align: left; color: var(--text-muted); }
+.spec-table th, .spec-table td { padding: var(--space-3) var(--space-4); text-align: left; vertical-align: top; border-bottom: 1px solid var(--gray-200); }
+.spec-table thead th {
+  background: var(--navy-700); color: var(--white); font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+}
+.spec-table thead th:first-child { border-top-left-radius: var(--radius-md); }
+.spec-table thead th:last-child { border-top-right-radius: var(--radius-md); }
+.spec-table tbody th { width: 34%; color: var(--navy-700); font-weight: 700; }
+.spec-table tbody tr:nth-child(even) > * { background: var(--gray-100); }
+.spec-table tbody tr:last-child > * { border-bottom: 0; }
+.spec-table + .spec-table { margin-top: var(--space-6); }
+.spec-table a, .prose a:not(.btn), .types a { color: var(--navy-700); font-weight: 700; text-decoration: underline; text-decoration-color: var(--red-500); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+/* Texto corrido + lista lado a lado */
+.split { display: grid; gap: var(--space-6); }
+.prose { max-width: 65ch; }
+.prose p + p { margin-top: var(--space-4); }
+.split .check-list { align-self: start; }
+@media (min-width: 1024px) { .split { grid-template-columns: 1.1fr .9fr; gap: var(--space-8); } }
+
+/* Chamada para serviço (ex.: teste hidrostático na página de mangueiras) */
+.callout { margin-bottom: 0; }
+.callout h2 { margin-bottom: var(--space-4); }
+.callout .btn-row { margin-top: var(--space-5); }
+@media (max-width: 479px) { .callout { flex-direction: column; } }
+
+.steps--3 .step:not(:last-child)::after { bottom: calc(var(--space-6) * -1 + 8px); }
+@media (min-width: 1024px) { .steps--3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* Links para as outras páginas de produto */
+.related { display: grid; gap: var(--space-3); }
+.related a {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  min-height: 56px; padding: var(--space-4) var(--space-5);
+  background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-md); box-shadow: var(--shadow-card);
+  color: var(--navy-700); font-weight: 700; text-decoration: none; transition: box-shadow .25s ease, border-color .25s ease;
+}
+.related a::after { content: "→"; color: var(--red-500); font-size: 1.25rem; transition: transform .25s ease; }
+.related a:hover { box-shadow: var(--shadow-card-hover); border-color: var(--red-500); }
+.related a:hover::after { transform: translateX(4px); }
+@media (min-width: 768px) { .related { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .related { grid-template-columns: repeat(3, 1fr); } }
+
+/* Link "Ver [produto]" nos cards da home */
+.card__links { display: grid; gap: var(--space-2); margin-top: var(--space-4); }
+.card__link, .feature__more {
+  width: fit-content; font-weight: 700; color: var(--navy-700);
+  text-decoration: underline; text-decoration-color: var(--red-500); text-decoration-thickness: 2px; text-underline-offset: 4px;
+}
+.card__link:hover, .feature__more:hover { color: var(--navy-500); }
+.feature__more { align-self: center; }
 
 /* ---------- 28. Motion ---------- */
 .js .reveal { opacity: 0; transform: translateY(16px); transition: opacity 400ms ease-out, transform 400ms ease-out; }

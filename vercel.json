@@ -3,6 +3,7 @@
   "framework": null,
   "buildCommand": "",
   "outputDirectory": "site",
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/assets/(.*)",
