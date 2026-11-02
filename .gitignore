@@ -20,3 +20,6 @@ node_modules/
 
 # Estado do plugin oh-my-claudecode (local)
 .omc/
+
+# Arquivos para o cliente (questionários etc.), fora do repo público
+Entregas cliente/

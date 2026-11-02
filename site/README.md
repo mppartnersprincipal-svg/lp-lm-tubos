@@ -71,7 +71,7 @@ Tudo fica no topo de `js/main.js`:
 ## Decisões de implementação
 
 - **Tokens:** os do PRD prevalecem sobre a pasta `Design system from logo/` (decisão do cliente).
-- **Endereço:** usamos **Qd. 2, Lt. 17, Sala 2**, conforme a placa do CNPJ na fachada. O PRD trazia Lt. 16.
+- **Endereço e horário:** os do Perfil da Empresa no Google (02/11/2026): R. Pedro Galvão, 65, Qd. 2, Lt. 16, Jardim Imperial; seg. a sex. 7h30 às 18h.
 - **Nomes das marcas:** vão em `--text-muted` em vez de `--gray-500`, porque `--gray-500` sobre `--gray-100` não passa no contraste AA.
 - **Fontes:** hospedadas no próprio site (`assets/fonts/`, subset latin, woff2). Archivo é variável (800 e 900 no mesmo arquivo) e é pré-carregada no `<head>` porque o título do hero é o elemento de LCP. Não voltar para o Google Fonts: a conexão com os servidores do Google atrasava o LCP em ~0,4 s no mobile.
 - **Esteiras (`[data-marquee]`):** usadas na faixa de diferenciais e na seção Marcas. O JS monta o layout na hora (sem pulo de layout) e só mede, duplica e liga a animação depois do `load`, para não disputar o LCP. Velocidade por lista em `data-marquee-speed` (px/s).
@@ -150,7 +150,7 @@ Cada uma está marcada com `[PENDENTE]` em comentário no código.
 13. **Política de privacidade:** prazos de guarda das conversas e do cadastro (sugestão: 12 meses sem venda, 5 anos com venda); se a LM não for anunciar na Meta, remover as menções ao Pixel da Meta (seções 2, 5 e 6). Agência: definir rotina de limpeza das tabelas `lmtubos_*` no Supabase para cumprir os 13 meses declarados.
 
 1. Confirmar a razão social exata (o briefing traz "MATERIAS").
-2. Horário de sábado.
+2. ~~Horário de sábado~~ Resolvido em 02/11/2026: seg. a sex. 7h30 às 18h, sábado e domingo fechado (Perfil da Empresa no Google).
 3. ~~Avaliações do Google~~ Resolvido em 30/09/2026: 3 avaliações reais + nota 5,0 (81 avaliações), copiadas do perfil. Para atualizar, trocar textos e o total na seção `#avaliacoes` do `index.html`.
 4. Autorização para citar a **EBM** e, se possível, o logo dela.
 5. Logo da Tupper (as outras 5 marcas já têm logo no site; Tupper foi retirada até o logo chegar).
@@ -159,4 +159,5 @@ Cada uma está marcada com `[PENDENTE]` em comentário no código.
 8. Tags dentro do GTM `GTM-KXWZWFS4`: GA4, conversão do Google Ads (clique no WhatsApp) e Meta Pixel, usando os eventos do dataLayer acima.
 9. (resolvido em 05/10: domínio da LP é `www.lmtubos.com`)
 10. Promoções sazonais: a faixa `.promo-bar` está pronta, basta ligar `PROMO.enabled` em `js/main.js`.
-11. Confirmar o lote e a sala do endereço (Lt. 17, Sala 2, conforme a placa, contra Lt. 16 no PRD).
+11. ~~Lote e sala do endereço~~ Resolvido em 02/11/2026: R. Pedro Galvão, 65, Qd. 2, Lt. 16, Jardim Imperial (Perfil da Empresa no Google).
+21. **Telefone:** o Perfil da Empresa no Google mostra (62) 98538-7272; o site usa o WhatsApp do Roberto (62) 98558-7373. Confirmar qual é o principal (perguntado no questionário de 02/11).
