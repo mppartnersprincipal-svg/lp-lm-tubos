@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Google Tag Manager com Consent Mode v2 (igual à home): tudo começa negado até o aceite no aviso de cookies. -->
+  <!-- Google Tag Manager com Consent Mode v2: tudo começa negado até o aceite no aviso de cookies. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -17,10 +17,13 @@
       });
       dataLayer.push({ pagina: "conexoes-ranhuradas", consentimento: estado });
     })();
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    // O GTM entra no evento load: a foto do topo (LCP) pinta antes das tags do Ads/GA4 ocuparem a CPU.
+    // Cliques feitos antes disso ficam na fila do dataLayer e são processados quando o GTM chega.
+    (function(w,d,s,l,i){function gtm(){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
+    if(d.readyState==='complete')gtm();else w.addEventListener('load',gtm,{once:true});
     })(window,document,'script','dataLayer','GTM-KXWZWFS4');
   </script>
   <!-- End Google Tag Manager -->
