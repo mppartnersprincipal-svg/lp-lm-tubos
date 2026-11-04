@@ -511,10 +511,12 @@ a.topbar__item:hover { color: var(--white); }
 
 /* ---------- 12b. Estoque (mosaico de fotos reais) ---------- */
 .stock {
-  display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; gap: var(--space-3);
+  display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; grid-auto-flow: row dense; gap: var(--space-3);
 }
 .stock__item { min-width: 0; }
 .stock__item--big { grid-column: span 2; grid-row: span 2; }
+/* Foto em paisagem (ex.: bomba): ocupa 2 colunas no celular e no desktop; no tablet (3 colunas) volta a 1 para fechar a grade */
+.stock__item--wide { grid-column: span 2; }
 .stock__link {
   position: relative; display: block; height: 100%; overflow: hidden;
   border-radius: var(--radius-md); background: var(--gray-200); color: var(--white);
@@ -531,7 +533,7 @@ a.topbar__item:hover { color: var(--white); }
 }
 .stock__item--big .stock__caption { font-size: 1.125rem; left: var(--space-5); bottom: var(--space-5); }
 .stock__cta {
-  grid-column: span 2; display: flex; flex-direction: column; justify-content: center; gap: var(--space-4);
+  grid-column: 1 / -1; display: flex; flex-direction: column; justify-content: center; gap: var(--space-4);
   padding: var(--space-5); border-radius: var(--radius-md);
   background: var(--navy-700); color: var(--white);
 }
@@ -539,9 +541,13 @@ a.topbar__item:hover { color: var(--white); }
 .stock__cta .btn { align-self: flex-start; }
 @media (min-width: 768px) {
   .stock { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 240px; gap: var(--space-4); }
+  .stock__item--wide { grid-column: span 1; }
+  .stock__cta { flex-direction: row; align-items: center; justify-content: space-between; }
+  .stock__cta .btn { align-self: center; flex-shrink: 0; }
 }
 @media (min-width: 1024px) {
   .stock { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 260px; }
+  .stock__item--wide { grid-column: span 2; }
   .stock__cta { padding: var(--space-6); }
 }
 
@@ -997,6 +1003,13 @@ body.has-cookie-bar .footer__bottom { padding-bottom: calc(var(--cookie-h, 160px
 
 .steps--3 .step:not(:last-child)::after { bottom: calc(var(--space-6) * -1 + 8px); }
 @media (min-width: 1024px) { .steps--3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* Fotos reais do estoque nas páginas de produto (#fotos) */
+.shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+.shot { margin: 0; }
+.shot img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--radius-md); background: var(--gray-200); }
+.shot figcaption { margin-top: var(--space-2); font-size: var(--fs-small); font-weight: 700; color: var(--text-strong); }
+@media (min-width: 768px) { .shots { grid-template-columns: repeat(2, minmax(0, 360px)); gap: var(--space-5); } }
 
 /* Links para as outras páginas de produto */
 .related { display: grid; gap: var(--space-3); }

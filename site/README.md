@@ -88,7 +88,8 @@ Tudo fica no topo de `js/main.js`:
 - Lighthouse mobile, 4 execuções locais com gzip: Performance entre 91 e 99; Acessibilidade, Boas Práticas e SEO em 100.
 - 01/10/2026, Lighthouse 12 sem gzip (servidor local simples), 3 execuções: mobile LCP 2,71 a 2,79 s (mediana 2,72 s), CLS 0; desktop LCP 0,62 s, nota 100. Meta do cliente: LCP até 3 s.
 - 01/10/2026, depois da seção Estoque, 3 execuções mobile: sem gzip LCP 2,93 s; **com gzip (como numa hospedagem real) nota 99, LCP 2,11 s, CLS 0, TBT ~5 ms**. Na hospedagem, confirmar que gzip ou brotli está ligado para HTML, CSS, JS e SVG (sem isso o HTML de 76 KB pesa ~4x mais).
-- **Seção Estoque (`#estoque`):** 7 fotos reais em `assets/img/estoque/` (480 e 899 px, WebP + JPG, `loading="lazy"`). Clicar amplia a foto num `<dialog>` (`initLightbox` em main.js); sem suporte, o link abre a foto. Originais em `Fotos_e_Logo/Fotos Estoque/`.
+- **Seção Estoque (`#estoque`):** 7 fotos reais em `assets/img/estoque/` (480 e 899 px, WebP + JPG, `loading="lazy"`).
+- **Fotos novas (03/11/2026, originais em `Fotos_e_Logo/Fotos Estoque/Fotos novaas/`):** bomba de incêndio elétrica, motobomba, tês mecânicos ranhurados, conexões ranhuradas e flanges, adaptadores de latão, registros e adaptadores de hidrante, tês e reduções galvanizados (`assets/img/estoque/estoque-*-{480,899|960}`). Usadas no mosaico `#estoque` da home (+5 fotos; a da bomba é `stock__item--wide`, 2 colunas no celular e no desktop; a grade usa `grid-auto-flow: dense` e o card de chamada ocupa a linha inteira), no topo de `/bombas-de-incendio` (`paginas/topo-bomba-incendio-*`, 16:10) e na faixa `#fotos` ("Do nosso estoque", classe `.shots`) de conexões, mangueiras, bombas e tubulação. CSS `?v=20261104`. Clicar amplia a foto num `<dialog>` (`initLightbox` em main.js); sem suporte, o link abre a foto. Originais em `Fotos_e_Logo/Fotos Estoque/`.
 
 ## Especificação dos tubos e política de privacidade (21/10/2026)
 
@@ -111,7 +112,7 @@ Objetivo: subir o Índice de Qualidade do Google Ads ("experiência na página d
 | Conexões ranhuradas | `/conexoes-ranhuradas` | estoque de conexões ranhuradas (real) |
 | Sprinklers | `/sprinklers` | fachada do galpão (falta foto dos sprinklers) |
 | Mangueiras | `/mangueiras-de-incendio` | esguichos e registros de hidrante (falta foto das mangueiras) |
-| Bombas | `/bombas-de-incendio` | fachada do galpão (falta foto das bombas) |
+| Bombas | `/bombas-de-incendio` | bomba de incêndio elétrica (real, 03/11) |
 | Tubos para incêndio | `/tubulacao-de-incendio` | curvas, tês e niples galvanizados (real) |
 | Tubos de aço carbono (campanha própria) | `/tubos-de-aco-carbono` | conexões de aço carbono (falta foto das barras) |
 
@@ -142,7 +143,7 @@ Cada uma está marcada com `[PENDENTE]` em comentário no código.
 14. **Conexões ranhuradas** (`/conexoes-ranhuradas`): acoplamento rígido e/ou flexível, adaptador de flange ranhurado, redução concêntrica, tê mecânico (aparece na foto), ângulos de curva, válvula gaveta ranhurada, faixa de bitolas, pressão de trabalho, marcas e certificação (UL/FM).
 15. **Sprinklers** (`/sprinklers`): modelos em estoque (pendente, upright, lateral, embutido, oculto), temperaturas, fator K, resposta rápida/padrão, roscas, acabamentos, marcas, sprinkler para câmara fria e foto real dos bicos.
 16. **Mangueiras** (`/mangueiras-de-incendio`): tipos (1 a 5), diâmetros, comprimentos, engate, marca/certificação, se vende semirrígida/mangotinho; teste hidrostático (prazo, se entrega laudo); foto real das mangueiras.
-17. **Bombas** (`/bombas-de-incendio`): quais vende (elétrica, diesel, jockey), potências, marcas, painel de comando, conjunto montado, se instala casa de bombas, se tem a pronta entrega; foto real.
+17. **Bombas** (`/bombas-de-incendio`): quais vende (elétrica, diesel, jockey), potências, marcas, painel de comando, conjunto montado, se instala casa de bombas, se tem a pronta entrega (foto real chegou em 03/11; a motobomba da foto serve como bomba de incêndio?).
 18. **Tubulação** (`/tubulacao-de-incendio`): tubo galvanizado (ex.: 2½"), cor da pintura, barra de 6 m, faixa de bitolas.
 19. **Tubos de aço carbono** (`/tubos-de-aco-carbono`): os itens da pendência 12 + ASTM A53 e faixa de 1" a 16"; foto das barras de tubo.
 20. **Alarme:** se vende acionador manual, detector e sirene (card da home; central não vende).
