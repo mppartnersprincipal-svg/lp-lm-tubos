@@ -146,30 +146,12 @@ O dono respondeu o questionário de 02/11 (PDF em `Entregas cliente/`, fora do g
 - **Tubos:** NBR 5580 (classes), DIN 2440 e ASTM A53; sch 40 e 80; com e sem costura; ½" a 10"; preto, pintado ou galvanizado; pontas lisa, rosqueada ou ranhurada; **só em barras de 6 m** (não vende por metro); galvanizado de 2½" sim.
 - **Alarme:** acionador manual, detector e sirene sim (central não).
 - **Empresa:** razão social como está no site ("LM Tubos Materiais Contra Incêndio LTDA"); pode citar a EBM; nenhuma certificação para citar.
-- **Ficou em branco:** se vão anunciar no Instagram/Facebook, e todas as fotos/logos da seção 8.
+- **Meta:** confirmado pelo Pedro em 05/11 que a LM **não vai anunciar no Instagram/Facebook**: o Pixel da Meta saiu da política de privacidade (a Meta fica citada só como dona do WhatsApp Business). `metaPixelId` em `js/main.js` continua vazio.
 
 ## Pendências com o cliente
 
-Cada uma está marcada com `[PENDENTE]` em comentário no código.
+**Encerradas em 05/11/2026.** O que ficou sem resposta no questionário (fotos de sprinklers, mangueiras e barras de tubo; cor da pintura; marcas das mangueiras e prazo do teste hidrostático; potência das bombas e grafia "Buffalo"; pressão e UL/FM das conexões; logos da Tupper e da EBM; ano da mudança para o galpão) foi **desconsiderado pelo Pedro** por não ser relevante para a LP. Os comentários `[PENDENTE]` foram retirados do código. Prazos de guarda da política: ficam os sugeridos pela agência (12 meses sem venda, 5 anos com venda).
 
-1. ~~Razão social~~ Resolvido em 05/11/2026: "LM Tubos Materiais Contra Incêndio LTDA", como já estava no site.
-2. ~~Horário de sábado~~ Resolvido em 02/11/2026: seg. a sex. 7h30 às 18h, sábado e domingo fechado (Perfil da Empresa no Google).
-3. ~~Avaliações do Google~~ Resolvido em 30/09/2026: 3 avaliações reais + nota 5,0 (81 avaliações), copiadas do perfil. Para atualizar, trocar textos e o total na seção `#avaliacoes` do `index.html`.
-4. ~~Autorização EBM~~ Autorizado em 05/11/2026. Falta o **logo da EBM**, se quiserem mostrar.
-5. Logo da Tupper (as outras 5 marcas já têm logo no site; Tupper foi retirada até o logo chegar). Tyco, Famac, Buffalo e Toyama aparecem só em texto (sem logo).
-6. ~~Certificações~~ Respondido em 05/11/2026: nenhuma certificação específica para citar.
-7. **Fotos:** faltam bicos de sprinkler, mangueiras e barras de tubo de aço carbono (bombas e conexões chegaram em 03/11). Os cards de `#destaques` ainda usam fotos de banco de imagens.
-8. Tags dentro do GTM `GTM-KXWZWFS4`: GA4, conversão do Google Ads (clique no WhatsApp) e Meta Pixel, usando os eventos do dataLayer acima.
-9. (resolvido em 05/10: domínio da LP é `www.lmtubos.com`)
-10. Promoções sazonais: a faixa `.promo-bar` está pronta, basta ligar `PROMO.enabled` em `js/main.js`.
-11. ~~Lote e sala do endereço~~ Resolvido em 02/11/2026: R. Pedro Galvão, 65, Qd. 2, Lt. 16, Jardim Imperial (Perfil da Empresa no Google).
-12. ~~Especificação dos tubos de aço carbono~~ Resolvido em 05/11/2026 (ver acima). Falta só a **cor da pintura** do tubo pintado.
-13. **Política de privacidade:** prazos de guarda das conversas e do cadastro (sugestão: 12 meses sem venda, 5 anos com venda); **se vão anunciar na Meta** (ficou em branco em 05/11; se não, remover as menções ao Pixel da Meta nas seções 2, 5 e 6). Agência: definir rotina de limpeza das tabelas `lmtubos_*` no Supabase para cumprir os 13 meses declarados.
-14. **Conexões:** ~~itens de estoque~~ resolvidos em 05/11. Faltam pressão de trabalho e certificação UL/FM (não informadas).
-15. ~~Sprinklers~~ Resolvido em 05/11/2026 (falta só a foto).
-16. **Mangueiras:** ~~tipos, diâmetros, comprimentos, semirrígida, laudo~~ resolvidos em 05/11. Faltam as marcas das mangueiras e o prazo médio do teste hidrostático.
-17. **Bombas:** ~~tipos, marcas, painel, pronta entrega, instalação~~ resolvidos em 05/11. Falta a faixa de potência (respondeu "todas") e conferir a grafia "Buffalo".
-18. ~~Tubulação~~ Resolvido em 05/11/2026 (falta a cor da pintura).
-19. ~~Tubos de aço carbono~~ Resolvido em 05/11/2026 (faltam a cor da pintura e a foto das barras).
-20. ~~Alarme~~ Resolvido em 05/11/2026: vende acionador manual, detector e sirene (card da home atualizado).
-21. ~~Telefone~~ Resolvido em 02/11/2026: o telefone oficial é o do site, WhatsApp do Roberto (62) 98558-7373. Obs.: o print do Perfil da Empresa no Google mostrava (62) 98538-7272; se estiver assim no perfil, corrigir lá para bater com o site.
+Se algum desses itens chegar no futuro, é melhoria opcional: trocar as fotos de banco dos cards de `#destaques` e os topos de /sprinklers, /mangueiras-de-incendio e /tubos-de-aco-carbono por fotos reais.
+
+Itens da agência: rotina de limpeza das tabelas `lmtubos_*` no Supabase para cumprir os 13 meses declarados na política; ligar `PROMO.enabled` em `js/main.js` quando houver promoção.
