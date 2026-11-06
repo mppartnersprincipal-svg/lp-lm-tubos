@@ -50,7 +50,7 @@ Deploy: Vercel, ligado ao GitHub. **O projeto do domínio é `lp-lm-tubos-yfx2`*
 
 ## Pendências abertas
 
-- Com o cliente: **nenhuma** (05/11: o Pedro desconsiderou o que ficou sem resposta no questionário; a LM não vai anunciar na Meta, Pixel fora da política). Agência: no GA4 criar eventos principais (whatsapp_click, generate_lead) e dimensões (whatsapp_origem, lead_origem); excluir o projeto Vercel duplicado `lp-lm-tubos`; limpeza das tabelas `lmtubos_*` (13 meses); opcional rotacionar as credenciais da MCC (foram coladas no chat)
+- Com o cliente: **nenhuma** (05/11: o Pedro desconsiderou o que ficou sem resposta no questionário; a LM não vai anunciar na Meta, Pixel fora da política). Agência: excluir o projeto Vercel duplicado `lp-lm-tubos`; limpeza das tabelas `lmtubos_*` (13 meses); opcional rotacionar as credenciais da MCC (foram coladas no chat)
 
 ## Histórico (1 linha por entrega, mais recente no fim)
 
@@ -98,3 +98,4 @@ Deploy: Vercel, ligado ao GitHub. **O projeto do domínio é `lp-lm-tubos-yfx2`*
 - 04/11: 7 fotos novas do estoque (`Fotos_e_Logo/Fotos Estoque/Fotos novaas/`: bomba elétrica, motobomba, tês mecânicos, ranhuradas+flanges, latão de hidrante, registros, galvanizados) otimizadas e aplicadas: topo de /bombas-de-incendio, +5 no mosaico #estoque da home e faixa "Do nosso estoque" em 4 páginas de produto. CSS `?v=20261104`
 - 05/11: respostas do dono ao questionário (PDF em `Entregas cliente/`) aplicadas: as 6 páginas de produto, a home (card de tubos, cards de produtos, FAQ de normas, marcas Tyco/Famac/Buffalo/Toyama), JSON-LD e llms.txt passam a AFIRMAR estoque (tubos ½" a 10", NBR 5580/DIN 2440/ASTM A53, sch 40/80, barras de 6 m; conexões 1" a 10"; sprinklers Tyco em todos os modelos; mangueiras tipos 1 a 5; bombas elétrica/diesel/jockey; alarme com acionador, detector e sirene). Razão social, EBM e certificação resolvidas
 - 05/11: pendências do cliente encerradas (Pedro: não relevantes para a LP); `[PENDENTE]` retirados do código. LM não vai anunciar na Meta: Pixel removido da política de privacidade (seções 2, 5, 6 e 7), atualizada em 05/11
+- 05/11: GA4 (propriedade LM Tubos, p557512673): `generate_lead` criado como evento principal (sem valor, 1 por evento; `whatsapp_click` já era principal) e dimensões personalizadas de evento "WhatsApp origem" (`whatsapp_origem`) e "Lead origem" (`lead_origem`). `whatsapp_botao` ainda não vai para o GA4 (a tag do GTM só manda whatsapp_origem)
