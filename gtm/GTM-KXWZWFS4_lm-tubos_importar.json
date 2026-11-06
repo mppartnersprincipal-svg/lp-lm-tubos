@@ -92,6 +92,21 @@
                     "value": "{{DLV - whatsapp_origem}}"
                   }
                 ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "whatsapp_botao"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV - whatsapp_botao}}"
+                  }
+                ]
               }
             ]
           }
@@ -487,6 +502,30 @@
             "type": "TEMPLATE",
             "key": "value",
             "value": "G-WBE4K48M82"
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "23",
+        "name": "DLV - whatsapp_botao",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "whatsapp_botao"
           }
         ]
       }

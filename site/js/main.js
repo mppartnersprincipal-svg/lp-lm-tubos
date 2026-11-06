@@ -146,9 +146,9 @@
   }
 
   function trackWhatsApp(origin, label, button) {
-    const event = { event: "whatsapp_click", whatsapp_origem: origin };
-    if (button) event.whatsapp_botao = button;
-    pushEvent(event);
+    // whatsapp_botao sempre vai no push (undefined quando não há botão) para limpar
+    // o valor anterior no modelo de dados do GTM, que guarda a última chave recebida.
+    pushEvent({ event: "whatsapp_click", whatsapp_origem: origin, whatsapp_botao: button || undefined });
     collect("whatsapp_click", { source: origin, label: label || "" });
     if (!trackingOn) return;
     if (TRACKING.metaPixelId && window.fbq) window.fbq("track", "Contact", { content_name: origin });
