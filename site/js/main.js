@@ -53,8 +53,89 @@
 
   function withUtm(msg) {
     const { source, campaign } = readUtm();
-    if (!source && !campaign) return msg;
-    return `${msg}\n\n[origem: ${source || "-"} / ${campaign || "-"}]`;
+    const cidade = readCidade();
+    if (!source && !campaign && !cidade) return msg;
+    const local = cidade ? ` / ${cidade.nome}-${cidade.uf}` : "";
+    return `${msg}\n\n[origem: ${source || "-"} / ${campaign || "-"}${local}]`;
+  }
+
+  /* ---------------------------------------------------------------
+     Headline por cidade (campanha Google Ads do Nordeste)
+     Cada grupo de anúncio manda ?cidade=<slug> (e utm_term={keyword}). Só cidades desta lista
+     mudam a página: o texto exibido sai daqui, nunca da URL. Manter igual à lista CIDADES do
+     script clientes/lm-tubos/build_lm_tubos_nordeste_cidades.py (Google-Ads-Automate).
+     --------------------------------------------------------------- */
+  const CIDADE_KEY = "lm-cidade";
+  const CIDADES = {
+    "salvador": { nome: "Salvador", uf: "BA" },
+    "feira-de-santana": { nome: "Feira de Santana", uf: "BA" },
+    "camacari": { nome: "Camaçari", uf: "BA" },
+    "vitoria-da-conquista": { nome: "Vitória da Conquista", uf: "BA" },
+    "recife": { nome: "Recife", uf: "PE" },
+    "jaboatao": { nome: "Jaboatão dos Guararapes", uf: "PE", termos: ["jaboatao"] },
+    "caruaru": { nome: "Caruaru", uf: "PE" },
+    "petrolina": { nome: "Petrolina", uf: "PE" },
+    "fortaleza": { nome: "Fortaleza", uf: "CE" },
+    "juazeiro-do-norte": { nome: "Juazeiro do Norte", uf: "CE" },
+    "maracanau": { nome: "Maracanaú", uf: "CE" },
+    "sobral": { nome: "Sobral", uf: "CE" },
+    "sao-luis": { nome: "São Luís", uf: "MA" },
+    "imperatriz": { nome: "Imperatriz", uf: "MA" },
+    "joao-pessoa": { nome: "João Pessoa", uf: "PB" },
+    "campina-grande": { nome: "Campina Grande", uf: "PB" },
+    "natal": { nome: "Natal", uf: "RN" },
+    "mossoro": { nome: "Mossoró", uf: "RN" },
+    "parnamirim": { nome: "Parnamirim", uf: "RN" },
+    "maceio": { nome: "Maceió", uf: "AL" },
+    "arapiraca": { nome: "Arapiraca", uf: "AL" },
+    "aracaju": { nome: "Aracaju", uf: "SE" },
+    "teresina": { nome: "Teresina", uf: "PI" },
+    "parnaiba": { nome: "Parnaíba", uf: "PI" }
+  };
+
+  // "Feira de Santana" -> "feira de santana" (sem acento, minúsculo, espaços simples)
+  function normalizar(texto) {
+    return String(texto || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  }
+
+  // 1) ?cidade=<slug>; 2) cidade escrita na keyword (utm_term), a mais longa primeiro.
+  function cidadeDaUrl(params) {
+    const slug = normalizar(params.get("cidade")).replace(/ /g, "-");
+    if (CIDADES[slug]) return slug;
+    const termo = ` ${normalizar(params.get("utm_term"))} `;
+    if (termo.trim() === "") return null;
+    const candidatos = Object.keys(CIDADES).flatMap((s) =>
+      (CIDADES[s].termos || [normalizar(CIDADES[s].nome)]).map((t) => [s, t]));
+    candidatos.sort((a, b) => b[1].length - a[1].length);
+    const achado = candidatos.find(([, t]) => termo.includes(` ${t} `));
+    return achado ? achado[0] : null;
+  }
+
+  // Cidade da visita: vem da URL de entrada e fica na sessão (os links internos não levam a query).
+  function readCidade() {
+    const slug = cidadeDaUrl(new URLSearchParams(window.location.search));
+    if (slug) {
+      try { window.sessionStorage.setItem(CIDADE_KEY, slug); } catch (err) { /* armazenamento bloqueado */ }
+      return CIDADES[slug];
+    }
+    let salvo = null;
+    try { salvo = window.sessionStorage.getItem(CIDADE_KEY); } catch (err) { /* armazenamento bloqueado */ }
+    return CIDADES[salvo] || null;
+  }
+
+  // Só a home tem [data-geo-h1]. Sem cidade reconhecida, a página fica exatamente como está no HTML.
+  function initGeoHeadline() {
+    const h1 = document.querySelector("[data-geo-h1]");
+    const cidade = readCidade();
+    if (!h1 || !cidade) return;
+    const destaque = document.createElement("span");
+    destaque.className = "hl";
+    destaque.textContent = cidade.nome;
+    h1.replaceChildren("Materiais contra incêndio em ", destaque, ", com envio direto do nosso estoque.");
+    const eyebrow = document.querySelector("[data-geo-eyebrow]");
+    if (eyebrow) eyebrow.textContent = `Distribuidora em Goiânia com envio para ${cidade.nome} (${cidade.uf})`;
+    document.documentElement.dataset.cidade = cidade.uf;
   }
 
   // data-wa-origin = de onde veio o clique (nas páginas de produto, o slug da página);
@@ -489,6 +570,7 @@
   }
 
   /* --------------------------------------------------------------- */
+  initGeoHeadline();
   initPromo();
   initMarquees();
   initLightbox();
