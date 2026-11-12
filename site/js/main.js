@@ -93,23 +93,41 @@
     "parnaiba": { nome: "Parnaíba", uf: "PI" }
   };
 
+  // ID do Google Ads ({loc_physical_ms} = cidade de onde a pessoa pesquisou) -> slug acima.
+  // Usado pela campanha de termos gerais, em que a keyword não tem cidade.
+  const LOC_IDS = {
+    "1001533": "salvador", "9198184": "salvador", "1001521": "feira-de-santana",
+    "1031518": "camacari", "9074196": "camacari", "9213191": "camacari", "1001536": "vitoria-da-conquista",
+    "1001625": "recife", "9047761": "jaboatao", "1031557": "caruaru", "1031899": "petrolina", "9195896": "petrolina",
+    "1001538": "fortaleza", "1001539": "juazeiro-do-norte", "9199016": "juazeiro-do-norte",
+    "1031794": "maracanau", "1001540": "sobral", "1001561": "sao-luis", "1001560": "imperatriz", "9198837": "imperatriz",
+    "1001622": "joao-pessoa", "1001621": "campina-grande", "1001662": "natal", "9198996": "natal",
+    "1001661": "mossoro", "1031884": "parnamirim", "1001506": "maceio", "9196895": "maceio",
+    "1031439": "arapiraca", "1001715": "aracaju", "9198255": "aracaju",
+    "1001629": "teresina", "9229461": "teresina", "1031885": "parnaiba"
+  };
+
   // "Feira de Santana" -> "feira de santana" (sem acento, minúsculo, espaços simples)
   function normalizar(texto) {
     return String(texto || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
       .toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
   }
 
-  // 1) ?cidade=<slug>; 2) cidade escrita na keyword (utm_term), a mais longa primeiro.
+  // 1) ?cidade=<slug>; 2) cidade escrita na keyword (utm_term), a mais longa primeiro;
+  // 3) ?loc=<ID do Google> da cidade de onde a pessoa pesquisou.
   function cidadeDaUrl(params) {
     const slug = normalizar(params.get("cidade")).replace(/ /g, "-");
     if (CIDADES[slug]) return slug;
     const termo = ` ${normalizar(params.get("utm_term"))} `;
-    if (termo.trim() === "") return null;
-    const candidatos = Object.keys(CIDADES).flatMap((s) =>
-      (CIDADES[s].termos || [normalizar(CIDADES[s].nome)]).map((t) => [s, t]));
-    candidatos.sort((a, b) => b[1].length - a[1].length);
-    const achado = candidatos.find(([, t]) => termo.includes(` ${t} `));
-    return achado ? achado[0] : null;
+    if (termo.trim() !== "") {
+      const candidatos = Object.keys(CIDADES).flatMap((s) =>
+        (CIDADES[s].termos || [normalizar(CIDADES[s].nome)]).map((t) => [s, t]));
+      candidatos.sort((a, b) => b[1].length - a[1].length);
+      const achado = candidatos.find(([, t]) => termo.includes(` ${t} `));
+      if (achado) return achado[0];
+    }
+    const loc = String(params.get("loc") || "").replace(/\D/g, "");
+    return Object.prototype.hasOwnProperty.call(LOC_IDS, loc) ? LOC_IDS[loc] : null;
   }
 
   // Cidade da visita: vem da URL de entrada e fica na sessão (os links internos não levam a query).
