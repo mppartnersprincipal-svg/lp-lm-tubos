@@ -9,14 +9,19 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     (function () {
-      var aceito = false;
-      try { aceito = localStorage.getItem("lm-consent") === "granted"; } catch (e) {}
-      var estado = aceito ? "granted" : "denied";
+      var escolha = null;
+      try { escolha = localStorage.getItem("lm-consent"); } catch (e) {}
+      // Medição de anúncios (ad_storage, ad_user_data) ligada por padrão, sem personalização; "Recusar" desliga.
+      // Analytics e personalização só depois de "Aceitar". Desde 16/11/2026 (antes tudo começava negado e 89% não aceitavam).
+      var anuncios = escolha === "denied" ? "denied" : "granted";
+      var completo = escolha === "granted" ? "granted" : "denied";
+      gtag("set", "url_passthrough", true);
+      gtag("set", "ads_data_redaction", true);
       gtag("consent", "default", {
-        ad_storage: estado, ad_user_data: estado, ad_personalization: estado, analytics_storage: estado,
+        ad_storage: anuncios, ad_user_data: anuncios, ad_personalization: completo, analytics_storage: completo,
         functionality_storage: "granted", security_storage: "granted", wait_for_update: 500
       });
-      dataLayer.push({ pagina: "politica", consentimento: estado });
+      dataLayer.push({ pagina: "politica", consentimento: escolha || "padrao" });
     })();
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -107,7 +112,7 @@
       <h2 id="dados">2. Quais dados coletamos</h2>
       <p><strong>Dados que você informa no formulário.</strong> O formulário de orçamento pede nome, empresa (opcional), o seu perfil (construtora, instalador, engenheiro etc.), a cidade e o estado da obra e o que você precisa. Esses dados não ficam gravados no site: ao enviar, o navegador monta uma mensagem com eles e abre o WhatsApp da LM Tubos. A partir daí a conversa segue no WhatsApp, e é lá que a mensagem fica registrada. Se você chegou por um anúncio, a mensagem também pode trazer a origem da campanha (fonte e nome da campanha).</p>
       <p><strong>Conversa no WhatsApp.</strong> Ao clicar em qualquer botão de WhatsApp, você passa a conversar com o nosso atendimento comercial pelo WhatsApp Business da LM Tubos. Nessa conversa recebemos o seu número, o nome do seu perfil e as mensagens, listas e projetos que você enviar. Esses dados ficam no WhatsApp e no nosso cadastro de clientes.</p>
-      <p><strong>Dados de navegação (ferramentas do Google).</strong> Só depois que você aceita o aviso de cookies, o site carrega as tags do <strong>Google Analytics 4</strong> e do <strong>Google Ads</strong> por meio do Google Tag Manager. Elas registram as páginas visitadas, os cliques em botões de WhatsApp e o envio do formulário (só o fato de ter enviado, não o conteúdo), além de dados técnicos como tipo de dispositivo, navegador, localização aproximada e identificadores de cookie e de clique no anúncio (<code>gclid</code>).</p>
+      <p><strong>Dados de navegação (ferramentas do Google).</strong> O site carrega as tags do <strong>Google Ads</strong> e do <strong>Google Analytics 4</strong> por meio do Google Tag Manager, no Modo de Consentimento do Google. Por padrão, só a medição de conversões do Google Ads fica ativa (base: legítimo interesse, sem personalização de anúncios); a análise de navegação do Analytics e a personalização só começam depois que você aceita o aviso de cookies, e tudo é desligado se você recusar. Elas registram as páginas visitadas, os cliques em botões de WhatsApp e o envio do formulário (só o fato de ter enviado, não o conteúdo), além de dados técnicos como tipo de dispositivo, navegador, localização aproximada e identificadores de cookie e de clique no anúncio (<code>gclid</code>).</p>
       <p><strong>Medição própria, anônima.</strong> Para saber quais partes da página funcionam, o site tem um coletor próprio que registra, sem cookies e sem guardar o seu endereço IP: a página aberta, o tempo que ela ficou visível, até onde você rolou, em que botões e links clicou, quais seções viu, quais perguntas abriu no bloco de dúvidas, a escolha feita no aviso de cookies e os parâmetros de campanha da URL (<code>utm_source</code>, <code>utm_medium</code>, <code>utm_campaign</code>, <code>utm_term</code>, <code>utm_content</code> e a presença de <code>gclid</code>). Também registra o tipo de dispositivo, o navegador, o sistema operacional, o tamanho da tela e a cidade e o estado aproximados, informados pela hospedagem a partir da conexão, sem que o IP seja armazenado. Cada visita recebe um identificador aleatório de sessão, que expira depois de 30 minutos sem atividade. Se você não recusou os cookies, o navegador guarda também um identificador aleatório de visitante por até 13 meses, só para contar visitas que voltam. Nada disso é cruzado com o seu nome, telefone ou mensagem: esses dados não identificam você.</p>
       <p><strong>Registros técnicos da hospedagem.</strong> Como em qualquer site, a hospedagem pode registrar temporariamente o endereço IP e a data e a hora de cada acesso nos seus registros de segurança.</p>
       <p>Não pedimos nem tratamos dados sensíveis (saúde, religião, opinião política, biometria) e não tomamos decisões automatizadas que afetem os seus direitos.</p>
@@ -134,7 +139,7 @@
       <h2 id="compartilhamento">5. Com quem compartilhamos</h2>
       <p>Não vendemos nem cedemos os seus dados. Compartilhamos apenas com fornecedores que operam o site, os anúncios e o atendimento, cada um limitado à sua função:</p>
       <ul>
-        <li><strong>Google</strong> (Google Tag Manager, Google Analytics 4 e Google Ads): recebe os eventos de navegação e de conversão e o identificador de clique no anúncio, só depois do seu aceite. Veja a <a href="https://policies.google.com/privacy?hl=pt-BR" target="_blank" rel="noopener">política de privacidade do Google</a>.</li>
+        <li><strong>Google</strong> (Google Tag Manager, Google Analytics 4 e Google Ads): recebe os eventos de conversão e o identificador de clique no anúncio por padrão (medição, sem personalização) e os eventos de navegação só depois do seu aceite; nada é enviado se você recusar. Veja a <a href="https://policies.google.com/privacy?hl=pt-BR" target="_blank" rel="noopener">política de privacidade do Google</a>.</li>
         <li><strong>Meta</strong> (WhatsApp Business): recebe a conversa que você inicia pelo WhatsApp. O site não usa o Pixel da Meta nem envia dados de navegação para o Facebook ou o Instagram. Veja a <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">política de privacidade da Meta</a>.</li>
         <li><strong>Supabase</strong>: banco de dados onde fica a medição própria anônima descrita na seção 2.</li>
         <li><strong>Vercel</strong>: hospedagem do site e do serviço que recebe a medição própria.</li>
@@ -143,7 +148,7 @@
       <p>Alguns desses fornecedores têm servidores fora do Brasil. Nesses casos, a transferência internacional ocorre conforme o art. 33 da LGPD, com base nas cláusulas contratuais e nas garantias oferecidas por cada fornecedor.</p>
 
       <h2 id="cookies">6. Cookies e como recusar</h2>
-      <p>Na primeira visita, o site mostra um aviso com as opções <strong>Aceitar</strong> e <strong>Recusar</strong>. Até você aceitar, as tags do Google ficam bloqueadas (Modo de Consentimento do Google) e nenhum cookie de medição ou de anúncio é gravado. Recusar não impede você de usar o site, pedir orçamento nem falar pelo WhatsApp.</p>
+      <p>Na primeira visita, o site mostra um aviso com as opções <strong>Aceitar</strong> e <strong>Recusar</strong>. Enquanto você não escolhe, fica ativa apenas a medição de conversões do Google Ads (cookies <code>_gcl_*</code>), sem personalização de anúncios e sem o Analytics (Modo de Consentimento do Google). <strong>Aceitar</strong> libera também o Analytics e a personalização; <strong>Recusar</strong> desliga tudo, inclusive a medição de anúncios, e nenhum cookie do Google é gravado. Recusar não impede você de usar o site, pedir orçamento nem falar pelo WhatsApp.</p>
       <ul>
         <li><strong>Google Analytics 4</strong>: cookies <code>_ga</code> e <code>_ga_*</code>, para reconhecer visitas repetidas, com duração de até 2 anos.</li>
         <li><strong>Google Ads</strong>: cookies <code>_gcl_au</code> e <code>_gcl_aw</code>, para medir conversões dos anúncios, com duração de até 90 dias.</li>

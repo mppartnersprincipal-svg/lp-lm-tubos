@@ -3,20 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Google Tag Manager com Consent Mode v2: tudo começa negado e só libera quando o visitante aceita
-       o aviso de cookies (js/main.js atualiza o consentimento). A escolha fica salva em localStorage "lm-consent". -->
+  <!-- Google Tag Manager com Consent Mode v2: medição de anúncios ligada por padrão (sem personalização), analytics e
+       personalização só após "Aceitar"; "Recusar" nega tudo (js/main.js atualiza). Escolha em localStorage "lm-consent". -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     (function () {
-      var aceito = false;
-      try { aceito = localStorage.getItem("lm-consent") === "granted"; } catch (e) {}
-      var estado = aceito ? "granted" : "denied";
+      var escolha = null;
+      try { escolha = localStorage.getItem("lm-consent"); } catch (e) {}
+      // Medição de anúncios (ad_storage, ad_user_data) ligada por padrão, sem personalização; "Recusar" desliga.
+      // Analytics e personalização só depois de "Aceitar". Desde 16/11/2026 (antes tudo começava negado e 89% não aceitavam).
+      var anuncios = escolha === "denied" ? "denied" : "granted";
+      var completo = escolha === "granted" ? "granted" : "denied";
+      gtag("set", "url_passthrough", true);
+      gtag("set", "ads_data_redaction", true);
       gtag("consent", "default", {
-        ad_storage: estado, ad_user_data: estado, ad_personalization: estado, analytics_storage: estado,
+        ad_storage: anuncios, ad_user_data: anuncios, ad_personalization: completo, analytics_storage: completo,
         functionality_storage: "granted", security_storage: "granted", wait_for_update: 500
       });
-      dataLayer.push({ pagina: "obrigado", consentimento: estado });
+      dataLayer.push({ pagina: "obrigado", consentimento: escolha || "padrao" });
     })();
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

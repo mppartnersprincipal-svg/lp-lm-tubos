@@ -220,7 +220,8 @@
     window.dataLayer.push(data);
   }
 
-  // Consent Mode v2: o <head> já começa tudo como "denied"; aqui atualizamos conforme a escolha.
+  // Consent Mode v2: o <head> já liga a medição de anúncios (ad_storage/ad_user_data) por padrão e deixa analytics e
+  // personalização negados; aqui "Aceitar" libera tudo e "Recusar" nega tudo, inclusive a medição de anúncios.
   function updateConsent(granted) {
     if (typeof window.gtag !== "function") return;
     const state = granted ? "granted" : "denied";

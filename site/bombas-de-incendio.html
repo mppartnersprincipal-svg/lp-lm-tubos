@@ -8,14 +8,19 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     (function () {
-      var aceito = false;
-      try { aceito = localStorage.getItem("lm-consent") === "granted"; } catch (e) {}
-      var estado = aceito ? "granted" : "denied";
+      var escolha = null;
+      try { escolha = localStorage.getItem("lm-consent"); } catch (e) {}
+      // Medição de anúncios (ad_storage, ad_user_data) ligada por padrão, sem personalização; "Recusar" desliga.
+      // Analytics e personalização só depois de "Aceitar". Desde 16/11/2026 (antes tudo começava negado e 89% não aceitavam).
+      var anuncios = escolha === "denied" ? "denied" : "granted";
+      var completo = escolha === "granted" ? "granted" : "denied";
+      gtag("set", "url_passthrough", true);
+      gtag("set", "ads_data_redaction", true);
       gtag("consent", "default", {
-        ad_storage: estado, ad_user_data: estado, ad_personalization: estado, analytics_storage: estado,
+        ad_storage: anuncios, ad_user_data: anuncios, ad_personalization: completo, analytics_storage: completo,
         functionality_storage: "granted", security_storage: "granted", wait_for_update: 500
       });
-      dataLayer.push({ pagina: "bombas-de-incendio", consentimento: estado });
+      dataLayer.push({ pagina: "bombas-de-incendio", consentimento: escolha || "padrao" });
     })();
     // GTM carrega na hora (igual à home) desde 16/11/2026: com o carregamento atrasado, o toque no WhatsApp no celular
     // podia sair antes do contêiner terminar e o clique não chegava ao Google Ads. O Consent Mode continua acima.
@@ -175,7 +180,7 @@
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <div class="cookie-bar" id="cookie-bar" role="dialog" aria-labelledby="cookie-text" hidden>
-    <p id="cookie-text">Usamos cookies para medir o desempenho dos nossos anúncios. Você aceita? <a class="cookie-bar__link" href="/politica-de-privacidade">Saiba mais</a></p>
+    <p id="cookie-text">Medimos o resultado dos nossos anúncios sem personalização. Aceitar libera também a análise de navegação; recusar desliga tudo. <a class="cookie-bar__link" href="/politica-de-privacidade">Saiba mais</a></p>
     <div class="cookie-bar__actions">
       <button class="btn btn--secondary" type="button" data-consent="denied">Recusar</button>
       <button class="btn btn--primary" type="button" data-consent="granted">Aceitar</button>
