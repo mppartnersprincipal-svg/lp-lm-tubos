@@ -17,17 +17,12 @@
       });
       dataLayer.push({ pagina: "tubos-de-aco-carbono", consentimento: estado });
     })();
-    // O GTM entra 3 s depois do load ou na primeira interação (toque, clique, tecla, rolagem), o que vier antes:
-    // a foto do topo (LCP) pinta antes das tags do Ads/GA4 ocuparem a CPU. Um toque no WhatsApp carrega o GTM
-    // na hora (pointerdown vem antes do click) e o whatsapp_click espera na fila do dataLayer.
-    (function(w,d,s,l,i){function gtm(){w[l]=w[l]||[];w[l].push({'gtm.start':
+    // GTM carrega na hora (igual à home) desde 16/11/2026: com o carregamento atrasado, o toque no WhatsApp no celular
+    // podia sair antes do contêiner terminar e o clique não chegava ao Google Ads. O Consent Mode continua acima.
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
-    var ok=false,ev=['pointerdown','keydown','touchstart','scroll'];function go(){if(ok)return;ok=true;
-    ev.forEach(function(e){w.removeEventListener(e,go,true)});gtm();}
-    ev.forEach(function(e){w.addEventListener(e,go,{capture:true,passive:true})});
-    function later(){setTimeout(go,3000);}if(d.readyState==='complete')later();else w.addEventListener('load',later,{once:true});
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-KXWZWFS4');
   </script>
   <!-- End Google Tag Manager -->
